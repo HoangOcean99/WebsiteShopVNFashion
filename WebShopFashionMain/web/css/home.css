@@ -1,87 +1,91 @@
+html {
+    /* Thuộc tính này điều khiển hành vi cuộn của trang */
+    scroll-behavior: smooth;
+}
 @keyframes cloud-left {
-  0% {
-    transform: translateX(-20px);
-  }
-  /* dịch sang trái */
-  50% {
-    transform: translateX(0px);
-  }
-  /* dịch sang phải */
-  100% {
-    transform: translateX(-20px);
-  }
-  /* quay lại trái */
+    0% {
+        transform: translateX(-20px);
+    }
+    /* dịch sang trái */
+    50% {
+        transform: translateX(0px);
+    }
+    /* dịch sang phải */
+    100% {
+        transform: translateX(-20px);
+    }
+    /* quay lại trái */
 }
 
 @keyframes cloud-right {
-  0% {
-    transform: translateX(0px);
-  }
-  50% {
-    transform: translateX(20px);
-  }
-  100% {
-    transform: translateX(0px);
-  }
+    0% {
+        transform: translateX(0px);
+    }
+    50% {
+        transform: translateX(20px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
 }
 
 .animate-cloud-left {
-  animation: cloud-left 5s ease-in-out infinite;
+    animation: cloud-left 5s ease-in-out infinite;
 }
 
 .animate-cloud-right {
-  animation: cloud-right 5s ease-in-out infinite;
+    animation: cloud-right 5s ease-in-out infinite;
 }
 
 @font-face {
-  font-family: "HP-Bodon";
-  src: url("HP-Bodon-Poster-Bold.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
+    font-family: "HP-Bodon";
+    src: url("HP-Bodon-Poster-Bold.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
 }
 
 body {
-  font-family: "HP-Bodon", serif;
+    font-family: "HP-Bodon", serif;
 }
 
 @keyframes fade {
-  0% {
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  30% {
-    opacity: 1;
-  }
-  40% {
-    opacity: 0;
-  }
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    30% {
+        opacity: 1;
+    }
+    40% {
+        opacity: 0;
+    }
 }
 
 .slide {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background-size: cover;
-  background-position: center;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-  animation: fade 20s infinite;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    animation: fade 20s infinite;
 }
 
 .slide:nth-child(1) {
-  animation-delay: 0s;
+    animation-delay: 0s;
 }
 
 .slide:nth-child(2) {
-  animation-delay: 4s;
+    animation-delay: 4s;
 }
 
 .slide:nth-child(3) {
-  animation-delay: 8s;
+    animation-delay: 8s;
 }
 
 .slide:nth-child(4) {
-  animation-delay: 12s;
+    animation-delay: 12s;
 }

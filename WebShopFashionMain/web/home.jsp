@@ -1,0 +1,140 @@
+<%-- 
+    Document   : home
+    Created on : Oct 3, 2025, 9:11:41 AM
+    Author     : Duong
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/home.css" />
+    <script src="main.js"></script>
+</head>
+
+<body>
+    <%@include file="navbar.jsp" %>
+
+    <section
+        id="home"
+        class="w-full min-h-screen bg-[url('images/Trangchu.png')] bg-cover bg-center bg-fixed overflow-hidden"
+        >
+        <!--<div class="flex justify-between w-full h-full fixed z-20 opacity-80">-->
+        <img
+            src="images/cloudLeft.png"
+            alt="cloundLeft"
+            class="absolute top-0 left-0 h-2/3 w-auto animate-cloud-left"
+            />
+
+        <img
+            src="images/cloudRight.png"
+            alt="cloundRight"
+            class="absolute top-0 right-0 h-2/3 w-auto animate-cloud-right"
+            />
+        <!--</div>-->
+    </section>
+
+    <section id="category" class="w-full min-h-screen bg-[url('images/background.png')] bg-cover bg-center bg-no-repeat shadow-lg bg-fixed">
+        <h2
+            class="justify-center text-center text-2xl font-bold underline text-brown-800 p-20"
+            >
+            Danh Mục
+        </h2>
+
+        <div class="flex gap-20 justify-center mb-40">
+            <div class="text-center cursor-pointer" onclick="window.location.href = 'category.jsp'">
+                <img
+                    src="images/AoGiaoLinh.jpg"
+                    alt="AoGiaoLinh"
+                    class="w-80 h-[420px] object-cover rounded-lg shadow-2xl"
+                    />
+                <h3 class="mt-4 text-xl font-bold text-brown-800">Áo Giao Lĩnh</h3>
+            </div>
+
+            <div class="text-center cursor-pointer" onclick="window.location.href = 'category.jsp'">
+                <img
+                    src="images/AoTacNu.jpg"
+                    alt="AoTacNu"
+                    class="w-80 h-[420px] object-cover rounded-lg shadow-2xl"
+                    />
+                <h3 class="mt-4 text-xl font-bold text-brown-800">Áo Tấc Nữ</h3>
+            </div>
+
+            <div class="text-center cursor-pointer" onclick="window.location.href = 'category.jsp'">
+                <img
+                    src="images/VienLinh.jpg"
+                    alt="VienLinh"
+                    class="w-80 h-[420px] object-cover rounded-lg shadow-2xl"
+                    />
+                <h3 class="mt-4 text-xl font-bold text-brown-1000">Áo Viên Lĩnh</h3>
+            </div>
+        </div>
+
+        <div class="relative w-full h-[800px] overflow-hidden object-cover z-10" id="feedback">
+            <div class="slide" style="background-image: url('images/f1.jpg')"></div>
+            <div class="slide" style="background-image: url('images/f2.jpg')"></div>
+            <div class="slide" style="background-image: url('images/f3.jpg')"></div>
+            <div class="slide" style="background-image: url('images/f4.jpg')"></div>
+
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-5xl font-bold drop-shadow-lg"
+                >
+                FEEDBACK
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-[#4B2E17] text-white py-10" id="footer">
+        <div
+            class="container mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-6"
+            >
+            <!-- Cột trái -->
+            <div class="text-center md:text-left">
+                <img src="images/lgo.png" alt="logo" class="w-30 h-20 object-cover" />
+                <p class="text-sm text-gray-300 max-w-sm">
+                    Hành trình tìm lại hương sắc Việt
+                </p>
+            </div>
+
+            <!-- Cột giữa -->
+            <div class="flex gap-6 text-sm">
+                <a href="#home" class="hover:text-yellow-400 transition">Giới thiệu</a>
+                <a href="#category" class="hover:text-yellow-400 transition">Danh mục</a>
+                <a href="#feedback" class="hover:text-yellow-400 transition">Feedback</a>
+                <a href="#footer" class="hover:text-yellow-400 transition">Liên hệ</a>
+            </div>
+
+            <!-- Cột phải -->
+            <div class="flex gap-4">
+                <i
+                    data-lucide="facebook "
+                    class="w-5 h-5 hover:text-yellow-400 cursor-pointer"
+                    ></i>
+                <i
+                    data-lucide="instagram "
+                    class="w-5 h-5 hover:text-yellow-400 cursor-pointer"
+                    ></i>
+                <i
+                    data-lucide="mail "
+                    class="w-5 h-5 hover:text-yellow-400 cursor-pointer"
+                    ></i>
+            </div>
+        </div>
+
+        <div
+            class="border-t border-gray-600 mt-6 pt-4 text-center text-sm text-gray-400"
+            >
+            © 2025 Diễm Xưa. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
