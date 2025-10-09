@@ -7,64 +7,39 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    rel="stylesheet" href="css/home.css" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/home.css" />
     <script src="main.js"></script>
 </head>
 
 <body>
-    <nav
-        class="fixed top-0 left-0 w-full z-50 bg-[#4B2E17] text-white items-center"
-        >
-        <div
-            class="container mx-auto flex items-center justify-center px-12 py-2"
-            >
-            <div class="flex gap-20">
-                <a href="#" class="hover:text-yellow-400 text-xl">Giới Thiệu</a>
-                <a href="#" class="hover:text-yellow-400 text-xl">Danh Mục</a>
-            </div>
-
-            <div class="flex-shrink-0">
-                <img
-                    src="images/lgo.png"
-                    alt="Logo"
-                    class="w-25 h-20 object-cover items-center justify-center mx-auto rounded-full px-20"
-                    />
-            </div>
-
-            <div class="flex items-center gap-20">
-                <a href="#" class="hover:text-yellow-400 text-xl">Feedback</a>
-                <a href="#" class="hover:text-yellow-400 text-xl">Liên Hệ</a>
-            </div>
-
-            <div class="flex items-center gap-4 pl-20">
-                <i data-lucide="search" class="w-5 h-5 cursor-pointer"></i>
-                <i data-lucide="user" class="w-5 h-5 cursor-pointer"></i>
-                <i data-lucide="shopping-cart" class="w-5 h-5 cursor-pointer"></i>
-            </div>
-        </div>
-    </nav>
+    <%@include file="navbar.jsp" %>
 
     <section
+        id="home"
         class="w-full min-h-screen bg-[url('images/Trangchu.png')] bg-cover bg-center bg-fixed overflow-hidden"
         >
-        <div class="flex justify-between w-full h-full fixed z-20 opacity-80">
-            <img
-                src="images/cloudLeft.png"
-                alt="cloundLeft"
-                class="absolute top-0 left-0 h-2/3 w-auto animate-cloud-left"
-                />
+        <!--<div class="flex justify-between w-full h-full fixed z-20 opacity-80">-->
+        <img
+            src="images/cloudLeft.png"
+            alt="cloundLeft"
+            class="absolute top-0 left-0 h-2/3 w-auto animate-cloud-left"
+            />
 
-            <img
-                src="images/cloudRight.png"
-                alt="cloundRight"
-                class="absolute top-0 right-0 h-2/3 w-auto animate-cloud-right"
-                />
-        </div>
+        <img
+            src="images/cloudRight.png"
+            alt="cloundRight"
+            class="absolute top-0 right-0 h-2/3 w-auto animate-cloud-right"
+            />
+        <!--</div>-->
     </section>
 
-    <section
-        class="w-full min-h-screen bg-[url('images/background.png')] bg-cover bg-center bg-no-repeat shadow-lg bg-fixed"
-        >
+    <section id="category" class="w-full min-h-screen bg-[url('images/background.png')] bg-cover bg-center bg-no-repeat shadow-lg bg-fixed">
         <h2
             class="justify-center text-center text-2xl font-bold underline text-brown-800 p-20"
             >
@@ -72,7 +47,7 @@
         </h2>
 
         <div class="flex gap-20 justify-center mb-40">
-            <div class="text-center">
+            <div class="text-center cursor-pointer" onclick="window.location.href = 'category.jsp'">
                 <img
                     src="images/AoGiaoLinh.jpg"
                     alt="AoGiaoLinh"
@@ -81,7 +56,7 @@
                 <h3 class="mt-4 text-xl font-bold text-brown-800">Áo Giao Lĩnh</h3>
             </div>
 
-            <div class="text-center">
+            <div class="text-center cursor-pointer" onclick="window.location.href = 'category.jsp'">
                 <img
                     src="images/AoTacNu.jpg"
                     alt="AoTacNu"
@@ -90,7 +65,7 @@
                 <h3 class="mt-4 text-xl font-bold text-brown-800">Áo Tấc Nữ</h3>
             </div>
 
-            <div class="text-center">
+            <div class="text-center cursor-pointer" onclick="window.location.href = 'category.jsp'">
                 <img
                     src="images/VienLinh.jpg"
                     alt="VienLinh"
@@ -100,7 +75,7 @@
             </div>
         </div>
 
-        <div class="relative w-full h-[800px] overflow-hidden object-cover z-10">
+        <div class="relative w-full h-[800px] overflow-hidden object-cover z-10" id="feedback">
             <div class="slide" style="background-image: url('images/f1.jpg')"></div>
             <div class="slide" style="background-image: url('images/f2.jpg')"></div>
             <div class="slide" style="background-image: url('images/f3.jpg')"></div>
@@ -114,7 +89,7 @@
         </div>
     </section>
 
-    <footer class="bg-[#4B2E17] text-white py-10">
+    <footer class="bg-[#4B2E17] text-white py-10" id="footer">
         <div
             class="container mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-6"
             >
@@ -128,10 +103,10 @@
 
             <!-- Cột giữa -->
             <div class="flex gap-6 text-sm">
-                <a href="# " class="hover:text-yellow-400 transition">Giới thiệu</a>
-                <a href="# " class="hover:text-yellow-400 transition">Danh mục</a>
-                <a href="# " class="hover:text-yellow-400 transition">Feedback</a>
-                <a href="# " class="hover:text-yellow-400 transition">Liên hệ</a>
+                <a href="#home" class="hover:text-yellow-400 transition">Giới thiệu</a>
+                <a href="#category" class="hover:text-yellow-400 transition">Danh mục</a>
+                <a href="#feedback" class="hover:text-yellow-400 transition">Feedback</a>
+                <a href="#footer" class="hover:text-yellow-400 transition">Liên hệ</a>
             </div>
 
             <!-- Cột phải -->

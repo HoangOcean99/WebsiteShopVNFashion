@@ -12,23 +12,29 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <nav class="fixed top-0 left-0 w-full z-50 bg-[#4B2E17] text-white">
-            <div class="container mx-auto flex items-center justify-center">
-                <div class="flex gap-20 font-semibold">
-                    <a href="#" class="hover:text-yellow-400">Giới Thiệu</a>
-                    <a href="#" class="hover:text-yellow-400">Danh Mục</a>
+        <nav class="fixed top-0 left-0 w-full z-50 bg-[#4B2E17] text-white items-center">
+            <div
+                class="container mx-auto flex items-center justify-center px-12 py-2"
+                >
+                <div class="flex gap-20">
+                    <a href="#home" class="hover:text-yellow-400 text-xl">Giới Thiệu</a>
+                    <a href="#category" class="hover:text-yellow-400 text-xl">Danh Mục</a>
                 </div>
 
                 <div class="flex-shrink-0">
-                    <img src="images/watermark2.png" alt="Logo" class="h-12 w-12 items-center justify-center mx-20 bg-white" />
+                    <img
+                        src="images/lgo.png"
+                        alt="Logo"
+                        class="w-25 h-20 object-cover items-center justify-center mx-auto rounded-full px-20"
+                        />
                 </div>
 
-                <div class="flex gap-20">
-                    <a href="#" class="hover:text-yellow-400">Feedback</a>
-                    <a href="#" class="hover:text-yellow-400">Liên Hệ</a>
+                <div class="flex items-center gap-20">
+                    <a href="#feedback" class="hover:text-yellow-400 text-xl">Feedback</a>
+                    <a href="#footer" class="hover:text-yellow-400 text-xl">Liên Hệ</a>
                 </div>
 
-                <div class="flex items-center gap-4 ml-6 px-12">
+                <div class="flex items-center gap-4 pl-20">
                     <i data-lucide="search" class="w-5 h-5 cursor-pointer"></i>
                     <i data-lucide="user" class="w-5 h-5 cursor-pointer"></i>
                     <i data-lucide="shopping-cart" class="w-5 h-5 cursor-pointer"></i>

@@ -20,29 +20,7 @@
     </head>
 
     <body>
-        <nav class="fixed top-0 left-0 w-full z-50 bg-[#4B2E17] text-white">
-            <div class="container mx-auto flex items-center justify-center">
-                <div class="flex gap-20 font-semibold">
-                    <a href="#" class="hover:text-yellow-400">Giới Thiệu</a>
-                    <a href="#" class="hover:text-yellow-400">Danh Mục</a>
-                </div>
-
-                <div class="flex-shrink-0">
-                    <img src="images/watermark2.png" alt="Logo" class="h-12 w-12 items-center justify-center mx-20 bg-white" />
-                </div>
-
-                <div class="flex gap-20">
-                    <a href="#" class="hover:text-yellow-400">Feedback</a>
-                    <a href="#" class="hover:text-yellow-400">Liên Hệ</a>
-                </div>
-
-                <div class="flex items-center gap-4 ml-6 px-12">
-                    <i data-lucide="search" class="w-5 h-5 cursor-pointer"></i>
-                    <i data-lucide="user" class="w-5 h-5 cursor-pointer"></i>
-                    <i data-lucide="shopping-cart" class="w-5 h-5 cursor-pointer"></i>
-                </div>
-            </div>
-        </nav>
+        <%@include file="navbar.jsp" %>
 
         <section class="relative w-full h-screen overflow-hidden bg-[#f5f0e8]">
             <img src="images/Home2.png" alt="Trang chủ" class="w-full h-full object-cover" />
@@ -53,32 +31,32 @@
                     <h1 class="font-bold mb-5 text-xl">ÁO TẮC</h1>
                 </div>
                 <div class="grid grid-cols-3 grid-rows-2 gap-y-5 w-1/2 mx-auto">
-                    <div>
+                    <div class="cursor-pointer" onclick="window.location.href = 'productDetail.jsp'">
                         <div class="w-44 h-52 bg-gray-400 mx-auto rounded-lg"></div>
                         <p class="mt-2">Giao lính tơ xước tím nhạt</p>
                         <p class="font-semibold">350.000đ</p>
                     </div>
-                    <div>
+                    <div class="cursor-pointer" onclick="window.location.href = 'productDetail.jsp'">
                         <div class="w-44 h-52  bg-gray-400 mx-auto rounded-lg"></div>
                         <p class="mt-2">Giao lính xanh ngọc</p>
                         <p class="font-semibold">350.000đ</p>
                     </div>
-                    <div>
+                    <div class="cursor-pointer" onclick="window.location.href = 'productDetail.jsp'">
                         <div class="w-44 h-52 bg-gray-400 mx-auto rounded-lg"></div>
                         <p class="mt-2">Giao lính tơ xước hồng</p>
                         <p class="font-semibold">350.000đ</p>
                     </div>
-                    <div>
+                    <div class="cursor-pointer" onclick="window.location.href = 'productDetail.jsp'">
                         <div class="w-44 h-52 bg-gray-400 mx-auto rounded-lg"></div>
                         <p class="mt-2">Giao lính xanh ngọc</p>
                         <p class="font-semibold">350.000đ</p>
                     </div>
-                    <div>
+                    <div class="cursor-pointer" onclick="window.location.href = 'productDetail.jsp'">
                         <div class="w-44 h-52 bg-gray-400 mx-auto rounded-lg"></div>
                         <p class="mt-2">Giao lính sa hàn xanh lá</p>
                         <p class="font-semibold">350.000đ</p>
                     </div>
-                    <div>
+                    <div class="cursor-pointer" onclick="window.location.href = 'productDetail.jsp'">
                         <div class="w-44 h-52 bg-gray-400 mx-auto rounded-lg"></div>
                         <p class="mt-2">Giao lính xanh ngọc</p>
                         <p class="font-semibold">350.000đ</p>
