@@ -17,8 +17,8 @@
                 class="container mx-auto flex items-center justify-center px-12 py-2"
                 >
                 <div class="flex gap-20">
-                    <a href="#home" class="hover:text-yellow-400 text-xl">Giới Thiệu</a>
-                    <a href="#category" class="hover:text-yellow-400 text-xl">Danh Mục</a>
+                    <a href="home.jsp#home" class="hover:text-yellow-400 text-xl">Giới Thiệu</a>
+                    <a href="home.jsp#category" class="hover:text-yellow-400 text-xl">Danh Mục</a>
                 </div>
 
                 <div class="flex-shrink-0">
@@ -30,8 +30,8 @@
                 </div>
 
                 <div class="flex items-center gap-20">
-                    <a href="#feedback" class="hover:text-yellow-400 text-xl">Feedback</a>
-                    <a href="#footer" class="hover:text-yellow-400 text-xl">Liên Hệ</a>
+                    <a href="home.jsp#feedback" class="hover:text-yellow-400 text-xl">Feedback</a>
+                    <a href="home.jsp#footer" class="hover:text-yellow-400 text-xl">Liên Hệ</a>
                 </div>
 
                 <div class="flex items-center gap-4 pl-20">
