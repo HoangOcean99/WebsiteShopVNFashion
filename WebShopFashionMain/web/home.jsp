@@ -39,7 +39,7 @@
         <!--</div>-->
     </section>
 
-    <section id="category" class="w-full min-h-screen bg-[url('images/background.png')] bg-cover bg-center bg-no-repeat shadow-lg bg-fixed">
+    <section id="category" class="w-full min-h-screen bg-[url('images/Background3.png')] bg-cover bg-center bg-no-repeat shadow-lg bg-fixed">
         <h2
             class="justify-center text-center text-2xl font-bold underline text-brown-800 p-20"
             >

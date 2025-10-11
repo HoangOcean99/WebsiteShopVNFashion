@@ -10,6 +10,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/home.css" />
     </head>
     <body>
         <nav class="fixed top-0 left-0 w-full z-50 bg-[#4B2E17] text-white items-center">
@@ -17,7 +18,7 @@
                 class="container mx-auto flex items-center justify-center px-12 py-2"
                 >
                 <div class="flex gap-20">
-                    <a href="#home" class="hover:text-yellow-400 text-xl">Giới Thiệu</a>
+                    <a href="#home" class="hover:text-yellow-400 text-xl ">Giới Thiệu</a>
                     <a href="#category" class="hover:text-yellow-400 text-xl">Danh Mục</a>
                 </div>
 
