@@ -15,7 +15,7 @@
         <script src="https://unpkg.com/lucide@latest"></script>
         <script src="https://cdn.tailwindcss.com"></script>
         <!--        <link rel="stylesheet" type="text/css" media="screen" href="main.css" />-->
-        <!--<link rel="stylesheet" href="css/category.css" />-->
+        <link rel="stylesheet" href="css/category.css" />
         <script src="main.js"></script>
     </head>
     <body>
