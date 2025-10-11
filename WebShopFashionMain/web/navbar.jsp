@@ -12,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <nav class="fixed top-0 left-0 w-full z-50 bg-[#4B2E17] text-white items-center">
+        <nav class="fixed top-0 left-0 w-full z-40 bg-[#4B2E17] text-white items-center">
             <div
                 class="container mx-auto flex items-center justify-center px-12 py-2"
                 >
@@ -37,7 +37,7 @@
                 <div class="flex items-center gap-4 pl-20">
                     <i data-lucide="search" class="w-5 h-5 cursor-pointer"></i>
                     <i data-lucide="user" class="w-5 h-5 cursor-pointer"></i>
-                    <i data-lucide="shopping-cart" class="w-5 h-5 cursor-pointer"></i>
+                    <i data-lucide="shopping-cart" class="w-5 h-5 cursor-pointer" onclick="window.location.href = 'cart.jsp'"></i>
                 </div>
             </div>
         </nav>

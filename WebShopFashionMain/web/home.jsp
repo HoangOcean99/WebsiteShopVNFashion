@@ -18,6 +18,7 @@
 </head>
 
 <body>
+    <%@include file="login.jsp" %>
     <%@include file="navbar.jsp" %>
 
     <section
@@ -39,7 +40,7 @@
         <!--</div>-->
     </section>
 
-    <section id="category" class="w-full min-h-screen bg-[url('images/Background3.png')] bg-cover bg-center bg-no-repeat shadow-lg bg-fixed">
+    <section id="category" class="w-full min-h-screen bg-[url('images/Background3.png')] bg-cover bg-center bg-no-repeat shadow-lg bg-fixed overflow-hidden">
         <h2
             class="justify-center text-center text-2xl font-bold underline text-brown-800 p-20"
             >
@@ -89,7 +90,7 @@
         </div>
     </section>
 
-    <footer class="bg-[#4B2E17] text-white py-10" id="footer">
+    <footer class="bg-[#4B2E17] text-white py-10 overflow-hidden" id="footer">
         <div
             class="container mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-6"
             >
