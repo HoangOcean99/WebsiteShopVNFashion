@@ -76,7 +76,7 @@
                                         </button>
                                     </div>
 
-                                    <button class="flex-1 py-3 px-6 bg-[#6B4B38] text-white font-semibold rounded-lg hover:bg-[#5A3F2F] transition duration-200 shadow-md">
+                                    <button class="flex-1 py-3 px-6 bg-[#6B4B38] text-white font-semibold rounded-lg hover:bg-[#5A3F2F] transition duration-200 shadow-md" onclick="window.location.href = 'cart.jsp'">
                                         Add to Cart
                                     </button>
                                 </div>
