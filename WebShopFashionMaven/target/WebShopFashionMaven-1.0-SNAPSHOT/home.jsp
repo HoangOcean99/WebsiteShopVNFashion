@@ -29,12 +29,16 @@
         const app = firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
     </script>
-    <script src="main.js"></script>
 
 </head>
 
 <body>
-    <%@include file="login.jsp" %>
+    <%
+    boolean isAuthenticated = session.getAttribute("isAuthenticated") != null && (Boolean) session.getAttribute("isAuthenticated");
+    %>
+    <div class="w-full h-full bg-black/40 fixed z-50 flex justify-center items-center hidden" id="login-modal">
+        <%@include file="login.jsp" %>
+    </div>    
     <%@include file="search.jsp" %>
     <%@include file="navbar.jsp" %>
 
@@ -42,7 +46,6 @@
         id="home"
         class="w-full min-h-screen bg-[url('images/Trangchu.png')] bg-cover bg-center bg-fixed overflow-hidden"
         >
-        <!--<div class="flex justify-between w-full h-full fixed z-20 opacity-80">-->
         <img
             src="images/cloudLeft.png"
             alt="cloundLeft"
@@ -54,7 +57,6 @@
             alt="cloundRight"
             class="absolute top-0 right-0 h-2/3 w-auto animate-cloud-right"
             />
-        <!--</div>-->
     </section>
 
     <section id="category" class="w-full min-h-screen bg-[url('images/Background3.png')] bg-cover bg-center bg-no-repeat shadow-lg bg-fixed overflow-hidden">
@@ -186,30 +188,33 @@
         }
     </script>
     <script>
-        // --- Logic Xử lý Đăng nhập Firebase ---
+        const isServerAuthenticated = <%= isAuthenticated %>;
 
-        // 1. Hàm gửi Token lên Servlet (Backend)
-        function sendTokenToServer(user) {
+        function sendTokenToServer(user, retryCount = 0) { // Đảm bảo retryCount có giá trị mặc định là 0
             user.getIdToken().then(idToken => {
                 fetch('FirebaseLoginServlet', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                     },
-                    body: `idToken=${idToken}`
+                    body: 'idToken=' + encodeURIComponent(idToken)
                 })
                         .then(res => {
                             if (res.ok) {
                                 window.location.href = 'home.jsp';
+                            } else if ((res.status === 401 || res.status === 400) && retryCount < 2) {
+                                console.warn(`Xác minh thất bại lần ${retryCount + 1}. Thử lại sau 1.5 giây...`);
+                                setTimeout(() => {
+                                    sendTokenToServer(user, retryCount + 1);
+                                }, 1500); 
                             } else {
                                 alert('Xác thực Server thất bại.');
+                                console.error(`Lỗi Server cuối cùng: ${res.status}`);
                             }
-                        })
-                        .catch(error => console.error('Lỗi fetch:', error));
+                        });
             });
         }
 
-        // 2. Hàm đăng nhập (Được gọi từ nút trong login.jsp)
         function signInWithGoogle() {
             const provider = new firebase.auth.GoogleAuthProvider();
             auth.signInWithPopup(provider).catch((error) => {
@@ -217,17 +222,20 @@
             });
         }
 
-        // 3. FIX LỖI 2: ĐẶT onAuthStateChanged Ở NGOÀI CÙNG
-        // Hàm này chạy ngay khi trang tải xong và mỗi khi trạng thái đăng nhập thay đổi.
+
         auth.onAuthStateChanged(user => {
             if (user) {
-                // Đóng modal nếu nó đang mở
-                const modal = document.getElementById("login-modal");
-                if (modal)
-                    modal.classList.add("hidden");
+                if (!isServerAuthenticated) {
+                    const modal = document.getElementById("login-modal");
+                    if (modal)
+                        modal.classList.add("hidden");
 
-                // Gửi token chỉ khi người dùng vừa đăng nhập hoặc đã được lưu session
-                sendTokenToServer(user);
+                    sendTokenToServer(user, 0);
+                } else {
+                    console.log("Firebase user và Server Session đã đồng bộ. Đã ngăn chặn redirect loop.");
+                }
+            } else {
+                // thêm logic chuyển hướng sau
             }
         });
 
