@@ -1,0 +1,4 @@
+com\mycompany\webshopfashionmaven\JakartaRestConfiguration.class
+com\diemxua\webshopfashionmaven\resources\JakartaEE10Resource.class
+com\diemxua\controller\FirebaseLoginServlet.class
+com\diemxua\utils\AppContextListener.class
