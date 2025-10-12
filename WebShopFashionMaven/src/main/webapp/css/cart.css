@@ -1,0 +1,10 @@
+@font-face {
+    font-family: "HP-Bodon";
+    src: url("HP-Bodon-Poster-Bold.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: "HP-Bodon", serif;
+}
