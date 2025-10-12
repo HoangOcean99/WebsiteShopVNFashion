@@ -5,41 +5,41 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <nav class="fixed top-0 left-0 w-full z-40 bg-[#4B2E17] text-white items-center">
-            <div
-                class="container mx-auto flex items-center justify-center px-12 py-2"
-                >
-                <div class="flex gap-20">
-                    <a href="home.jsp#home" class="hover:text-yellow-400 text-xl">Giới Thiệu</a>
-                    <a href="home.jsp#category" class="hover:text-yellow-400 text-xl">Danh Mục</a>
-                </div>
+<% 
+    String userName =(String) session.getAttribute("userName");
+%>
+<nav class="fixed top-0 left-0 w-full z-40 bg-[#4B2E17] text-white items-center">
+    <div
+        class="container mx-auto flex items-center justify-center px-12 py-2"
+        >
+        <div class="flex gap-20">
+            <a href="home.jsp#home" class="hover:text-yellow-400 text-xl">Giới Thiệu</a>
+            <a href="home.jsp#category" class="hover:text-yellow-400 text-xl">Danh Mục</a>
+        </div>
 
-                <div class="flex-shrink-0">
-                    <img
-                        src="images/lgo.png"
-                        alt="Logo"
-                        class="w-25 h-20 object-cover items-center justify-center mx-auto rounded-full px-20"
-                        />
-                </div>
+        <div class="flex-shrink-0">
+            <img
+                src="images/lgo.png"
+                alt="Logo"
+                class="w-25 h-20 object-cover items-center justify-center mx-auto rounded-full px-20"
+                />
+        </div>
 
-                <div class="flex items-center gap-20">
-                    <a href="home.jsp#feedback" class="hover:text-yellow-400 text-xl">Feedback</a>
-                    <a href="home.jsp#footer" class="hover:text-yellow-400 text-xl">Liên Hệ</a>
-                </div>
+        <div class="flex items-center gap-20">
+            <a href="home.jsp#feedback" class="hover:text-yellow-400 text-xl">Feedback</a>
+            <a href="home.jsp#footer" class="hover:text-yellow-400 text-xl">Liên Hệ</a>
+        </div>
 
-                <div class="flex items-center gap-4 pl-20">
-                    <i data-lucide="search" class="w-5 h-5 cursor-pointer" id="search-button"></i>
-                    <i data-lucide="user" class="w-5 h-5 cursor-pointer" id="login-button"></i>
-                    <i data-lucide="shopping-cart" class="w-5 h-5 cursor-pointer" onclick="window.location.href = 'cart.jsp'"></i>
-                </div>
-            </div>
-        </nav>
-    </body>
-</html>
+        <div class="flex items-center gap-4 pl-20">
+            <i data-lucide="search" class="w-5 h-5 cursor-pointer" id="search-button"></i>
+            <i data-lucide="shopping-cart" class="w-5 h-5 cursor-pointer" onclick="window.location.href = 'cart.jsp'"></i>
+            <% if(userName == null) { %>
+                <i data-lucide="user" class="w-5 h-5 cursor-pointer" id="login-button"></i>
+            <% } %>
+            <% if(userName != null) { %>
+                <span><%= userName %></span>
+            <% } %>
+        </div>
+    </div>
+</nav>
+
