@@ -5,6 +5,35 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<style>
+    .dropdown-container {
+        position: relative;
+        display: inline-block;
+    }
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        z-index: 1;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        padding: 12px 0;
+        display: none;
+    }
+    .dropdown-menu a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+    .dropdown-menu a:hover {
+        background-color: #ddd;
+    }
+    .dropdown-menu.show {
+        display: block;
+    }
+</style>
 <% 
     String userName =(String) session.getAttribute("userName");
 %>
@@ -31,15 +60,21 @@
         </div>
 
         <div class="flex items-center gap-4 pl-20">
-            <i data-lucide="search" class="w-5 h-5 cursor-pointer" id="search-button"></i>
+            <!--<i data-lucide="search" class="w-5 h-5 cursor-pointer" id="search-button"></i>-->
             <i data-lucide="shopping-cart" class="w-5 h-5 cursor-pointer" onclick="window.location.href = 'cart.jsp'"></i>
             <% if(userName == null) { %>
-                <i data-lucide="user" class="w-5 h-5 cursor-pointer" id="login-button"></i>
+            <i data-lucide="user" class="w-5 h-5 cursor-pointer" id="login-button"></i>
             <% } %>
             <% if(userName != null) { %>
-                <span><%= userName %></span>
+            <div class="dropdown-container">
+                <span style="cursor: pointer" id="userNameTrigger" class="dropdown-trigger"><%= userName %></span>
+                <div id="userDropdownMenu" class="dropdown-menu">
+                    <a href="#" style="cursor: pointer">Thông tin tài khoản</a>
+                    <a onclick="signOutUser()" style="cursor: pointer">Đăng xuất</a>
+                </div>
+            </div>
             <% } %>
+
         </div>
     </div>
 </nav>
-

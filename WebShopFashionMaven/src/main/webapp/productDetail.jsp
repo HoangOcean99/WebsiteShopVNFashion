@@ -14,13 +14,32 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script src="https://unpkg.com/lucide@latest"></script>
         <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
         <!--        <link rel="stylesheet" type="text/css" media="screen" href="main.css" />-->
         <link rel="stylesheet" href="css/category.css" />
         <script src="main.js"></script>
+        <script>
+            // KHỞI TẠO FIREBASE (Cần chạy sớm)
+            const firebaseConfig = {
+                // ... (chi tiết config của bạn)
+                apiKey: "AIzaSyBKJjw6QbT3vJKt3jL86bvG3wCvyma5lMQ",
+                authDomain: "diemxua-8f674.firebaseapp.com",
+                projectId: "diemxua-8f674",
+                storageBucket: "diemxua-8f674.firebasestorage.app",
+                messagingSenderId: "327215765829",
+                appId: "1:327215765829:web:2f1fad3037b2dcd3d0c62c",
+                measurementId: "G-VLJJY4SERC"
+            };
+            const app = firebase.initializeApp(firebaseConfig);
+            const auth = firebase.auth();
+        </script>
     </head>
     <body>
         <%@include file="navbar.jsp" %>
-
+        <%
+            boolean isAuthenticated = session.getAttribute("isAuthenticated") != null && (Boolean) session.getAttribute("isAuthenticated");
+        %>
         <section class="relative w-full h-screen overflow-hidden bg-[#f5f0e8] top-[40px]">
             <img src="images/Home2.png" alt="Trang chủ" class="w-full h-full object-cover" />
             <div class="absolute text-center top-[50px] left-0 w-full h-full">
@@ -92,6 +111,10 @@
         </section>
         <script>
             lucide.createIcons();
+            const isServerAuthenticated = <%= isAuthenticated %>;
+
         </script>
+        <script src="js/handleUI.js"></script>
+        <script src="js/handleAuth.js"></script>
     </body>
 </html>
