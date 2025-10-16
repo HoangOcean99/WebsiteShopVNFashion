@@ -199,7 +199,7 @@
             }
         }); 
     </script>
-    <<script src="js/handleUI.js"></script>
-    <<script src="js/handleAuth.js"></script>
+    <script src="js/handleUI.js"></script>
+    <script src="js/handleAuth.js"></script>
 </body>
 </html>

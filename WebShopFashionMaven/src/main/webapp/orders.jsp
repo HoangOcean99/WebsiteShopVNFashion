@@ -71,9 +71,9 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="flex gap-[20px] p-4 border border-[#4B2E17]-2000 rounded-lg m-6">
-                             <img src="images/AoTacNam.jpg" art="timnhat" class="w-15 h-32 bg-gray-400 rounded-2xl" />
+                            <img src="images/AoTacNam.jpg" art="timnhat" class="w-15 h-32 bg-gray-400 rounded-2xl" />
                             <div class="grow block">
                                 <p class="text-2xl font-bold pb-2">Giao Lĩnh Tơ Xước Tím Nhạt </p>
                                 <p class="text-xl pb-2"> 350.000đ x1</p>
@@ -89,18 +89,18 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="flex justify-between items-center ml-6 mr-6">
                             <h1 class="text-xl font-bold text-center ">Tottal: 715.000đ</h1>
-                            <button class=" w-fit text-center font-bold border border-[#492910]/60 rounded-2xl px-2 py-1 
+                            <button class=" w-fit text-center font-bold border border-[#492910]/60 rounded-2xl px-2 py-1
                                     hover:bg-[#fdf8f3]/50 focus:bg-[#fdf8f3]/80
-                                    focus:outline-none focus:ring-1 focus:ring-[#492910] cursor-pointer"  onclick="window.location.href = 'oderDetail.jsp'">
+                                    focus:outline-none focus:ring-1 focus:ring-[#492910] cursor-pointer"  onclick="window.location.href = 'orderDetail.jsp'">
                                 Detail
                             </button>
-                        
+
                         </div>
                     </div>
-                    
+
                     <div class="bg-[#fdf8f3]/60 rounded-2xl p-6 shadow relative z-10">
                         <div class="flex justify-around items-center"> 
                             <div class="flex items-center gap-2">
@@ -130,9 +130,9 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="flex gap-[20px] p-4 border border-[#4B2E17]-2000 rounded-lg m-6">
-                             <img src="images/AoTacNam.jpg" art="timnhat" class="w-15 h-32 bg-gray-400 rounded-2xl" />
+                            <img src="images/AoTacNam.jpg" art="timnhat" class="w-15 h-32 bg-gray-400 rounded-2xl" />
                             <div class="grow block">
                                 <p class="text-2xl font-bold pb-2">Giao Lĩnh Tơ Xước Tím Nhạt </p>
                                 <p class="text-xl pb-2"> 350.000đ x1</p>
@@ -148,15 +148,15 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="flex justify-between items-center ml-6 mr-6">
                             <h1 class="text-xl font-bold text-center ">Tottal: 715.000đ</h1>
-                            <button class=" w-fit text-center font-bold border border-[#492910]/60 rounded-2xl px-2 py-1 
+                            <button class=" w-fit text-center font-bold border border-[#492910]/60 rounded-2xl px-2 py-1
                                     hover:bg-[#fdf8f3]/50 focus:bg-[#fdf8f3]/80
-                                    focus:outline-none focus:ring-1 focus:ring-[#492910] cursor-pointer"  onclick="window.location.href = 'oderDetail.jsp'">
+                                    focus:outline-none focus:ring-1 focus:ring-[#492910] cursor-pointer"  onclick="window.location.href = 'orderDetail.jsp'">
                                 Detail
                             </button>
-                        
+
                         </div>
                     </div>
                 </div> 

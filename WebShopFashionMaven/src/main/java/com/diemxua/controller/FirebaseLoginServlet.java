@@ -4,6 +4,8 @@
  */
 package com.diemxua.controller;
 
+import com.diemxua.model.User;
+import com.diemxua.services.UserService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
@@ -21,7 +23,9 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 public class FirebaseLoginServlet extends HttpServlet {
 
-    private static final long serialVersionUID = 1L; 
+    private static final long serialVersionUID = 1L;
+    private UserService userService;
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -39,6 +43,13 @@ public class FirebaseLoginServlet extends HttpServlet {
             String uid = decodedToken.getUid();
             String email = decodedToken.getEmail();
             String name = decodedToken.getName();
+
+            userService = new UserService();
+            User user = userService.getUserByFirebaseUId(uid);
+            if (user == null) {
+                user = new User(email, "client", uid);
+                userService.insert(user);
+            }
 
             request.getSession().setAttribute("userUID", uid);
             request.getSession().setAttribute("userEmail", email);
