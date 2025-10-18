@@ -8,8 +8,10 @@ function sendTokenToServer(user, retryCount = 0) {
             body: 'idToken=' + encodeURIComponent(idToken)
         })
                 .then(res => {
-                    if (res.ok) {
-                        window.location.href = 'home.jsp';
+
+                    if (res.status === 200) {
+                        console.log("hello error")
+                        window.location.href = `${contextPath}/UserProfileServlet`;
                     } else if ((res.status === 401 || res.status === 400) && retryCount < 2) {
                         console.warn(`Xác minh thất bại lần ${retryCount + 1}. Thử lại sau 0.5 giây...`);
                         setTimeout(() => {
@@ -31,7 +33,7 @@ function signInWithGoogle() {
 }
 
 window.signOutUser = function () {
-    // Logic đăng xuất
+// Logic đăng xuất
     firebase.auth().signOut().then(() => {
         console.log("Đăng xuất Firebase Client thành công.");
         fetch('FirebaseLogoutServlet', {
@@ -53,12 +55,14 @@ window.signOutUser = function () {
 auth.onAuthStateChanged(user => {
     if (user) {
         if (!isServerAuthenticated) {
+            console.log("Quyen")
             const modal = document.getElementById("login-modal");
             if (modal)
                 modal.classList.add("hidden");
             sendTokenToServer(user, 0);
         } else {
             console.log("Firebase user và Server Session đã đồng bộ.");
+            if(!doneUserDetail) window.location.href = `${contextPath}/UserProfileServlet`;
         }
     } else {
     }

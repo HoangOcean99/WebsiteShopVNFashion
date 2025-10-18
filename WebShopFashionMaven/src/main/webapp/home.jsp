@@ -32,9 +32,12 @@
 
 </head>
 
-<body>
+<body>  
     <%
-    boolean isAuthenticated = session.getAttribute("isAuthenticated") != null && (Boolean) session.getAttribute("isAuthenticated");
+        boolean doneUserDetail = session.getAttribute("doneUserDetail") != null && (Boolean) session.getAttribute("doneUserDetail");
+    %>
+    <%
+        boolean isAuthenticated = session.getAttribute("isAuthenticated") != null && (Boolean) session.getAttribute("isAuthenticated");
     %>
     <div class="w-full h-full bg-black/40 fixed z-50 flex justify-center items-center hidden" id="login-modal">
         <%@include file="login.jsp" %>
@@ -154,24 +157,27 @@
     </footer>
     <script>
         lucide.createIcons();
-        
+
         const isServerAuthenticated = <%= isAuthenticated %>;
-        
-        
+        const doneUserDetail = <%= doneUserDetail %>;
+        const contextPath = '<%= request.getContextPath() %>';
+
+
+
         document.addEventListener('DOMContentLoaded', function () {
             const loginModal = document.getElementById("login-modal");
             const searchModal = document.getElementById("search-modal");
             const loginButton = document.getElementById("login-button");
             const searchButton = document.getElementById("search-button");
-            
+
             const urlParams = new URLSearchParams(window.location.search);
             const shouldShowLogin = urlParams.get('showLogin');
-            
+
             if (shouldShowLogin === 'true' && !isServerAuthenticated && loginModal) {
                 loginModal.classList.remove("hidden");
                 window.history.replaceState(null, null, window.location.pathname);
             }
-            
+
             if (loginButton && loginModal) {
                 loginButton.addEventListener("click", () => {
                     loginModal.classList.remove("hidden");
@@ -184,7 +190,7 @@
                     }
                 });
             }
-            
+
             if (searchButton && searchModal) {
                 searchButton.addEventListener("click", () => {
                     searchModal.classList.remove("hidden");
@@ -197,7 +203,7 @@
                     }
                 });
             }
-        }); 
+        });
     </script>
     <script src="js/handleUI.js"></script>
     <script src="js/handleAuth.js"></script>

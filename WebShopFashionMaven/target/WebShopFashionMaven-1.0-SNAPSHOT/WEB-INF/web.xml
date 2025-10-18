@@ -14,6 +14,7 @@
         <url-pattern>/FirebaseLoginServlet</url-pattern>
     </servlet-mapping>
     
+    
     <servlet>
         <servlet-name>FirebaseLogoutServlet</servlet-name>
         <servlet-class>com.diemxua.controller.FirebaseLogoutServlet</servlet-class>
@@ -23,6 +24,18 @@
         <servlet-name>FirebaseLogoutServlet</servlet-name>
         <url-pattern>/FirebaseLogoutServlet</url-pattern>
     </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>UserProfileServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.UserProfileServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UserProfileServlet</servlet-name>
+        <url-pattern>/UserProfileServlet</url-pattern>
+    </servlet-mapping>
+    
     
     <listener>
         <listener-class>com.diemxua.utils.AppContextListener</listener-class>

@@ -43,6 +43,7 @@ public class FirebaseLoginServlet extends HttpServlet {
             String uid = decodedToken.getUid();
             String email = decodedToken.getEmail();
             String name = decodedToken.getName();
+            String urlImage = decodedToken.getPicture();
 
             userService = new UserService();
             User user = userService.getUserByFirebaseUId(uid);
@@ -50,10 +51,10 @@ public class FirebaseLoginServlet extends HttpServlet {
                 user = new User(email, "client", uid);
                 userService.insert(user);
             }
-
             request.getSession().setAttribute("userUID", uid);
             request.getSession().setAttribute("userEmail", email);
             request.getSession().setAttribute("userName", name);
+            request.getSession().setAttribute("userImage", urlImage);
             request.getSession().setAttribute("isAuthenticated", true);
 
             response.setStatus(HttpServletResponse.SC_OK);

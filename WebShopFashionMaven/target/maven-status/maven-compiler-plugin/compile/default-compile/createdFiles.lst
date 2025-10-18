@@ -1,10 +1,12 @@
 com\mycompany\webshopfashionmaven\JakartaRestConfiguration.class
+com\diemxua\utils\AppContextListener.class
+com\diemxua\controller\UserProfileServlet.class
 com\diemxua\model\User.class
 com\diemxua\utils\AuthenticationFilter.class
 com\diemxua\controller\FirebaseLoginServlet.class
-com\diemxua\utils\AppContextListener.class
 com\diemxua\services\UserService.class
 com\diemxua\services\DBContext.class
+com\diemxua\services\UserProfileService.class
 com\diemxua\webshopfashionmaven\resources\JakartaEE10Resource.class
 com\diemxua\model\UserProfile.class
 com\diemxua\controller\FirebaseLogoutServlet.class
