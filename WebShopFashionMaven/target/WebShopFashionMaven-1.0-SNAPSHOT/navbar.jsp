@@ -9,9 +9,7 @@
     String userName =(String) session.getAttribute("userName");
 %>
 <nav class="fixed top-0 left-0 w-full z-40 bg-[#4B2E17] text-white items-center">
-    <div
-        class="container mx-auto flex items-center justify-center px-12 py-2"
-        >
+    <div class="container mx-auto flex items-center justify-center px-12 py-2">
         <div class="flex gap-20">
             <a href="home.jsp#home" class="hover:text-yellow-400 text-xl">Giới Thiệu</a>
             <a href="home.jsp#category" class="hover:text-yellow-400 text-xl">Danh Mục</a>
@@ -31,7 +29,7 @@
         </div>
 
         <div class="flex items-center gap-4 pl-20">
-            <i data-lucide="search" class="w-5 h-5 cursor-pointer" id="search-button"></i>
+            <i data-lucide="handbag" class="w-5 h-5 cursor-pointer"  onclick="window.location.href = 'orders.jsp'"></i>
             <i data-lucide="shopping-cart" class="w-5 h-5 cursor-pointer" onclick="window.location.href = 'cart.jsp'"></i>
             <% if(userName == null) { %>
                 <i data-lucide="user" class="w-5 h-5 cursor-pointer" id="login-button"></i>
