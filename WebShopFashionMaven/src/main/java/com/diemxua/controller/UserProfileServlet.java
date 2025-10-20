@@ -4,7 +4,9 @@
  */
 package com.diemxua.controller;
 
+import com.diemxua.model.Address;
 import com.diemxua.model.UserProfile;
+import com.diemxua.services.AddressService;
 import com.diemxua.services.UserProfileService;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -45,9 +47,11 @@ public class UserProfileServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             HttpSession session = request.getSession();
+            UserProfileService userProfileDAO = new UserProfileService();
+            AddressService addressDAO = new AddressService();
+
             String firebaseID = (String) session.getAttribute("userUID");
             String firebaseImage = (String) session.getAttribute("userImage");
-            UserProfileService dao = new UserProfileService();
             String fullName = request.getParameter("fullname");
             String phone = request.getParameter("phone");
             String dateOB = request.getParameter("dateOfBirth");
@@ -55,8 +59,16 @@ public class UserProfileServlet extends HttpServlet {
             java.util.Date mainDate = format.parse(dateOB);
             String gender = request.getParameter("gender");
 
-            UserProfile UserProfile = new UserProfile(fullName, phone, mainDate, gender, firebaseImage, firebaseID);
-            dao.insert(UserProfile);
+            String recipientName = request.getParameter("recipientName");
+            String ShippingPhone = request.getParameter("shippingPhone");
+            String country = request.getParameter("country");
+            String city = request.getParameter("city");
+            String addressDetail = request.getParameter("addressDetail");
+
+            UserProfile userProfile = new UserProfile(fullName, phone, mainDate, gender, firebaseImage, firebaseID);
+            Address address = new Address(recipientName, ShippingPhone, country, city, addressDetail, true, firebaseID);
+            userProfileDAO.insert(userProfile);
+            addressDAO.insert(address);
 
             session.setAttribute("doneUserDetail", true);
             request.getRequestDispatcher("home.jsp").forward(request, response);

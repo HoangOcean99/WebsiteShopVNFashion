@@ -118,33 +118,33 @@
                 </div>
             </fieldset>
 
-            <!--            <fieldset>
-                            <legend>Thông tin giao hàng</legend>
-                            <div class="form-group">
-                                <label for="recipientName">Tên người nhận (Recipient Name):</label>
-                                <input type="text" id="recipientName" name="recipientName" required>
-                            </div>
-            
-                            <div class="form-group">
-                                <label for="shippingPhone">Số điện thoại nhận hàng (Phone):</label>
-                                <input type="tel" id="shippingPhone" name="shippingPhone" required>
-                            </div>
-            
-                            <div class="form-group">
-                                <label for="country">Quốc gia (Country):</label>
-                                <input type="text" id="country" name="country" required>
-                            </div>
-            
-                            <div class="form-group">
-                                <label for="city">Thành phố (City):</label>
-                                <input type="text" id="city" name="city" required>
-                            </div>
-            
-                            <div class="form-group">
-                                <label for="addressDetail">Địa chỉ chi tiết (Address Detail):</label>
-                                <textarea id="addressDetail" name="addressDetail" required></textarea>
-                            </div>
-                        </fieldset>-->
+            <fieldset>
+                <legend>Thông tin giao hàng</legend>
+                <div class="form-group">
+                    <label for="recipientName">Tên người nhận (Recipient Name):</label>
+                    <input type="text" id="recipientName" name="recipientName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="shippingPhone">Số điện thoại nhận hàng (Phone):</label>
+                    <input type="tel" id="shippingPhone" name="shippingPhone" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="country">Quốc gia (Country):</label>
+                    <input type="text" id="country" name="country" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="city">Thành phố (City):</label>
+                    <input type="text" id="city" name="city" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="addressDetail">Địa chỉ chi tiết (Address Detail):</label>
+                    <textarea id="addressDetail" name="addressDetail" required></textarea>
+                </div>
+            </fieldset>
             <button type="submit">Gửi thông tin</button>
         </form>
     </body>
