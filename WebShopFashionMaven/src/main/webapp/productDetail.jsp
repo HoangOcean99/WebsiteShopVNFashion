@@ -41,7 +41,7 @@
             boolean isAuthenticated = session.getAttribute("isAuthenticated") != null && (Boolean) session.getAttribute("isAuthenticated");
         %>
         <section class="relative w-full h-screen overflow-hidden bg-[#f5f0e8] top-[40px]">
-            <img src="images/Home2.png" alt="Trang chủ" class="w-full h-full object-cover" />
+            <img src="images/Home2.png" alt="Trang chủ" class="w-full h-full object-cover fixed top-0" />
             <div class="absolute text-center top-[50px] left-0 w-full h-full">
                 <div class="bg-transparent min-h-screen py-8">
                     <div class="max-w-6xl mx-auto">

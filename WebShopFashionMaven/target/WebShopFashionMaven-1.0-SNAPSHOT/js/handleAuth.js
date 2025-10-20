@@ -8,9 +8,7 @@ function sendTokenToServer(user, retryCount = 0) {
             body: 'idToken=' + encodeURIComponent(idToken)
         })
                 .then(res => {
-
                     if (res.status === 200) {
-                        console.log("hello error")
                         window.location.href = `${contextPath}/UserProfileServlet`;
                     } else if ((res.status === 401 || res.status === 400) && retryCount < 2) {
                         console.warn(`Xác minh thất bại lần ${retryCount + 1}. Thử lại sau 0.5 giây...`);
@@ -55,7 +53,6 @@ window.signOutUser = function () {
 auth.onAuthStateChanged(user => {
     if (user) {
         if (!isServerAuthenticated) {
-            console.log("Quyen")
             const modal = document.getElementById("login-modal");
             if (modal)
                 modal.classList.add("hidden");

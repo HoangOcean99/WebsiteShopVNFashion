@@ -42,8 +42,8 @@ l<%--
         %>
         <%@include file="navbar.jsp" %>
         <section class="relative w-full h-screen overflow-hidden bg-[#f5f0e8]">
-            <img src="images/Home2.png" alt="Trang chủ" class="w-full h-full object-cover" />
-            <div class="absolute text-center top-[70px] left-0 w-full h-full">
+            <img src="images/Home2.png" alt="Trang chủ" class="w-full h-full object-cover fixed top-0" />
+            <div class="absolute text-center top-[90px] left-0 w-full h-full">
                 <div class="flex text-center items-center justify-center gap-36">
                     <h1 class="font-bold mb-5 text-xl">GIAO LĨNH</h1>
                     <h1 class="font-bold mb-5 text-xl">VIÊN LĨNH</h1>
