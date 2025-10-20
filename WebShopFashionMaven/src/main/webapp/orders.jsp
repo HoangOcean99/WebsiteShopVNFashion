@@ -91,12 +91,14 @@
                         </div>
 
                         <div class="flex justify-between items-center ml-6 mr-6">
-                            <h1 class="text-xl font-bold text-center ">Tottal: 715.000đ</h1>
-                            <button class=" w-fit text-center font-bold border border-[#492910]/60 rounded-2xl px-2 py-1
-                                    hover:bg-[#fdf8f3]/50 focus:bg-[#fdf8f3]/80
-                                    focus:outline-none focus:ring-1 focus:ring-[#492910] cursor-pointer"  onclick="window.location.href = 'orderDetail.jsp'">
-                                Detail
-                            </button>
+                            <h1 class="text-xl font-bold text-center ">Total: 715.000đ</h1>
+                            <div  onclick="window.location.href = 'orderDetail.jsp'">
+                                <button class=" w-fit text-center font-bold border border-[#492910]/60 rounded-2xl px-2 py-1
+                                        hover:bg-[#fdf8f3]/50 focus:bg-[#fdf8f3]/80
+                                        focus:outline-none focus:ring-1 focus:ring-[#492910] cursor-pointer"  onclick="window.location.href = 'oderDetail.jsp'">
+                                    Detail
+                                </button>
+                            </div>
 
                         </div>
                     </div>
@@ -150,13 +152,14 @@
                         </div>
 
                         <div class="flex justify-between items-center ml-6 mr-6">
-                            <h1 class="text-xl font-bold text-center ">Tottal: 715.000đ</h1>
-                            <button class=" w-fit text-center font-bold border border-[#492910]/60 rounded-2xl px-2 py-1
-                                    hover:bg-[#fdf8f3]/50 focus:bg-[#fdf8f3]/80
-                                    focus:outline-none focus:ring-1 focus:ring-[#492910] cursor-pointer"  onclick="window.location.href = 'orderDetail.jsp'">
-                                Detail
-                            </button>
-
+                            <h1 class="text-xl font-bold text-center ">Total: 715.000đ</h1>
+                            <div onclick="window.location.href = 'orderDetail.jsp'">
+                                <button class=" w-fit text-center font-bold border border-[#492910]/60 rounded-2xl px-2 py-1
+                                        hover:bg-[#fdf8f3]/50 focus:bg-[#fdf8f3]/80
+                                        focus:outline-none focus:ring-1 focus:ring-[#492910] cursor-pointer">
+                                    Detail
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div> 
