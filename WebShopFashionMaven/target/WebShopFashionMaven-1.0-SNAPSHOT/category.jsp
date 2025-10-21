@@ -1,9 +1,5 @@
-l<%-- 
-    Document   : category
-    Created on : Oct 3, 2025, 9:29:39 AM
-    Author     : Duong
---%>
-
+<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
+<%@ page import="java.util.List, com.diemxua.model.Product" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -42,44 +38,39 @@ l<%--
         %>
         <%@include file="navbar.jsp" %>
         <section class="relative w-full h-screen overflow-hidden bg-[#f5f0e8]">
-            <img src="images/Home2.png" alt="Trang chủ" class="w-full h-full object-cover" />
-            <div class="absolute text-center top-[70px] left-0 w-full h-full">
+            <img src="images/Home2.png" alt="Trang chủ" class="w-full h-full object-cover fixed top-0" />
+            <div class="absolute text-center top-[120px] left-0 w-full h-full">
                 <div class="flex text-center items-center justify-center gap-36">
-                    <h1 class="font-bold mb-5 text-xl">GIAO LĨNH</h1>
-                    <h1 class="font-bold mb-5 text-xl">VIÊN LĨNH</h1>
-                    <h1 class="font-bold mb-5 text-xl">ÁO TẮC</h1>
+                    <h1 class="font-bold mb-5 text-xl cursor-pointer"><a href="ProductServlet?categoryId=1">GIAO LĨNH</a></h1>
+                    <h1 class="font-bold mb-5 text-xl cursor-pointer"><a href="ProductServlet?categoryId=2">VIÊN LĨNH</a></h1>
+                    <h1 class="font-bold mb-5 text-xl cursor-pointer"><a href="ProductServlet?categoryId=4">ÁO TẤC</a></h1>
                 </div>
                 <div class="grid grid-cols-3 grid-rows-2 gap-y-5 w-1/2 mx-auto">
-                    <div class="cursor-pointer" onclick="window.location.href = 'productDetail.jsp'">
-                        <div class="w-44 h-52 bg-gray-400 mx-auto rounded-lg"></div>
-                        <p class="mt-2">Giao lính tơ xước tím nhạt</p>
-                        <p class="font-semibold">350.000đ</p>
+                    <% 
+                        List<com.diemxua.model.Product> productList = 
+                            (List<com.diemxua.model.Product>) request.getAttribute("listProducts");
+
+                        if (productList != null) {
+                            for (com.diemxua.model.Product p : productList) {
+                    %>
+                    <div class="cursor-pointer" 
+                         onclick="window.location.href = 'ProductDetailServlet?ProductId=<%= p.getProductID() %>'">
+                        <div class="w-44 h-52 bg-gray-400 mx-auto rounded-lg">
+                            <img src="<%= p.getImageProduct1() %>" alt="<%= p.getProductName() %>" class="w-full h-full object-cover rounded-lg">
+                        </div>
+
+                        <p class="mt-2"><%= p.getProductName() %></p>
+                        <p class="font-semibold"><%= p.getFormatPrice() %>đ</p>
                     </div>
-                    <div class="cursor-pointer" onclick="window.location.href = 'productDetail.jsp'">
-                        <div class="w-44 h-52  bg-gray-400 mx-auto rounded-lg"></div>
-                        <p class="mt-2">Giao lính xanh ngọc</p>
-                        <p class="font-semibold">350.000đ</p>
-                    </div>
-                    <div class="cursor-pointer" onclick="window.location.href = 'productDetail.jsp'">
-                        <div class="w-44 h-52 bg-gray-400 mx-auto rounded-lg"></div>
-                        <p class="mt-2">Giao lính tơ xước hồng</p>
-                        <p class="font-semibold">350.000đ</p>
-                    </div>
-                    <div class="cursor-pointer" onclick="window.location.href = 'productDetail.jsp'">
-                        <div class="w-44 h-52 bg-gray-400 mx-auto rounded-lg"></div>
-                        <p class="mt-2">Giao lính xanh ngọc</p>
-                        <p class="font-semibold">350.000đ</p>
-                    </div>
-                    <div class="cursor-pointer" onclick="window.location.href = 'productDetail.jsp'">
-                        <div class="w-44 h-52 bg-gray-400 mx-auto rounded-lg"></div>
-                        <p class="mt-2">Giao lính sa hàn xanh lá</p>
-                        <p class="font-semibold">350.000đ</p>
-                    </div>
-                    <div class="cursor-pointer" onclick="window.location.href = 'productDetail.jsp'">
-                        <div class="w-44 h-52 bg-gray-400 mx-auto rounded-lg"></div>
-                        <p class="mt-2">Giao lính xanh ngọc</p>
-                        <p class="font-semibold">350.000đ</p>
-                    </div>
+                    <% 
+                }  
+            } 
+            else{
+                    %>
+                    <h1>Chưa có sản phẩm nào</h1>
+                    <%
+            }
+                    %>
                 </div>
             </div>
         </section>
@@ -87,7 +78,7 @@ l<%--
             lucide.createIcons();
             const isServerAuthenticated = <%= isAuthenticated %>;
 
-        </script>
+        </script>z
         <script src="js/handleUI.js"></script>
         <script src="js/handleAuth.js"></script>
     </body>

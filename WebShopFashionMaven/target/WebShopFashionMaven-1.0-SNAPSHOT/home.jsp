@@ -70,7 +70,7 @@
         </h2>
 
         <div class="flex gap-20 justify-center mb-40">
-            <div class="text-center cursor-pointer" onclick="window.location.href = 'category.jsp'">
+            <div class="text-center cursor-pointer" onclick="window.location.href = 'ProductServlet?categoryId=1'">
                 <img
                     src="images/AoGiaoLinh.jpg"
                     alt="AoGiaoLinh"
@@ -79,7 +79,16 @@
                 <h3 class="mt-4 text-xl font-bold text-brown-800">Áo Giao Lĩnh</h3>
             </div>
 
-            <div class="text-center cursor-pointer" onclick="window.location.href = 'category.jsp'">
+            <div class="text-center cursor-pointer" onclick="window.location.href = 'ProductServlet?categoryId=2'">
+                <img
+                    src="images/VienLinh.jpg"
+                    alt="VienLinh"
+                    class="w-80 h-[420px] object-cover rounded-lg shadow-2xl"
+                    />
+                <h3 class="mt-4 text-xl font-bold text-brown-1000">Áo Viên Lĩnh</h3>
+            </div>
+
+            <div class="text-center cursor-pointer" onclick="window.location.href = 'ProductServlet?categoryId=4'">
                 <img
                     src="images/AoTacNu.jpg"
                     alt="AoTacNu"
@@ -88,14 +97,6 @@
                 <h3 class="mt-4 text-xl font-bold text-brown-800">Áo Tấc Nữ</h3>
             </div>
 
-            <div class="text-center cursor-pointer" onclick="window.location.href = 'category.jsp'">
-                <img
-                    src="images/VienLinh.jpg"
-                    alt="VienLinh"
-                    class="w-80 h-[420px] object-cover rounded-lg shadow-2xl"
-                    />
-                <h3 class="mt-4 text-xl font-bold text-brown-1000">Áo Viên Lĩnh</h3>
-            </div>
         </div>
 
         <div class="relative w-full h-[800px] overflow-hidden object-cover z-10" id="feedback">

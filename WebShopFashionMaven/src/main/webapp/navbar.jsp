@@ -8,6 +8,35 @@
 <% 
     String userName =(String) session.getAttribute("userName");
 %>
+<style>
+    .dropdown-container {
+        position: relative;
+        display: inline-block;
+    }
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        z-index: 1;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        padding: 12px 0;
+        display: none;
+    }
+    .dropdown-menu a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+    .dropdown-menu a:hover {
+        background-color: #ddd;
+    }
+    .dropdown-menu.show {
+        display: block;
+    }
+</style>
 <nav class="fixed top-0 left-0 w-full z-40 bg-[#4B2E17] text-white items-center">
     <div class="container mx-auto flex items-center justify-center px-12 py-2">
         <div class="flex gap-20">
@@ -32,10 +61,16 @@
             <i data-lucide="handbag" class="w-5 h-5 cursor-pointer"  onclick="window.location.href = 'orders.jsp'"></i>
             <i data-lucide="shopping-cart" class="w-5 h-5 cursor-pointer" onclick="window.location.href = 'cart.jsp'"></i>
             <% if(userName == null) { %>
-                <i data-lucide="user" class="w-5 h-5 cursor-pointer" id="login-button"></i>
+            <i data-lucide="user" class="w-5 h-5 cursor-pointer" id="login-button"></i>
             <% } %>
             <% if(userName != null) { %>
-                <span><%= userName %></span>
+            <div class="dropdown-container">
+                <span style="cursor: pointer" id="userNameTrigger" class="dropdown-trigger"><%= userName %></span>
+                <div id="userDropdownMenu" class="dropdown-menu">
+                    <a href="#" style="cursor: pointer">Thông tin tài khoản</a>
+                    <a onclick="signOutUser()" style="cursor: pointer">Đăng xuất</a>
+                </div>
+            </div>
             <% } %>
         </div>
     </div>

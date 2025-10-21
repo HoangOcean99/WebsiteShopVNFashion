@@ -36,6 +36,7 @@ public class UserProfileServlet extends HttpServlet {
         UserProfileService dao = new UserProfileService();
         UserProfile userProfile = dao.getUserById(firebaseID);
         if (userProfile != null) {
+            session.setAttribute("doneUserDetail", true);
             request.getRequestDispatcher("home.jsp").forward(request, response);
         } else {
             request.getRequestDispatcher("formUserDetail.jsp").forward(request, response);
