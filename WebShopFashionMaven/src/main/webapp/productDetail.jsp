@@ -3,7 +3,7 @@
     Created on : Oct 8, 2025, 10:04:12 PM
     Author     : Duong
 --%>
-
+<%@ page import="java.util.List, com.diemxua.model.Product" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,46 +14,81 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script src="https://unpkg.com/lucide@latest"></script>
         <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
         <!--        <link rel="stylesheet" type="text/css" media="screen" href="main.css" />-->
         <link rel="stylesheet" href="css/category.css" />
         <script src="main.js"></script>
+        <script>
+            // KHỞI TẠO FIREBASE (Cần chạy sớm)
+            const firebaseConfig = {
+                // ... (chi tiết config của bạn)
+                apiKey: "AIzaSyBKJjw6QbT3vJKt3jL86bvG3wCvyma5lMQ",
+                authDomain: "diemxua-8f674.firebaseapp.com",
+                projectId: "diemxua-8f674",
+                storageBucket: "diemxua-8f674.firebasestorage.app",
+                messagingSenderId: "327215765829",
+                appId: "1:327215765829:web:2f1fad3037b2dcd3d0c62c",
+                measurementId: "G-VLJJY4SERC"
+            };
+            const app = firebase.initializeApp(firebaseConfig);
+            const auth = firebase.auth();
+        </script>
     </head>
     <body>
         <%@include file="navbar.jsp" %>
-
+        <%
+            boolean isAuthenticated = session.getAttribute("isAuthenticated") != null && (Boolean) session.getAttribute("isAuthenticated");
+            com.diemxua.model.Product product = (com.diemxua.model.Product) request.getAttribute("product");
+            String title = "GIAO LĨNH";
+            if(product.getCategoryID() == 2){
+                title = "VIÊN LĨNH";
+            }else if(product.getCategoryID() == 4) {
+                title = "ÁO TẤC";
+            }
+            String urlImage = product.getImageProduct1();
+        %>
         <section class="relative w-full h-screen overflow-hidden bg-[#f5f0e8] top-[40px]">
-            <img src="images/Home2.png" alt="Trang chủ" class="w-full h-full object-cover" />
+            <img src="images/Home2.png" alt="Trang chủ" class="w-full h-full object-cover fixed top-0" />
             <div class="absolute text-center top-[50px] left-0 w-full h-full">
                 <div class="bg-transparent min-h-screen py-8">
                     <div class="max-w-6xl mx-auto">
+                        <% if(product != null) { %>
                         <header class="text-center mb-8">
                             <h1 class="text-xl font-serif font-bold text-[#352F29] border-b border-b-[#352F29] inline-block tracking-widest">
-                                GIAO LINH
+                                <%= title %>
                             </h1>
                         </header>
 
                         <div class=" w-full flex flex-col mx-16 md:flex-row gap-[100px]">
                             <div class="md:w-2/5">
                                 <div class="w-full h-[420px] bg-[#8FA79D] rounded-lg shadow-xl mb-4">
+                                    <img src="<%= urlImage %>" alt="<%= product.getProductName() %>" id="mainImage" class="w-full h-full object-cover rounded-lg">
                                 </div>
 
                                 <div class="flex gap-4 justify-start">
-                                    <div class="w-16 h-16 bg-[#8FA79D] rounded-lg opacity-70 cursor-pointer"></div>
-                                    <div class="w-16 h-16 bg-[#8FA79D] rounded-lg opacity-70 cursor-pointer"></div>
-                                    <div class="w-16 h-16 bg-[#8FA79D] rounded-lg opacity-70 cursor-pointer"></div>
+                                    <div class="w-16 h-16 bg-[#8FA79D] rounded-lg opacity-70 cursor-pointer">
+                                        <img src="<%= product.getImageProduct1() %>" alt="<%= product.getProductName() %>" class="w-full h-full object-cover rounded-lg" onclick="changeImage('<%= product.getImageProduct1() %>')">
+                                    </div>
+                                    <div class="w-16 h-16 bg-[#8FA79D] rounded-lg opacity-70 cursor-pointer">
+                                        <img src="<%= product.getImageProduct2() %>" alt="<%= product.getProductName() %>" class="w-full h-full object-cover rounded-lg" onclick="changeImage('<%= product.getImageProduct2() %>')">
+                                    </div>
+                                    <div class="w-16 h-16 bg-[#8FA79D] rounded-lg opacity-70 cursor-pointer">
+                                        <img src="<%= product.getImageProduct3() %>" alt="<%= product.getProductName() %>" class="w-full h-full object-cover rounded-lg" onclick="changeImage('<%= product.getImageProduct3() %>')">
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="md:w-2/5 p-0">
                                 <h2 class="text-4xl font-serif text-[#352F29] mb-2 text-start">
-                                    Giao lĩnh tơ xước tím nhạt
+                                    <%= product.getProductName() %>
                                 </h2>
                                 <p class="text-3xl font-bold text-[#352F29] mb-6 text-start">
-                                    350.000₫
+                                    <%= product.getFormatPrice() %>₫
                                 </p>
 
                                 <div class="text-[#352F29] space-y-2 mb-8">
-                                    <p class="font-semibold text-start">Mã sản phẩm: C06: Fullset áo Giao lĩnh quần thường tơ xước tím nhạt</p>
+                                    <p class="font-semibold text-start"><%= product.getDescription() %></p>
                                     <p class="font-semibold text-start">Set đồ thuê gồm:</p>
                                     <ul class="list-none pl-4 space-y-1 text-sm">
                                         <li class="text-start relative before:content-['-'] before:absolute before:left-[-1rem]">Áo Giao lĩnh dáng dài vải tơ xước tím</li>
@@ -61,7 +96,10 @@
                                         <li class="text-start relative before:content-['-'] before:absolute before:left-[-1rem]">Xiêm thường quây (dạng váy) bên dưới</li>
                                     </ul>
                                     <p class="pt-2 text-start">
-                                        • Vải áo mềm mại, nhẹ nhàng mặc mát, set đồ dịu dàng, trang nhã phù hợp chụp ảnh, concept.
+                                        <%= product.getTrait() %>
+                                    </p>
+                                    <p class="pt-2 text-start">
+                                        <%= product.getItems() %>
                                     </p>
                                 </div>
 
@@ -86,12 +124,18 @@
                                 </button>
                             </div>
                         </div>
+                        <% } %>
                     </div>
                 </div>
             </div>
         </section>
         <script>
             lucide.createIcons();
+            const isServerAuthenticated = <%= isAuthenticated %>;
+
         </script>
+        <script src="js/handleUI.js"></script>
+        <script src="js/handleAuth.js"></script>
+        <<script src="js/handleChangeImage.js"></script>
     </body>
 </html>
