@@ -35,6 +35,27 @@
     </servlet-mapping>
     
     
+    <servlet>
+        <servlet-name>ProductServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.ProductServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ProductServlet</servlet-name>
+        <url-pattern>/ProductServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ProductDetailServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.ProductDetailServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ProductDetailServlet</servlet-name>
+        <url-pattern>/ProductDetailServlet</url-pattern>
+    </servlet-mapping>
+    
+    
     <listener>
         <listener-class>com.diemxua.utils.AppContextListener</listener-class>
     </listener> 
