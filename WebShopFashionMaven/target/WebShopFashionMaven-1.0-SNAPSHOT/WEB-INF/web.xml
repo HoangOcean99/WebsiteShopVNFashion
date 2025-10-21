@@ -14,6 +14,48 @@
         <url-pattern>/FirebaseLoginServlet</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>FirebaseLogoutServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.FirebaseLogoutServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>FirebaseLogoutServlet</servlet-name>
+        <url-pattern>/FirebaseLogoutServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>UserProfileServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.UserProfileServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UserProfileServlet</servlet-name>
+        <url-pattern>/UserProfileServlet</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>ProductServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.ProductServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ProductServlet</servlet-name>
+        <url-pattern>/ProductServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ProductDetailServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.ProductDetailServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ProductDetailServlet</servlet-name>
+        <url-pattern>/ProductDetailServlet</url-pattern>
+    </servlet-mapping>
+    
+    
     <listener>
         <listener-class>com.diemxua.utils.AppContextListener</listener-class>
     </listener> 
