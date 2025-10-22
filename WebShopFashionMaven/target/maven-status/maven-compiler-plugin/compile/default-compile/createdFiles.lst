@@ -3,6 +3,8 @@ com\diemxua\controller\ProductServlet.class
 com\diemxua\services\AddressService.class
 com\diemxua\model\Address.class
 com\diemxua\model\ProductDetail.class
+com\diemxua\services\ProductDetailService.class
+com\diemxua\services\ProductMaterialsService.class
 com\diemxua\utils\AppContextListener.class
 com\diemxua\controller\ProductDetailServlet.class
 com\diemxua\controller\UserProfileServlet.class

@@ -40,6 +40,7 @@
         <%
             boolean isAuthenticated = session.getAttribute("isAuthenticated") != null && (Boolean) session.getAttribute("isAuthenticated");
             com.diemxua.model.Product product = (com.diemxua.model.Product) request.getAttribute("product");
+            List<com.diemxua.model.ProductMaterial> productMaterial = (List<com.diemxua.model.ProductMaterial>) request.getAttribute("productMaterial");
             String title = "GIAO LĨNH";
             if(product.getCategoryID() == 2){
                 title = "VIÊN LĨNH";
@@ -91,15 +92,15 @@
                                     <p class="font-semibold text-start"><%= product.getDescription() %></p>
                                     <p class="font-semibold text-start">Set đồ thuê gồm:</p>
                                     <ul class="list-none pl-4 space-y-1 text-sm">
-                                        <li class="text-start relative before:content-['-'] before:absolute before:left-[-1rem]">Áo Giao lĩnh dáng dài vải tơ xước tím</li>
-                                        <li class="text-start relative before:content-['-'] before:absolute before:left-[-1rem]">Quần trắng</li>
-                                        <li class="text-start relative before:content-['-'] before:absolute before:left-[-1rem]">Xiêm thường quây (dạng váy) bên dưới</li>
+                                        <% if(productMaterial != null){
+                                            for(com.diemxua.model.ProductMaterial pm : productMaterial){
+                                        %>
+
+                                        <li class="text-start relative before:content-['-'] before:absolute before:left-[-1rem]"><%= pm.getMaterialName() %></li>
+                                            <% } }%>
                                     </ul>
                                     <p class="pt-2 text-start">
                                         <%= product.getTrait() %>
-                                    </p>
-                                    <p class="pt-2 text-start">
-                                        <%= product.getItems() %>
                                     </p>
                                 </div>
 

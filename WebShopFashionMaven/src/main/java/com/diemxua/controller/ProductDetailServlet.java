@@ -5,6 +5,8 @@
 package com.diemxua.controller;
 
 import com.diemxua.model.Product;
+import com.diemxua.model.ProductMaterial;
+import com.diemxua.services.ProductMaterialsService;
 import com.diemxua.services.ProductService;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +15,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 
 public class ProductDetailServlet extends HttpServlet {
 
@@ -25,7 +28,11 @@ public class ProductDetailServlet extends HttpServlet {
         ProductService productService = new ProductService();
         Product p = productService.getProductByProductId(pId);
 
+        ProductMaterialsService productMaterialService = new ProductMaterialsService();
+        List<ProductMaterial> pm = productMaterialService.getProductMaterialsByProductId(pId);
+
         request.setAttribute("product", p);
+        request.setAttribute("productMaterial", pm);
         request.getRequestDispatcher("productDetail.jsp").forward(request, response);
     }
 
