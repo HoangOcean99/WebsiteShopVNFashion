@@ -142,7 +142,7 @@ public class ProductService extends DBContext {
     }
 
     public void editProduct(Product product) {
-        String sql = "UPDATE Products SET Product_name = ?, Description = ?, Gender = ?, CategoryID = ?, CreateAt = ?, Price = ?, Trait = ?, Items = ?, ImageProduct1 = ?, ImageProduct2 = ?, ImageProduct3 = ?";
+        String sql = "UPDATE Products SET Product_name = ?, Description = ?, Gender = ?, CategoryID = ?, CreateAt = ?, Price = ?, Trait = ?, Items = ?, ImageProduct1 = ?, ImageProduct2 = ?, ImageProduct3 = ? WHERE ProductID = ?";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, product.getProductName());
@@ -156,6 +156,7 @@ public class ProductService extends DBContext {
             ps.setString(9, product.getImageProduct1());
             ps.setString(10, product.getImageProduct2());
             ps.setString(11, product.getImageProduct3());
+            ps.setInt(12, product.getProductID());
 
             ps.executeUpdate();
         } catch (SQLException e) {

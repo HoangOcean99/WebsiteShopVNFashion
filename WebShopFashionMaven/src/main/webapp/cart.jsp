@@ -173,7 +173,7 @@
                                 Buy
                             </button>
 
-                            <button onclick="window.location.href = 'category.jsp'"  class="w-full text-center font-bold border border-[#492910]/60 rounded-2xl px-2 py-1 mb-2 my-4
+                            <button onclick="window.location.href = 'ProductServlet?categoryId=1'"  class="w-full text-center font-bold border border-[#492910]/60 rounded-2xl px-2 py-1 mb-2 my-4
                                     hover:bg-[#fdf8f3]/50 focus:bg-[#fdf8f3]/80
                                     focus:outline-none focus:ring-1 focus:ring-[#492910]">
                                 Continue Shopping
