@@ -5,9 +5,11 @@
 package com.diemxua.controller;
 
 import com.diemxua.model.Address;
+import com.diemxua.model.User;
 import com.diemxua.model.UserProfile;
 import com.diemxua.services.AddressService;
 import com.diemxua.services.UserProfileService;
+import com.diemxua.services.UserService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -50,8 +52,10 @@ public class UserProfileServlet extends HttpServlet {
             HttpSession session = request.getSession();
             UserProfileService userProfileDAO = new UserProfileService();
             AddressService addressDAO = new AddressService();
-
+            UserService userService = new UserService();
             String firebaseID = (String) session.getAttribute("userUID");
+
+
             String firebaseImage = (String) session.getAttribute("userImage");
             String fullName = request.getParameter("fullname");
             String phone = request.getParameter("phone");
@@ -70,6 +74,8 @@ public class UserProfileServlet extends HttpServlet {
             Address address = new Address(recipientName, ShippingPhone, country, city, addressDetail, true, firebaseID);
             userProfileDAO.insert(userProfile);
             addressDAO.insert(address);
+
+            
 
             session.setAttribute("doneUserDetail", true);
             request.getRequestDispatcher("home.jsp").forward(request, response);

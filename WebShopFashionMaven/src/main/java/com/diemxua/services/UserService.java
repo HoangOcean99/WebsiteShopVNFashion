@@ -46,6 +46,7 @@ public class UserService extends DBContext {
             try (ResultSet rs = st.executeQuery()) {
                 if (rs.next()) {
                     m = new User();
+                    m.setUserID(rs.getInt("UserID"));
                     m.setEmail(rs.getString("Email"));
                     m.setRole(rs.getString("Role"));
                     m.setFirebaseUID(rs.getString("FirebaseUID"));
@@ -65,6 +66,7 @@ public class UserService extends DBContext {
             try (ResultSet rs = st.executeQuery()) {
                 if (rs.next()) {
                     m = new User();
+                    m.setUserID(rs.getInt("UserID"));
                     m.setEmail(rs.getString("Email"));
                     m.setRole(rs.getString("Role"));
                     m.setFirebaseUID(rs.getString("FirebaseUID"));

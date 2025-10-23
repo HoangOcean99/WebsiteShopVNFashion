@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List, com.diemxua.model.Product" %>
 <!DOCTYPE html>
 <html>
 
@@ -49,69 +50,54 @@
                     <!-- Bảng 1 -->
                     <div class="bg-[#fdf8f3]/60 rounded-2xl p-8 shadow relative z-10">
                         <h2 class="text-2xl font-bold mb-4">CART</h2>
-                        <!-- nội dung giỏ hàng -->
-                        <div>
+                        <div>  
+                            <% List<com.diemxua.model.Product> productsCartItems = (List<com.diemxua.model.Product>) request.getAttribute("listProductCart"); 
+                            List<com.diemxua.model.CartItems> cartItems = (List<com.diemxua.model.CartItems>) request.getAttribute("cartItems");                                 
+                            for(int i=0 ;i < cartItems.size(); i++){
+                                com.diemxua.model.Product productsCart = productsCartItems.get(i);
+                                com.diemxua.model.CartItems cartItem = cartItems.get(i);
+                            %>
                             <div class="flex gap-[20px] p-2 border border-[#4B2E17]-2000 rounded-lg mb-2">
-                                <img src="images/giaolinhtimnhat.jpg" art="timnhat" class="w-25 h-52 bg-gray-400 rounded-2xl" />
+                                <img src="<%= productsCart.getImageProduct1() %>" art="<%= productsCart.getProductName() %>" class="w-25 h-52 bg-gray-400 rounded-2xl" />
                                 <div class="grow block">
-                                    <p class="text-2xl font-bold pb-2">Giao Lĩnh Tơ Xước Tím Nhạt </p>
-                                    <p class="text-xl pb-2"> 350.000đ </p>
+                                    <p class="text-2xl font-bold pb-2"><%= productsCart.getProductName() %> </p>
+                                    <p class="text-xl pb-2"> <%= productsCart.getFormatPrice() %>đ </p>
                                     <div class="flex gap-6">
-                                        <button class="flex space-x-3 ">
-                                            <select class="border border-gray-300 rounded-full px-2 py-1 text-sm focus:outline-none">
-                                                <option>XL</option>
-                                                <option>L</option>
-                                                <option>M</option>
-                                                <option>S</option>
-                                            </select>
-                                        </button>
-                                        <div class="flex border border-gray bg-[#fdf8f3] w-fit rounded-full px-2 py-1 space-x-2">
-                                            <button class="text-lg leading-none px-2 select-none" onclick="decrease(this)">-</button>
-                                            <input type="number" value="1" min="1" class="w-8 text-center bg-transparent" />
-                                            <button class="text-lg leading-none select-none" onclick="increase(this)">+</button>
-                                        </div>
+                                        <form action="ChangeCartServlet" method="post">
+                                            <button class="flex space-x-3 " type="button">
+                                                <select class="border border-gray-300 rounded-full px-2 py-1 text-sm focus:outline-none"
+                                                        name="inputSize" 
+                                                        onchange="this.form.submit()">
+                                                    <option value="XL" <% if("XL".equals(cartItem.getSizeCart())) {%> selected <% } %>>XL</option>
+                                                    <option value="L" <% if("L".equals(cartItem.getSizeCart())) {%> selected <% } %>>L</option>
+                                                    <option value="M" <% if("M".equals(cartItem.getSizeCart())) {%> selected <% } %>>M</option>
+                                                    <option value="S" <% if("S".equals(cartItem.getSizeCart())) {%> selected <% } %>>S</option>
+                                                </select>
+                                            </button>
+                                            <input type="hidden" name="CartItemID" value="<%= cartItem.getCartItemId() %>"></input>
+                                            <input type="hidden" name="ProductID" value="<%= productsCart.getProductID() %>"></input>
+                                            <div class="flex border border-gray bg-[#fdf8f3] w-fit rounded-full px-2 py-1 space-x-2">
+                                                <button type="submit" class="text-lg leading-none px-2 select-none" onclick="decrease(this)">-</button>
+                                                <input type="number" 
+                                                       value="<%= cartItem.getQuantityCart()%>"
+                                                       min="1" 
+                                                       class="w-8 text-center bg-transparent"
+                                                       name="inputQuantity" />
+                                                <button type="submit" class="text-lg leading-none select-none" onclick="increase(this)">+</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
-                                <div>
-                                    <p class="text-2xl font-bold pb-12">350.000đ</p>
+                                <form action="DeleteCartItemServlet" method="post">
+                                    <input type="hidden" name="CartItemID" value="<%= cartItem.getCartItemId() %>"></input>
+                                    <p class="text-2xl font-bold pb-12"><%= cartItem.getFormatPriceCart()%>đ</p>
                                     <div class="flex gap-2 ">
                                         <i data-lucide="trash-2" class="size-5"></i>
-                                        <p class="text-md"> Deleted</p>
+                                        <input type="submit" class="text-md cursor-pointer" value="Delete">
                                     </div>
-
-                                </div>
+                                </form>
                             </div>
-
-                            <div class="flex gap-[20px] p-2 border border-[#4B2E17]-2000 rounded-lg mb-2">
-                                <img src="images/giaolinhtimnhat.jpg" art="timnhat" class="w-25 h-52 bg-gray-400 rounded-2xl" />
-                                <div class="grow block">
-                                    <p class="text-2xl font-bold pb-2">Giao Lĩnh Tơ Xước Tím Nhạt </p>
-                                    <p class="text-xl pb-2"> 350.000đ </p>
-                                    <div class="flex gap-6">
-                                        <button class="flex space-x-3 ">
-                                            <select class="border border-gray-300 rounded-full px-2 py-1 text-sm focus:outline-none">
-                                                <option>XL</option>
-                                                <option>L</option>
-                                                <option>M</option>
-                                                <option>S</option>
-                                            </select>
-                                        </button>
-                                        <div class="flex border border-gray bg-[#fdf8f3] w-fit rounded-full px-2 py-1 space-x-2">
-                                            <button class="text-lg leading-none px-2 select-none" onclick="decrease(this)">-</button>
-                                            <input type="number" value="1" min="1" class="w-8 text-center bg-transparent" />
-                                            <button class="text-lg leading-none select-none" onclick="increase(this)">+</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <p class="text-2xl font-bold pb-12">350.000đ</p>
-                                    <div class="flex gap-2 ">
-                                        <i data-lucide="trash-2" class="size-5"></i>
-                                        <p class="text-md"> Deleted</p>
-                                    </div>
-
-                                </div>
-                            </div>
+                            <% } %>
                         </div>
 
 

@@ -56,6 +56,59 @@
     </servlet-mapping>
     
     
+    <servlet>
+        <servlet-name>CartServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.CartServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CartServlet</servlet-name>
+        <url-pattern>/CartServlet</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>CartDetailServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.CartDetailServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CartDetailServlet</servlet-name>
+        <url-pattern>/CartDetailServlet</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>ChangeCartServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.ChangeCartServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ChangeCartServlet</servlet-name>
+        <url-pattern>/ChangeCartServlet</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>DeleteCartItemServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.DeleteCartItemServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteCartItemServlet</servlet-name>
+        <url-pattern>/DeleteCartItemServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>TryOnServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.TryOnServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>TryOnServlet</servlet-name>
+        <url-pattern>/TryOnServlet</url-pattern>
+    </servlet-mapping>
+    
     <listener>
         <listener-class>com.diemxua.utils.AppContextListener</listener-class>
     </listener> 

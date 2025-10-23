@@ -2,39 +2,60 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package com.diemxua.model;
 
 import java.util.*;
 import java.lang.*;
 import java.io.*;
+import java.text.NumberFormat;
 
 public class CartItems {
+
     private int cartItemId;
     private int productId;
-    private int quanity;
-    private float price;
-    private int cartId;
-    private int productDetailId;
+    private int userId;
+    private long priceCart;
+    private String sizeCart;
+    private int quantityCart;
+    private String formatPriceCart;
+
+    private String format(long price) {
+        Locale localeVN = new Locale("vi", "VN");
+        NumberFormat currencyFormatter = NumberFormat.getNumberInstance(localeVN);
+
+        currencyFormatter.setMaximumFractionDigits(0);
+        currencyFormatter.setMinimumFractionDigits(0);
+
+        return currencyFormatter.format(price);
+    }
 
     public CartItems() {
     }
 
-    public CartItems(int cartItemId, int productId, int quanity, float price, int cartId, int productDetailId) {
+    public CartItems(int cartItemId, int productId, int userId, long priceCart, String sizeCart, int quantityCart) {
         this.cartItemId = cartItemId;
         this.productId = productId;
-        this.quanity = quanity;
-        this.price = price;
-        this.cartId = cartId;
-        this.productDetailId = productDetailId;
+        this.userId = userId;
+        this.priceCart = priceCart;
+        this.sizeCart = sizeCart;
+        this.quantityCart = quantityCart;
+        this.formatPriceCart = this.format(this.priceCart);
     }
 
-    public CartItems(int productId, int quanity, float price, int cartId, int productDetailId) {
+    public CartItems(int productId, int userId, long priceCart, String sizeCart, int quantityCart) {
         this.productId = productId;
-        this.quanity = quanity;
-        this.price = price;
-        this.cartId = cartId;
-        this.productDetailId = productDetailId;
+        this.userId = userId;
+        this.priceCart = priceCart;
+        this.sizeCart = sizeCart;
+        this.quantityCart = quantityCart;
+        this.formatPriceCart = this.format(this.priceCart);
+    }
+
+    public CartItems(int productId, int userId, String sizeCart, int quantityCart) {
+        this.productId = productId;
+        this.userId = userId;
+        this.sizeCart = sizeCart;
+        this.quantityCart = quantityCart;
     }
 
     public int getCartItemId() {
@@ -53,37 +74,42 @@ public class CartItems {
         this.productId = productId;
     }
 
-    public int getQuanity() {
-        return quanity;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setQuanity(int quanity) {
-        this.quanity = quanity;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public float getPrice() {
-        return price;
+    public long getPriceCart() {
+        return priceCart;
     }
 
-    public void setPrice(float price) {
-        this.price = price;
+    public void setPriceCart(long priceCart) {
+        this.priceCart = priceCart;
+        this.formatPriceCart = this.format(this.priceCart);
     }
 
-    public int getCartId() {
-        return cartId;
+    public String getSizeCart() {
+        return sizeCart;
     }
 
-    public void setCartId(int cartId) {
-        this.cartId = cartId;
+    public void setSizeCart(String sizeCart) {
+        this.sizeCart = sizeCart;
     }
 
-    public int getProductDetailId() {
-        return productDetailId;
+    public int getQuantityCart() {
+        return quantityCart;
     }
 
-    public void setProductDetailId(int productDetailId) {
-        this.productDetailId = productDetailId;
+    public void setQuantityCart(int quantityCart) {
+        this.quantityCart = quantityCart;
+    }
+
+    public String getFormatPriceCart() {
+        return formatPriceCart;
     }
     
-    
+
 }

@@ -16,6 +16,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
     <link rel="stylesheet" href="css/home.css" />
+    <script src="//code.tidio.co/jm8e5ai5yvtjna1r1r5tpne389fpfjgb.js" async></script>
     <script>
         const firebaseConfig = {
             apiKey: "AIzaSyBKJjw6QbT3vJKt3jL86bvG3wCvyma5lMQ",

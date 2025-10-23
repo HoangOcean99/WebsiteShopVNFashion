@@ -56,6 +56,11 @@ public class FirebaseLoginServlet extends HttpServlet {
             request.getSession().setAttribute("userName", name);
             request.getSession().setAttribute("userImage", urlImage);
             request.getSession().setAttribute("isAuthenticated", true);
+            User currentUser = userService.getUserByFirebaseUId(uid);
+
+            if (currentUser != null) {
+                request.getSession().setAttribute("UserID", currentUser.getUserID());
+            }
 
             response.setStatus(HttpServletResponse.SC_OK);
 
