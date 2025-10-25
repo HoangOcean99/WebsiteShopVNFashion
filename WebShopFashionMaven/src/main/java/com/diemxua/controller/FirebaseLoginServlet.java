@@ -60,6 +60,7 @@ public class FirebaseLoginServlet extends HttpServlet {
 
             if (currentUser != null) {
                 request.getSession().setAttribute("UserID", currentUser.getUserID());
+                request.getSession().setAttribute("RoleUser", currentUser.getRole());
             }
 
             response.setStatus(HttpServletResponse.SC_OK);

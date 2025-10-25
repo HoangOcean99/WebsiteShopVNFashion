@@ -40,6 +40,10 @@
 <nav class="fixed top-0 left-0 w-full z-40 bg-[#4B2E17] text-white items-center">
     <div class="container mx-auto flex items-center justify-center px-12 py-2">
         <div class="flex gap-20">
+            <% boolean role = session.getAttribute("RoleUser") != null && (Boolean) session.getAttribute("RoleUser").equals("admin"); 
+            if(role){ %>
+            <a href="#" class="hover:text-yellow-400 text-xl">Dashboard</a>
+            <% } %>
             <a href="home.jsp#home" class="hover:text-yellow-400 text-xl">Giới Thiệu</a>
             <a href="home.jsp#category" class="hover:text-yellow-400 text-xl">Danh Mục</a>
         </div>
