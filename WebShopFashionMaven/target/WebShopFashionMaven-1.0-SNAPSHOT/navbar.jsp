@@ -42,7 +42,7 @@
         <div class="flex gap-20">
             <% boolean role = session.getAttribute("RoleUser") != null && (Boolean) session.getAttribute("RoleUser").equals("admin"); 
             if(role){ %>
-            <a href="#" class="hover:text-yellow-400 text-xl">Dashboard</a>
+            <a href="AdminProductServlet" class="hover:text-yellow-400 text-xl">Dashboard</a>
             <% } %>
             <a href="home.jsp#home" class="hover:text-yellow-400 text-xl">Giới Thiệu</a>
             <a href="home.jsp#category" class="hover:text-yellow-400 text-xl">Danh Mục</a>

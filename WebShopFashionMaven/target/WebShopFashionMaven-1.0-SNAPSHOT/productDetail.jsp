@@ -1,4 +1,4 @@
-<%-- 
+    <%-- 
     Document   : productDetail
     Created on : Oct 8, 2025, 10:04:12 PM
     Author     : Duong

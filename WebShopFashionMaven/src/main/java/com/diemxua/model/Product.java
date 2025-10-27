@@ -53,12 +53,11 @@ public class Product {
         this.imageProduct3 = imageProduct3;
     }
 
-    public Product(String productName, String description, String gender, int categoryID, String createAt, long price, String trait, String items, String imageProduct1, String imageProduct2, String imageProduct3) {
+    public Product(String productName, String description, String gender, int categoryID, long price, String trait, String items, String imageProduct1, String imageProduct2, String imageProduct3) {
         this.productName = productName;
         this.description = description;
         this.gender = gender;
         this.categoryID = categoryID;
-        this.createAt = createAt;
         this.price = price;
         this.formatPrice = this.format(this.price);
         this.trait = trait;

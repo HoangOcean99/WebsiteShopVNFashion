@@ -78,13 +78,12 @@ public class ProductMaterialsService extends DBContext {
     }
 
     public void insert(ProductMaterial user) {
-        String sql = "INSERT INTO ProductMaterials (MaterialID, MaterialName, ProductID)"
-                + "VALUES (?, ?, ?)";
+        String sql = "INSERT INTO ProductMaterials (MaterialName, ProductID)"
+                + "VALUES (?, ?)";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setInt(1, user.getMaterialID());
-            ps.setString(2, user.getMaterialName());
-            ps.setInt(3, user.getProductID());
+            ps.setString(1, user.getMaterialName());
+            ps.setInt(2, user.getProductID());
 
             ps.executeUpdate();
         } catch (SQLException e) {

@@ -1,0 +1,470 @@
+<%-- 
+    Document   : admin_product
+    Created on : Oct 25, 2025, 5:16:03 PM
+    Author     : Duong
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List, com.diemxua.model.Product" %>
+<%@ page import="java.util.List, com.diemxua.model.ProductDetail" %>
+<%@ page import="java.util.List, com.diemxua.model.ProductMaterial" %>
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Thêm Sản phẩm</title>
+
+        <style>
+            /* ================= Sidebar ================= */
+            .sidebar {
+                width: 250px;
+                height: 100vh;
+                position: fixed;
+                left: 0;
+                top: 0;
+                background-color: #2c3e50;
+                color: white;
+                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+                padding: 20px 0;
+            }
+
+            .sidebar h2 {
+                text-align: center;
+                color: #ecf0f1;
+                margin: 20px 0;
+                font-size: 1.4em;
+            }
+
+            .sidebar nav ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .sidebar nav ul li a {
+                display: block;
+                color: #ecf0f1;
+                text-decoration: none;
+                padding: 12px 20px;
+                font-size: 1em;
+                transition: background-color 0.3s, padding-left 0.2s;
+            }
+
+            .sidebar nav ul li a:hover {
+                background-color: #34495e;
+                padding-left: 28px;
+            }
+
+            .sidebar nav ul li a.active {
+                background-color: #1abc9c;
+                color: white;
+                font-weight: 600;
+            }
+
+            .sidebar-header {
+                padding: 0 20px;
+            }
+
+            .back-button {
+                display: inline-block;
+                color: #ecf0f1;
+                text-decoration: none;
+                padding: 6px 10px;
+                border-radius: 5px;
+                transition: background-color 0.2s;
+                font-size: 0.9em;
+            }
+
+            .back-button:hover {
+                background-color: #34495e;
+                color: white;
+            }
+
+            /* ================= Main Layout ================= */
+            .dashboard-container {
+                display: flex;
+                min-height: 100vh;
+                background-color: #f7f9fb;
+                font-family: 'Segoe UI', Tahoma, sans-serif;
+            }
+
+            .main-content {
+                flex: 1;
+                margin-left: 250px;
+                padding: 30px 50px;
+            }
+
+            .section h3 {
+                color: #2c3e50;
+                font-size: 1.5em;
+                margin-bottom: 20px;
+                border-bottom: 3px solid #1abc9c;
+                padding-bottom: 8px;
+            }
+
+            .back-button1 {
+                display: inline-block;
+                color: #2c3e50;
+                text-decoration: none;
+                background-color: #ecf0f1;
+                padding: 6px 10px;
+                border-radius: 5px;
+                margin-bottom: 15px;
+                transition: all 0.3s;
+            }
+
+            .back-button1:hover {
+                background-color: #1abc9c;
+                color: white;
+            }
+
+            .product-info-grid {
+                display: grid;
+                grid-template-columns: 200px 1fr; /* Cột label 200px, cột input còn lại */
+                gap: 10px 20px;
+                align-items: center;
+            }
+            .product-info-grid label {
+                text-align: right;
+                font-weight: 500;
+                color: #34495e;
+            }
+            .product-info-grid input[type="text"],
+            .product-info-grid input[type="number"],
+            .product-info-grid input[type="date"],
+            .product-info-grid select,
+            .product-info-grid textarea {
+                width: 100%;
+                padding: 8px 12px;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                box-sizing: border-box; /* Quan trọng để padding không làm tăng chiều rộng */
+            }
+            .product-info-grid textarea {
+                grid-column: 2; /* Đảm bảo textarea nằm ở cột thứ hai */
+                resize: vertical;
+            }
+            .product-info-grid label[for="description"] {
+                align-self: flex-start; /* Căn label mô tả lên đầu */
+                padding-top: 8px;
+            }
+
+            /* Input trong bảng */
+            .data-table input {
+                border: 1px solid #eee;
+                padding: 5px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            /* Nút hành động */
+            .button-primary, .button-danger, .button-add, .button-remove {
+                padding: 10px 15px;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                font-weight: bold;
+                margin-left: 10px;
+                transition: background-color 0.3s;
+            }
+            .button-primary {
+                background-color: #2ecc71;
+                color: white;
+            }
+            .button-primary:hover {
+                background-color: #27ae60;
+            }
+            .button-danger {
+                background-color: #e74c3c;
+                color: white;
+            }
+            .button-danger:hover {
+                background-color: #c0392b;
+            }
+            .button-add {
+                background-color: #3498db;
+                color: white;
+                margin-top: 10px;
+            }
+            .button-add:hover {
+                background-color: #2980b9;
+            }
+            .button-remove {
+                background-color: #bdc3c7;
+                color: #333;
+                margin: 0;
+                padding: 5px 8px;
+                font-size: 0.9em;
+            }
+            .button-remove:hover {
+                background-color: #95a5a6;
+            }
+
+            .header-actions {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+            .back-button1 {
+                text-decoration: none;
+                color: #3498db;
+                font-weight: bold;
+                padding: 5px 10px;
+            }
+
+            /* Đảm bảo ID sản phẩm (readonly) có màu nền khác biệt */
+            input[readonly] {
+                background-color: #ecf0f1;
+                cursor: default;
+            }
+
+
+            /* Styling for Image Gallery */
+            .image-gallery {
+                display: flex; /* Dùng flexbox để các image-box nằm ngang */
+                gap: 20px; /* Khoảng cách giữa các image-box */
+                flex-wrap: wrap; /* Cho phép xuống dòng nếu không đủ chỗ */
+                justify-content: flex-start; /* Căn các item về bên trái */
+                margin-top: 15px;
+            }
+
+            .image-box {
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                padding: 10px;
+                display: flex; /* Dùng flexbox bên trong image-box */
+                flex-direction: column; /* Sắp xếp các item theo chiều dọc (ảnh trên, input dưới) */
+                align-items: center; /* Căn giữa các item theo chiều ngang */
+                box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+                background-color: white;
+                width: 200px; /* Đặt chiều rộng cố định cho mỗi ô ảnh */
+                min-width: 150px; /* Đảm bảo không quá nhỏ */
+            }
+
+            .image-box img {
+                width: 100%; /* Ảnh sẽ chiếm toàn bộ chiều rộng của image-box */
+                height: 150px; /* Chiều cao cố định cho ảnh */
+                object-fit: cover; /* Đảm bảo ảnh được căn chỉnh và cắt nếu cần để vừa khung */
+                border-radius: 4px; /* Bo tròn góc ảnh một chút */
+                margin-bottom: 10px; /* Khoảng cách giữa ảnh và input file */
+                border: 1px solid #eee; /* Đường viền nhẹ cho ảnh */
+            }
+
+            .image-box input[type="file"] {
+                width: 100%;
+                padding: 8px;
+                border: 1px solid #ced4da;
+                border-radius: 5px;
+                background-color: #f8f9fa;
+                cursor: pointer;
+                font-size: 0.9em;
+                color: #495057;
+                /* Ẩn nút "Choose File" mặc định nếu muốn tạo nút tùy chỉnh */
+                /* display: none; */
+            }
+
+            .image-box input[type="file"]::-webkit-file-upload-button {
+                /* Tùy chỉnh nút "Choose File" cho trình duyệt WebKit (Chrome, Safari) */
+                visibility: hidden; /* Ẩn nút gốc */
+                width: 0; /* Đặt chiều rộng về 0 */
+                padding: 0; /* Không có padding */
+                margin: 0; /* Không có margin */
+            }
+
+            .image-box input[type="file"]::before {
+                /* Tạo nút tùy chỉnh cho trình duyệt WebKit */
+                content: 'Chọn ảnh'; /* Văn bản cho nút */
+                display: inline-block;
+                background: #3498db;
+                color: white;
+                border: 1px solid #3498db;
+                border-radius: 5px;
+                padding: 8px 12px;
+                outline: none;
+                white-space: nowrap;
+                cursor: pointer;
+                font-weight: 700;
+                font-size: 0.9em;
+                width: 100%; /* Đảm bảo nút chiếm toàn bộ chiều rộng */
+                text-align: center;
+                box-sizing: border-box; /* Quan trọng */
+            }
+
+            .image-box input[type="file"]:hover::before {
+                background: #2980b9;
+            }
+            .image-box input[type="file"]:active::before {
+                background: #2980b9;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="dashboard-container">
+            <%@include file="admin_sidebar.jsp" %>
+
+            <div class="main-content">
+                <div id="product-detail" class="section">
+                    <form action="AdminAddProductServlet" method="POST" enctype="multipart/form-data">
+                        <div class="header-actions">
+                            <a href="AdminProductServlet" class="back-button1">← Quay lại danh sách</a>
+                            <div style="flex-grow: 1;"></div>
+                        </div>
+
+                        <h3>📝 Chi tiết Sản phẩm: Áo Sơ Mi Linen Cao Cấp</h3>
+
+                        <div class="detail-group">
+                            <h4>Thông tin Cơ bản</h4>
+                            <div class="product-info-grid">
+
+                                <label for="productName"><strong>Tên Sản phẩm:</strong></label>
+                                <input type="text" id="productName" name="productName" value="" required>
+
+                                <label for="description"><strong>Mô tả Sản phẩm:</strong></label>
+                                <textarea type="text" id="description" name="description" rows="3"></textarea>
+
+                                <label for="gender"><strong>Giới tính áp dụng:</strong></label>
+                                <select id="gender" name="gender">
+                                    <option value="Male">Nam</option>
+                                    <option value="Female">Nữ</option>
+                                    <option value="Unisex">Unisex</option>
+                                </select>
+
+                                <label for="category"><strong>Danh mục:</strong></label>
+                                <select id="category" name="categoryID">
+                                    <option value="1">Giao Lĩnh</option>
+                                    <option value="2">Viên Lĩnh</option>
+                                    <option value="4">Áo Tấc</option>
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="detail-group">
+                            <h4>Ảnh sản phẩm (Liên kết)</h4>
+                            <div class="image-gallery">
+                                <div class="image-box">
+                                    <img src="" alt="Ảnh 1" id="preview1">
+                                    <input type="file" id="fileInput1" accept="image/*" name="image1">
+                                </div>
+
+                                <div class="image-box">
+                                    <img src="" alt="Ảnh 2" id="preview2">
+                                    <input type="file" id="fileInput2" accept="image/*" name="image2">
+                                </div>
+
+                                <div class="image-box">
+                                    <img src="" alt="Ảnh 3" id="preview3">
+                                    <input type="file" id="fileInput3" accept="image/*" name="image3">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="detail-group">
+                            <h4>Thông tin Mô tả & Giá</h4>
+                            <div class="product-info-grid">
+                                <label for="price"><strong>Giá (VND):</strong></label>
+                                <input type="number" id="price" name="price" value="" required min="0">
+
+                                <label for="features"><strong>Đặc điểm nổi bật:</strong></label>
+                                <textarea type="text" id="features" name="features" rows="3"></textarea>
+
+                                <label for="items"><strong>Các phụ kiện đi kèm:</strong></label>
+                                <textarea type="text" id="items" name="items" rows="3"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="detail-group">
+                            <h4>Chi tiết Chất liệu (Material)</h4>
+                            <table class="data-table" id="tableMaterial">
+                                <thead>
+                                    <tr>
+                                        <th>Tên Chất liệu</th>
+                                        <th>Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                            <button type="button" class="button-add" onclick="addRowTableMaterial()">+ Thêm Chất liệu</button>
+                        </div>
+
+                        <div class="detail-group">
+                            <h4>Chi tiết Kích cỡ & Tồn kho (Stock Quantity)</h4>
+                            <table class="data-table" id="tableDetail">
+                                <thead>
+                                    <tr>
+                                        <th>Kích cỡ</th>
+                                        <th>Tồn kho</th>
+                                        <th>Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                            <button type="button" class="button-add" onclick="addRowTableDetail()">+ Thêm Kích cỡ/Tồn kho</button>
+                        </div>
+                        <div style="margin-top: 20px; text-align: right;">
+                            <button type="submit" class="button-primary">➕ Thêm sản phẩm</button>
+                        </div>                    
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script>
+            function setUpPreview(inputFile, imagePreview) {
+                document.getElementById(inputFile).addEventListener("change", function (event) {
+                    const file1 = event.target.files[0];
+                    const preview1 = document.getElementById(imagePreview);
+
+                    if (file1) {
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            preview1.src = e.target.result;
+                        }
+                        reader.readAsDataURL(file1);
+                    }
+                })
+            }
+
+            setUpPreview("fileInput1", "preview1");
+            setUpPreview("fileInput2", "preview2");
+            setUpPreview("fileInput3", "preview3");
+
+
+            function addRowTableMaterial() {
+                const table = document.querySelector("#tableMaterial tbody")
+                const newRow = table.insertRow();
+
+                const nameCell = newRow.insertCell();
+                nameCell.innerHTML = '<input type="text" name="materialName[]" value="">';
+
+                const actionCell = newRow.insertCell();
+                actionCell.innerHTML = '<button type="button" class="button-remove" onclick="removeTable(this)">Xóa</button>';
+            }
+            function addRowTableDetail() {
+                const table = document.querySelector("#tableDetail tbody")
+                const newRow = table.insertRow();
+
+                const nameCell = newRow.insertCell();
+                nameCell.innerHTML = '<input type="text" name="size[]" value="" required>';
+
+                const quantityCell = newRow.insertCell();
+                quantityCell.innerHTML = '<input type="number" name="stock[]" value="" min="0" class="stock-low" required>';
+
+                const actionCell = newRow.insertCell();
+                actionCell.innerHTML = '<button type="button" class="button-remove" onclick="removeTable(this)">Xóa</button>';
+            }
+            function removeTable(button) {
+                const row = button.parentNode.parentNode;
+                row.parentNode.removeChild(row);
+            }
+        </script>
+    </body>
+</html>

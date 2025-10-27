@@ -7,6 +7,7 @@ com\diemxua\model\User.class
 com\diemxua\services\UserService.class
 com\diemxua\services\UserProfileService.class
 com\diemxua\webshopfashionmaven\resources\JakartaEE10Resource.class
+com\diemxua\controller\AdminProductServlet.class
 com\diemxua\model\Product.class
 com\diemxua\model\UserProfile.class
 com\diemxua\model\CartItems.class

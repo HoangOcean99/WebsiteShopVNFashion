@@ -109,6 +109,38 @@
         <url-pattern>/TryOnServlet</url-pattern>
     </servlet-mapping>
     
+    
+    <servlet>
+        <servlet-name>AdminProductServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.AdminProductServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminProductServlet</servlet-name>
+        <url-pattern>/AdminProductServlet</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>AdminProductDetailServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.AdminProductDetailServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminProductDetailServlet</servlet-name>
+        <url-pattern>/AdminProductDetailServlet</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>AdminAddProductServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.AdminAddProductServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminAddProductServlet</servlet-name>
+        <url-pattern>/AdminAddProductServlet</url-pattern>
+    </servlet-mapping>
     <listener>
         <listener-class>com.diemxua.utils.AppContextListener</listener-class>
     </listener> 
