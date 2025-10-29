@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author Duong
  */
-public class ChangeCartServlet extends HttpServlet {
+public class ChangeBuyServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

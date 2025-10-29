@@ -320,7 +320,7 @@
                             <a href="AdminProductServlet" class="back-button1">← Quay lại danh sách</a>
                             <div style="flex-grow: 1;"></div>
                             <button type="submit" class="button-primary">💾 Lưu Thay Đổi</button>
-                            <button type="button" class="button-danger" onclick="confirmDelete(105)">🗑️ Xóa Sản Phẩm</button>
+                            <button type="button" class="button-danger" onclick="window.location.href = 'AdminDeleteProductServlet?productID=<%= product.getProductID() %>'">🗑️ Xóa Sản Phẩm</button>
                         </div>
 
                         <h3>📝 Chi tiết Sản phẩm: Áo Sơ Mi Linen Cao Cấp</h3>

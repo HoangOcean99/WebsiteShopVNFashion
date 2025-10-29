@@ -18,6 +18,7 @@ public class CartItems {
     private String sizeCart;
     private int quantityCart;
     private String formatPriceCart;
+    private boolean isSelect;
 
     private String format(long price) {
         Locale localeVN = new Locale("vi", "VN");
@@ -32,7 +33,7 @@ public class CartItems {
     public CartItems() {
     }
 
-    public CartItems(int cartItemId, int productId, int userId, long priceCart, String sizeCart, int quantityCart) {
+    public CartItems(int cartItemId, int productId, int userId, long priceCart, String sizeCart, int quantityCart, boolean isSelect) {
         this.cartItemId = cartItemId;
         this.productId = productId;
         this.userId = userId;
@@ -40,15 +41,17 @@ public class CartItems {
         this.sizeCart = sizeCart;
         this.quantityCart = quantityCart;
         this.formatPriceCart = this.format(this.priceCart);
+        this.isSelect = isSelect;
     }
 
-    public CartItems(int productId, int userId, long priceCart, String sizeCart, int quantityCart) {
+    public CartItems(int productId, int userId, long priceCart, String sizeCart, int quantityCart, boolean isSelect) {
         this.productId = productId;
         this.userId = userId;
         this.priceCart = priceCart;
         this.sizeCart = sizeCart;
         this.quantityCart = quantityCart;
         this.formatPriceCart = this.format(this.priceCart);
+        this.isSelect = isSelect;
     }
 
     public CartItems(int productId, int userId, String sizeCart, int quantityCart) {
@@ -110,6 +113,15 @@ public class CartItems {
     public String getFormatPriceCart() {
         return formatPriceCart;
     }
-    
+
+    public boolean isIsSelect() {
+        return isSelect;
+    }
+
+    public void setIsSelect(boolean isSelect) {
+        this.isSelect = isSelect;
+    }
+
+
 
 }

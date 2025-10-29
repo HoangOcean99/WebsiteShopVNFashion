@@ -55,7 +55,6 @@ public class UserProfileServlet extends HttpServlet {
             UserService userService = new UserService();
             String firebaseID = (String) session.getAttribute("userUID");
 
-
             String firebaseImage = (String) session.getAttribute("userImage");
             String fullName = request.getParameter("fullname");
             String phone = request.getParameter("phone");
@@ -71,11 +70,9 @@ public class UserProfileServlet extends HttpServlet {
             String addressDetail = request.getParameter("addressDetail");
 
             UserProfile userProfile = new UserProfile(fullName, phone, mainDate, gender, firebaseImage, firebaseID);
-            Address address = new Address(recipientName, ShippingPhone, country, city, addressDetail, true, firebaseID);
+            Address address = new Address(recipientName, ShippingPhone, country, city, addressDetail, firebaseID);
             userProfileDAO.insert(userProfile);
             addressDAO.insert(address);
-
-            
 
             session.setAttribute("doneUserDetail", true);
             request.getRequestDispatcher("home.jsp").forward(request, response);

@@ -26,7 +26,8 @@ public class CartItemsService extends DBContext {
                         rs.getInt("UserID"),
                         rs.getLong("PriceCart"),
                         rs.getString("size"),
-                        rs.getInt("quantityCart")
+                        rs.getInt("quantityCart"),
+                        rs.getBoolean("isSelect")
                 );
                 list.add(m);
             }
@@ -51,6 +52,7 @@ public class CartItemsService extends DBContext {
                     m.setPriceCart(rs.getLong("PriceCart"));
                     m.setSizeCart(rs.getString("size"));
                     m.setQuantityCart(rs.getInt("quantityCart"));
+                    m.setIsSelect(rs.getBoolean("isSelect"));
                     list.add(m);
                 }
             }
@@ -74,6 +76,7 @@ public class CartItemsService extends DBContext {
                     m.setPriceCart(rs.getLong("PriceCart"));
                     m.setSizeCart(rs.getString("size"));
                     m.setQuantityCart(rs.getInt("quantityCart"));
+                    m.setIsSelect(rs.getBoolean("isSelect"));
                 }
             }
         } catch (SQLException e) {
@@ -98,6 +101,7 @@ public class CartItemsService extends DBContext {
                     m.setPriceCart(rs.getLong("PriceCart"));
                     m.setSizeCart(rs.getString("size"));
                     m.setQuantityCart(rs.getInt("quantityCart"));
+                    m.setIsSelect(rs.getBoolean("isSelect"));
                 }
             }
         } catch (SQLException e) {
@@ -107,8 +111,8 @@ public class CartItemsService extends DBContext {
     }
 
     public void insert(CartItems user) {
-        String sql = "INSERT INTO CartItems (ProductID, UserID, PriceCart, size, quantityCart)"
-                + "VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO CartItems (ProductID, UserID, PriceCart, size, quantityCart, isSelect)"
+                + "VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, user.getProductId());
@@ -116,7 +120,7 @@ public class CartItemsService extends DBContext {
             ps.setLong(3, user.getPriceCart());
             ps.setString(4, user.getSizeCart());
             ps.setInt(5, user.getQuantityCart());
-
+            ps.setBoolean(6, false);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -135,7 +139,7 @@ public class CartItemsService extends DBContext {
     }
 
     public void editUser(CartItems user) {
-        String sql = "UPDATE CartItems SET ProductID = ?, UserID = ?, PriceCart = ?, size = ?, quantityCart = ? WHERE CartItemID = ?";
+        String sql = "UPDATE CartItems SET ProductID = ?, UserID = ?, PriceCart = ?, size = ?, quantityCart = ?, isSelect = ? WHERE CartItemID = ?";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, user.getProductId());
@@ -143,7 +147,8 @@ public class CartItemsService extends DBContext {
             ps.setLong(3, user.getPriceCart());
             ps.setString(4, user.getSizeCart());
             ps.setInt(5, user.getQuantityCart());
-            ps.setInt(6, user.getCartItemId());
+            ps.setBoolean(6, user.isIsSelect());
+            ps.setInt(7, user.getCartItemId());
             ps.executeUpdate();
 
         } catch (SQLException e) {

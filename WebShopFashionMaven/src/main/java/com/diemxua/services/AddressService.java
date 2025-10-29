@@ -32,7 +32,6 @@ public class AddressService extends DBContext {
                         rs.getString("Country"),
                         rs.getString("City"),
                         rs.getString("AddressDetail"),
-                        rs.getBoolean("IsDefault"),
                         rs.getString("UserID")
                 );
                 list.add(m);
@@ -43,34 +42,34 @@ public class AddressService extends DBContext {
         return list;
     }
 
-    public Address getUserByFirebaseId(String userId) {
+    public List<Address> getUserByFirebaseId(String userId) {
         String sql = "SELECT * FROM Address WHERE UserID = ?";
-        Address m = null;
+        List<Address> list = new ArrayList<>();
         try (PreparedStatement st = connection.prepareStatement(sql)) {
             st.setString(1, userId);
             try (ResultSet rs = st.executeQuery()) {
-                if (rs.next()) {
-                    m = new Address();
+                while (rs.next()) {
+                    Address m = new Address();
                     m.setAddressID(rs.getInt("AddressID"));
                     m.setRecipientName(rs.getString("RecipientName"));
                     m.setPhone(rs.getString("Phone"));
                     m.setCountry(rs.getString("Country"));
                     m.setCity(rs.getString("City"));
                     m.setAddressDetail(rs.getString("AddressDetail"));
-                    m.setIsDefault(rs.getBoolean("IsDefault"));
                     m.setUserID(rs.getString("UserID"));
+                    list.add(m);
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return m;
+        return list;
     }
 
     public void insert(Address user) {
         // SỬA: Thêm 2 cột GroupID, SupplierID vào SQL INSERT
-        String sql = "INSERT INTO Address (RecipientName, Phone, Country, City, AddressDetail, isDefault, UserID) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?)"; // SỬA: Đủ 8 dấu ?
+        String sql = "INSERT INTO Address (RecipientName, Phone, Country, City, AddressDetail, UserID) "
+                + "VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, user.getRecipientName());
@@ -78,8 +77,7 @@ public class AddressService extends DBContext {
             ps.setString(3, user.getCountry());
             ps.setString(4, user.getCity());
             ps.setString(5, user.getAddressDetail());
-            ps.setBoolean(6, user.getIsDefault());
-            ps.setString(7, user.getUserID());
+            ps.setString(6, user.getUserID());
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -99,7 +97,7 @@ public class AddressService extends DBContext {
     }
 
     public void editUser(Address user) {
-        String sql = "UPDATE Address SET RecipientName = ?, Phone = ?, Country = ?, City = ?, AddressDetail = ?, isDefault = ? WHERE UserID = ?";
+        String sql = "UPDATE Address SET RecipientName = ?, Phone = ?, Country = ?, City = ?, AddressDetail = ? WHERE UserID = ?";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, user.getRecipientName());
@@ -107,7 +105,6 @@ public class AddressService extends DBContext {
             ps.setString(3, user.getCountry());
             ps.setString(4, user.getCity());
             ps.setString(5, user.getAddressDetail());
-            ps.setBoolean(6, user.getIsDefault());
             ps.setString(7, user.getUserID());
 
             ps.executeUpdate();

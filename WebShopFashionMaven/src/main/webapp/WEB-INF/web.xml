@@ -141,6 +141,39 @@
         <servlet-name>AdminAddProductServlet</servlet-name>
         <url-pattern>/AdminAddProductServlet</url-pattern>
     </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>AdminDeleteProductServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.AdminDeleteProductServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminDeleteProductServlet</servlet-name>
+        <url-pattern>/AdminDeleteProductServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>PaymentServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.PaymentServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>PaymentServlet</servlet-name>
+        <url-pattern>/PaymentServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AdminAddAddressServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.AdminAddAddressServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminAddAddressServlet</servlet-name>
+        <url-pattern>/AdminAddAddressServlet</url-pattern>
+    </servlet-mapping>
+    
+    
     <listener>
         <listener-class>com.diemxua.utils.AppContextListener</listener-class>
     </listener> 

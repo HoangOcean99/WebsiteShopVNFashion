@@ -16,27 +16,24 @@ public class Address {
     private String country;
     private String city;
     private String addressDetail;
-    private boolean isDefault;
     private String userID;
 
-    public Address(String recipientName, String phone, String country, String city, String addressDetail, boolean isDefault, String userID) {
+    public Address(String recipientName, String phone, String country, String city, String addressDetail, String userID) {
         this.recipientName = recipientName;
         this.phone = phone;
         this.country = country;
         this.city = city;
         this.addressDetail = addressDetail;
-        this.isDefault = isDefault;
         this.userID = userID;
     }
 
-    public Address(int addressID, String recipientName, String phone, String country, String city, String addressDetail, boolean isDefault, String userID) {
+    public Address(int addressID, String recipientName, String phone, String country, String city, String addressDetail, String userID) {
         this.addressID = addressID;
         this.recipientName = recipientName;
         this.phone = phone;
         this.country = country;
         this.city = city;
         this.addressDetail = addressDetail;
-        this.isDefault = isDefault;
         this.userID = userID;
     }
 
@@ -89,14 +86,6 @@ public class Address {
 
     public void setAddressDetail(String addressDetail) {
         this.addressDetail = addressDetail;
-    }
-
-    public boolean getIsDefault() {
-        return isDefault;
-    }
-
-    public void setIsDefault(boolean isDefault) {
-        this.isDefault = isDefault;
     }
 
     public String getUserID() {

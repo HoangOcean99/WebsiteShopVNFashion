@@ -1,9 +1,15 @@
 com\diemxua\services\AddressService.class
+com\diemxua\controller\PaymentServlet.class
 com\diemxua\model\Address.class
 com\diemxua\model\ProductDetail.class
 com\diemxua\services\ProductDetailService.class
 com\diemxua\utils\AppContextListener.class
+com\diemxua\controller\AdminProductDetailServlet.class
+com\diemxua\controller\AdminDeleteProductServlet.class
+com\diemxua\controller\AdminAddProductServlet.class
 com\diemxua\model\User.class
+com\diemxua\controller\BuyDetailServlet.class
+com\diemxua\controller\AdminAddAddressServlet.class
 com\diemxua\services\UserService.class
 com\diemxua\services\UserProfileService.class
 com\diemxua\webshopfashionmaven\resources\JakartaEE10Resource.class
@@ -13,6 +19,7 @@ com\diemxua\model\UserProfile.class
 com\diemxua\model\CartItems.class
 com\diemxua\controller\CartDetailServlet.class
 com\mycompany\webshopfashionmaven\JakartaRestConfiguration.class
+com\diemxua\controller\ChangeBuyServlet.class
 com\diemxua\controller\ProductServlet.class
 com\diemxua\controller\CartServlet.class
 com\diemxua\services\ProductMaterialsService.class
@@ -27,5 +34,6 @@ com\diemxua\services\ProductService.class
 com\diemxua\controller\FirebaseLoginServlet.class
 com\diemxua\services\CartItemsService.class
 com\diemxua\services\DBContext.class
+com\diemxua\controller\BuyServlet.class
 com\diemxua\controller\ChangeCartServlet.class
 com\diemxua\controller\FirebaseLogoutServlet.class

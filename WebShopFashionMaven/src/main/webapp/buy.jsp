@@ -74,12 +74,6 @@
                     <div class="bg-[#fdf8f3]/60 rounded-2xl p-8 shadow relative z-10">
                         <h2 class="text-2xl font-bold mb-4">Giỏ hàng</h2>
                         <div>  
-                            <% List<com.diemxua.model.Product> productsCartItems = (List<com.diemxua.model.Product>) request.getAttribute("listProductCart"); 
-                            List<com.diemxua.model.CartItems> cartItems = (List<com.diemxua.model.CartItems>) request.getAttribute("cartItems");                                 
-                            for(int i=0 ;i < cartItems.size(); i++){
-                                com.diemxua.model.Product productsCart = productsCartItems.get(i);
-                                com.diemxua.model.CartItems cartItem = cartItems.get(i);
-                            %>
                             <div class="flex gap-[20px] p-2 border border-[#4B2E17]-2000 rounded-lg mb-2">
                                 <form action="ChangeCartServlet" method="post">
                                     <input type="hidden" name="CartItemID" value="<%= cartItem.getCartItemId() %>"></input>
@@ -121,16 +115,7 @@
                                         </form>
                                     </div>
                                 </div>
-                                <form action="DeleteCartItemServlet" method="post">
-                                    <input type="hidden" name="CartItemID" value="<%= cartItem.getCartItemId() %>"></input>
-                                    <p class="text-2xl font-bold pb-12"><%= cartItem.getFormatPriceCart()%>đ</p>
-                                    <div class="flex gap-2 ">
-                                        <i data-lucide="trash-2" class="size-5"></i>
-                                        <input type="submit" class="text-md cursor-pointer" value="Delete">
-                                    </div>
-                                </form>
                             </div>
-                            <% } %>
                         </div>
 
 

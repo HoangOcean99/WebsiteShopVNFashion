@@ -1,7 +1,7 @@
-    <%-- 
-    Document   : productDetail
-    Created on : Oct 8, 2025, 10:04:12 PM
-    Author     : Duong
+<%-- 
+Document   : productDetail
+Created on : Oct 8, 2025, 10:04:12 PM
+Author     : Duong
 --%>
 <%@ page import="java.util.List, com.diemxua.model.Product" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -61,7 +61,7 @@
                 <div class="bg-transparent min-h-screen py-8">
                     <div class="max-w-6xl mx-auto">
                         <% if(product != null) { %>
-                        <form action="CartServlet" method="get">
+                        <form method="get">
                             <header class="text-center mb-8">
                                 <input type="hidden" value="<%= product.getProductID() %>" name="ProductID"/>
                                 <h1 class="text-xl font-serif font-bold text-[#352F29] border-b border-b-[#352F29] inline-block tracking-widest">
@@ -132,12 +132,13 @@
                                         </select>
 
                                         <button class="flex-1 py-3 px-6 bg-[#6B4B38] text-white font-semibold rounded-lg hover:bg-[#5A3F2F] transition duration-200 shadow-md" 
+                                                formaction="CartServlet"
                                                 type="submit">
                                             Add to Cart
                                         </button>
                                     </div>
-
                                     <button class="mt-4 w-full py-3 bg-[#C0A785] text-[#352F29] font-semibold rounded-lg hover:bg-[#B3997A] transition duration-200 shadow-md"
+                                            formaction="BuyServlet"
                                             type="submit">
                                         Buy Now
                                     </button>

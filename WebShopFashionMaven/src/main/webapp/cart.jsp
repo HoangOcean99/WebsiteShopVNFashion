@@ -4,8 +4,11 @@
     Author     : Admin
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List, com.diemxua.model.Product" %>
+<%@ page import="java.util.List, com.diemxua.model.Address" %>
+
 <!DOCTYPE html>
 <html>
 
@@ -36,6 +39,26 @@
             const app = firebase.initializeApp(firebaseConfig);
             const auth = firebase.auth();
         </script>
+        <style>
+            .deliverOption {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                padding: 10px 16px;
+                border-radius: 10px;
+                /*border: 2px solid #492910;*/
+                cursor: pointer;
+                user-select: none;
+                transition: 0.2s;
+            }
+
+            input[type="radio"]:checked + label,
+            .deliverOption:hover {
+                background-color: #49291010;
+                border-color: #492910;
+            }
+        </style>
+
     </head>
 
     <body>
@@ -49,7 +72,7 @@
                 <div class="grid grid-cols-[2fr_1fr] gap-6 w-4/5 mx-auto items-stretch">
                     <!-- Bảng 1 -->
                     <div class="bg-[#fdf8f3]/60 rounded-2xl p-8 shadow relative z-10">
-                        <h2 class="text-2xl font-bold mb-4">CART</h2>
+                        <h2 class="text-2xl font-bold mb-4">Giỏ hàng</h2>
                         <div>  
                             <% List<com.diemxua.model.Product> productsCartItems = (List<com.diemxua.model.Product>) request.getAttribute("listProductCart"); 
                             List<com.diemxua.model.CartItems> cartItems = (List<com.diemxua.model.CartItems>) request.getAttribute("cartItems");                                 
@@ -58,6 +81,16 @@
                                 com.diemxua.model.CartItems cartItem = cartItems.get(i);
                             %>
                             <div class="flex gap-[20px] p-2 border border-[#4B2E17]-2000 rounded-lg mb-2">
+                                <form action="ChangeCartServlet" method="post">
+                                    <input type="hidden" name="CartItemID" value="<%= cartItem.getCartItemId() %>"></input>
+                                    <input type="hidden" name="ProductID" value="<%= productsCart.getProductID() %>"></input>
+                                    <input type="checkbox" name="selectProduct"
+                                           class="w-5 h-5 my-auto rounded-md border-2 border-[#492910]/70
+                                           text-[#492910] focus:ring-[#492910]
+                                           cursor-pointer" <%= cartItem.isIsSelect() ? "checked" : "" %>
+                                           onchange="this.form.submit()"
+                                           />
+                                </form>
                                 <img src="<%= productsCart.getImageProduct1() %>" art="<%= productsCart.getProductName() %>" class="w-25 h-52 bg-gray-400 rounded-2xl" />
                                 <div class="grow block">
                                     <p class="text-2xl font-bold pb-2"><%= productsCart.getProductName() %> </p>
@@ -103,70 +136,108 @@
 
                     </div>
 
-                    <!-- Bảng 2 -->
                     <div class="bg-[#fdf8f3]/60 rounded-2xl p-6 shadow relative z-10">
-                        <h2 class="text-xl font-bold mb-4">Delivery</h2>
-                        <!-- nội dung bên phải -->
-                        <div class="block border-b border-dotted border-[#492910]/100 pb-4">
-                            <div class="border border-[#492910]/60  bg-[#a29992]/80 rounded-xl flex w-fit leading-height space-x-3 px-2 py-1 mb-2 ">
-                                <button class=" hover:bg-[#ffffff]/80 focus:bg-[#fdf8f3]/80
-                                        focus:ring-1 focus:ring-[#492910] px-3 py-1 rounded-xl leading-height ">Free</button>
-                                <button class=" hover:bg-[#ffffff]/80  focus:bg-[#fdf8f3]/80
-                                        focus:ring-1 focus:ring-[#492910]  px-3 py-1 rounded-xl leading-height ">Express:25.000d</button>
+                        <h2 class="text-xl font-bold mb-4">Thông tin vận chuyển</h2>
+
+                        <div class="block border-b border-dotted border-[#492910]/100 pb-4 mb-4">
+                            <div class="border border-[#492910]/60 bg-[#a29992]/80 rounded-xl flex w-fit leading-height space-x-3 px-2 py-1 mb-2">
+                                <label class="deliverOption">
+                                    <input type="radio" name="deliver" value="free" checked onclick="selectDeliver('free')">
+                                    Free
+                                </label>
+
+                                <label class="deliverOption">
+                                    <input type="radio" name="deliver" value="fast" onclick="selectDeliver('fast')">
+                                    Express (25.000₫)
+                                </label>
                             </div>
-                            <p>Delivery date: September 30, 2025</p>
+                            <p id="dateDisplay">Ngày giao hàng dự kiến: </p>
                         </div>
 
-                        <div class="block border-b border-dotted border-[#492910]/100 pb-4">
-                            <div class="flex border border-[#492910]/60 rounded-2xl w-fit leading-height px-2 py-1 mb-2 space-x-[200px] my-4">
-                                <p class="px-3 py-1 leading-height">Promocode</p>
-                                <button class="  border border-[#492910]/60 hover:bg-[#fdf8f3]/50 focus:bg-[#fdf8f3]/80
-                                        focus:ring-1 focus:ring-[#492910] px-3 py-1 rounded-xl leading-height">Apply</button>
+                        <div class="block border-b border-dotted border-[#492910]/100 pb-4 mb-4">
+                            <h3 class="font-bold mb-2">Địa chỉ giao hàng</h3>
+                            <div class="flex space-x-2 items-center">
+                                <select id="addressSelect"
+                                        class="w-full border border-[#492910]/60 bg-[#ffffff]/60 rounded-xl px-3 py-2 focus:ring-1 focus:ring-[#492910] focus:outline-none">
+                                    <option value="">-- Chọn thông tin nhận hàng --</option>
+                                    <% 
+                                        List<com.diemxua.model.Address> listAddress = (List<com.diemxua.model.Address>) request.getAttribute("listAddress");
+                                        for(com.diemxua.model.Address a : listAddress){
+                                    %>
+                                    <option value="<%= a.getAddressID() %>"><%= a.getRecipientName() +" - "+ a.getPhone() +" - "+  a.getAddressDetail() +" - "+  a.getCity() %></option>
+                                    <% } %>
+                                </select>
+                                <button id="addAddressBtn" class="border border-[#492910]/60 rounded-xl px-3 py-2 hover:bg-[#fdf8f3]/70 focus:ring-1 focus:ring-[#492910]">
+                                    Thêm
+                                </button>
                             </div>
-                            <p>20% off discount</p>
+
+                            <div id="newAddressForm" class="mt-3 hidden">
+                                <form method="post" action="AdminAddAddressServlet">
+                                    <input name="newRecipientName" type="text" placeholder="Tên người nhận (Recipient Name)..." class="w-full border border-[#492910]/60 rounded-xl px-3 py-2 mb-2 focus:ring-1 focus:ring-[#492910] focus:outline-none" required="true" />
+                                    <input name="newPhone" type="text" placeholder="Số điện thoại nhận hàng (Phone)..." class="w-full border border-[#492910]/60 rounded-xl px-3 py-2 mb-2 focus:ring-1 focus:ring-[#492910] focus:outline-none" required="true" />
+                                    <input name="newCountry" placeholder="Quốc gia (Country)..." class="w-full border border-[#492910]/60 rounded-xl px-3 py-2 mb-2 focus:ring-1 focus:ring-[#492910] focus:outline-none" required="true"></input>
+                                    <input name="newCity" placeholder="Thành phố (City)..." class="w-full border border-[#492910]/60 rounded-xl px-3 py-2 mb-2 focus:ring-1 focus:ring-[#492910] focus:outline-none" required="true"></input>
+                                    <textarea name="newDetailAddress" placeholder="Địa chỉ chi tiết (Address Detail)..." class="w-full border border-[#492910]/60 rounded-xl px-3 py-2 mb-2 focus:ring-1 focus:ring-[#492910] focus:outline-none" required="true"></textarea>
+
+                                    <button type="submit" class="w-full border border-[#492910]/60 rounded-xl px-3 py-2 bg-[#a29992]/70 hover:bg-[#a29992]/90 font-semibold focus:ring-1 focus:ring-[#492910]">
+                                        Save Address
+                                    </button>
+                                </form>
+                            </div>
                         </div>
 
+                        <div class="block border-b border-dotted border-[#492910]/100 pb-4 mb-4">
+                            <h3 class="font-bold mb-2">Hình thức thành toán</h3>
+                            <div class="space-y-2">
+                                <label class="flex items-center space-x-2">
+                                    <input type="radio" name="payment" class="accent-[#492910]" checked>
+                                    <span>Thanh toán khi nhận hàng</span>
+                                </label>
+                                <label class="flex items-center space-x-2">
+                                    <input type="radio" name="payment" class="accent-[#492910]">
+                                    <span>Thanh toán bằng MoMo</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <% long mainPrice = (long) request.getAttribute("mainPrice");
+                            String priceString = (String) request.getAttribute("priceString");
+                            String taxString = (String) request.getAttribute("taxString");
+                            long totalPrice = (long) request.getAttribute("totalPrice");
+                        %>
                         <div class="block border-b border-dotted border-[#492910]/100 pb-4">
-                            <div class="flex space-x-[250px]">
-                                <p>Subtotal</p>
-                                <p>700.000đ</p>
+                            <div class="flex justify-between">
+                                <p>Giá gốc: </p>
+                                <p><%= priceString %>đ</p>
                             </div>
-
-                            <div class="flex space-x-[200px]">
-                                <p>Discount</p>
-                                <p>(20%) - 15.000đ</p>
+                            <div class="flex justify-between">
+                                <p>Phí giao hàng: </p>
+                                <p>+ <span id="priceDeli">0</span>đ</p>
                             </div>
-
-                            <div class="flex space-x-[290px]">
-                                <p>Delivery</p>
-                                <p>0đ</p>
-                            </div>
-
-                            <div class="flex space-x-[280px]">
-                                <p>Tax</p>
-                                <p>+14.000đ</p>
+                            <div class="flex justify-between">
+                                <p>Thuế (1.5%):</p>
+                                <p>+ <%= taxString %>đ</p>
                             </div>
                         </div>
 
                         <div>
-                            <div class="flex space-x-[260px] text-md font-bold">
-                                <p>Tottal</p>
-                                <p>740.000đ</p>
+                            <div class="flex justify-between text-md font-bold mt-2">
+                                <p>Tổng tiền: </p>
+                                <p id="totalPriceDisplay">0đ</p>
                             </div>
-                            <button class="w-full text-center font-bold border border-[#492910]/60 rounded-2xl px-2 py-1 mb-2 my-4
-                                    hover:bg-[#fdf8f3]/50 focus:bg-[#fdf8f3]/80
-                                    focus:outline-none focus:ring-1 focus:ring-[#492910]">
-                                Buy
+
+                            <button class="w-full text-center font-bold border border-[#492910]/60 rounded-2xl px-2 py-2 my-4
+                                    hover:bg-[#fdf8f3]/50 focus:bg-[#fdf8f3]/80 focus:outline-none focus:ring-1 focus:ring-[#492910]">
+                                Mua
                             </button>
 
-                            <button onclick="window.location.href = 'ProductServlet?categoryId=1'"  class="w-full text-center font-bold border border-[#492910]/60 rounded-2xl px-2 py-1 mb-2 my-4
-                                    hover:bg-[#fdf8f3]/50 focus:bg-[#fdf8f3]/80
-                                    focus:outline-none focus:ring-1 focus:ring-[#492910]">
-                                Continue Shopping
+                            <button onclick="window.location.href = 'ProductServlet?categoryId=1'" 
+                                    class="w-full text-center font-bold border border-[#492910]/60 rounded-2xl px-2 py-2 mb-2
+                                    hover:bg-[#fdf8f3]/50 focus:bg-[#fdf8f3]/80 focus:outline-none focus:ring-1 focus:ring-[#492910]">
+                                Tiếp tục mua hàng
                             </button>
-
                         </div>
-
                     </div>
                 </div>
 
@@ -174,6 +245,39 @@
         <script>
             lucide.createIcons();
             const isServerAuthenticated = <%= isAuthenticated %>;
+            document.getElementById("addAddressBtn").onclick = () => {
+                document.getElementById("newAddressForm").classList.toggle("hidden");
+            };
+        </script>
+        <script>
+            function updateTotal() {
+                const priceDeli = document.getElementById("priceDeli");
+                const totalPriceDisplay = document.getElementById("totalPriceDisplay");
+
+                const subtotal = <%= totalPrice %>;
+                const deli = parseInt(priceDeli.textContent.replace(/\./g, '').replace('đ', '')) || 0;
+
+                const total = subtotal + deli;
+                totalPriceDisplay.textContent = total.toLocaleString('vi-VN') + 'đ';
+            }
+            function selectDeliver(type) {
+                const priceDeli = document.getElementById("priceDeli");
+                const currentDate = new Date();
+                const extraTime = (type === 'free') ? 3 : 6;
+                currentDate.setDate(currentDate.getDate() + extraTime);
+                const day = String(currentDate.getDate()).padStart(2, '0');
+                const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+                const year = currentDate.getFullYear();
+                const futureDateString = day + '/' + month + '/' + year;
+                const dateDisplay = document.getElementById("dateDisplay");
+                dateDisplay.textContent = 'Ngày giao hàng dự kiến: ' + futureDateString;
+                priceDeli.textContent = (type === 'free') ? '0' : '25.000';
+                updateTotal();
+            }
+            window.onload = () => {
+                selectDeliver('free')
+                updateTotal();
+            };
 
         </script>
         <script src="js/handleUI.js"></script>

@@ -27,7 +27,7 @@ import java.util.Locale;
  *
  * @author Duong
  */
-public class CartDetailServlet extends HttpServlet {
+public class BuyDetailServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -62,7 +62,7 @@ public class CartDetailServlet extends HttpServlet {
 
         request.setAttribute("cartItems", cartItems);
         request.setAttribute("listProductCart", productsCart);
-        request.getRequestDispatcher("cart.jsp").forward(request, response);
+        request.getRequestDispatcher("buy.jsp").forward(request, response);
     }
 
     private String format(long price) {
