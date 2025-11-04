@@ -6,7 +6,6 @@ package com.diemxua.model;
 
 import java.util.*;
 import java.lang.*;
-import java.io.*;
 import java.text.NumberFormat;
 
 public class Orders {
@@ -20,6 +19,7 @@ public class Orders {
     private int addressId;
     private int userId;
     private String formatPrice;
+    private String dateSend;
 
     private String format(long price) {
         Locale localeVN = new Locale("vi", "VN");
@@ -34,7 +34,7 @@ public class Orders {
     public Orders() {
     }
 
-    public Orders(int orderId, String status, String shipMethod, String paymentMethod, long totalPrice, int addressId, int userId) {
+    public Orders(int orderId, String status, String shipMethod, String paymentMethod, long totalPrice, int addressId, int userId, String dateSend) {
         this.orderId = orderId;
         this.status = status;
         this.shipMethod = shipMethod;
@@ -43,10 +43,10 @@ public class Orders {
         this.addressId = addressId;
         this.userId = userId;
         this.formatPrice = this.format(this.totalPrice);
-
+        this.dateSend = dateSend;
     }
 
-    public Orders(String status, String shipMethod, String paymentMethod, long totalPrice, int addressId, int userId) {
+    public Orders(String status, String shipMethod, String paymentMethod, long totalPrice, int addressId, int userId, String dateSend) {
         this.status = status;
         this.shipMethod = shipMethod;
         this.paymentMethod = paymentMethod;
@@ -54,10 +54,10 @@ public class Orders {
         this.addressId = addressId;
         this.userId = userId;
         this.formatPrice = this.format(this.totalPrice);
-
+        this.dateSend = dateSend;
     }
 
-    public Orders(int orderId, Date orderDate, String status, String shipMethod, String paymentMethod, long totalPrice, int addressId, int userId) {
+    public Orders(int orderId, Date orderDate, String status, String shipMethod, String paymentMethod, long totalPrice, int addressId, int userId, String dateSend) {
         this.orderId = orderId;
         this.orderDate = orderDate;
         this.status = status;
@@ -67,10 +67,10 @@ public class Orders {
         this.addressId = addressId;
         this.userId = userId;
         this.formatPrice = this.format(this.totalPrice);
-
+        this.dateSend = dateSend;
     }
 
-    public Orders(Date orderDate, String status, String shipMethod, String paymentMethod, long totalPrice, int addressId, int userId) {
+    public Orders(Date orderDate, String status, String shipMethod, String paymentMethod, long totalPrice, int addressId, int userId, String dateSend) {
         this.orderDate = orderDate;
         this.status = status;
         this.shipMethod = shipMethod;
@@ -79,7 +79,7 @@ public class Orders {
         this.addressId = addressId;
         this.userId = userId;
         this.formatPrice = this.format(this.totalPrice);
-
+        this.dateSend = dateSend;
     }
 
     public int getOrderId() {
@@ -151,4 +151,13 @@ public class Orders {
     public String getFormatPrice() {
         return formatPrice;
     }
+
+    public String getDateSend() {
+        return dateSend;
+    }
+
+    public void setDateSend(String dateSend) {
+        this.dateSend = dateSend;
+    }
+
 }

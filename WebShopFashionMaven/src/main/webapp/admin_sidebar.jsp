@@ -68,7 +68,7 @@
             <nav>
                 <ul>
                     <li><a id="product" href="AdminProductServlet">📦 Thông tin Sản phẩm</a></li>
-                    <li><a id="order" href="admin_order.jsp">🛒 Thông tin Đơn hàng</a></li>
+                    <li><a id="order" href="AdminOrderServlet">🛒 Thông tin Đơn hàng</a></li>
                     <li><a id="analysis" href="admin_analysis.jsp">📈 Phân tích Mua hàng</a></li>
                 </ul>
             </nav>

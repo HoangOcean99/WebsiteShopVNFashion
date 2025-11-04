@@ -35,7 +35,8 @@ public class OrdersService extends DBContext {
                         rs.getString("Payment_method"),
                         rs.getLong("Total_price"),
                         rs.getInt("addressId"),
-                        rs.getInt("userId")
+                        rs.getInt("userId"),
+                        rs.getString("dateOrder")
                 );
                 list.add(m);
             }
@@ -61,6 +62,7 @@ public class OrdersService extends DBContext {
                     m.setTotalPrice(rs.getLong("Total_price"));
                     m.setAddressId(rs.getInt("addressId"));
                     m.setUserId(rs.getInt("userId"));
+                    m.setDateSend(rs.getString("dateOrder"));
                 }
             }
         } catch (SQLException e) {
@@ -85,7 +87,8 @@ public class OrdersService extends DBContext {
                             rs.getString("Payment_method"),
                             rs.getLong("Total_price"),
                             rs.getInt("addressId"),
-                            rs.getInt("userId")
+                            rs.getInt("userId"),
+                            rs.getString("dateOrder")
                     );
                     list.add(m);
                 }
@@ -97,8 +100,8 @@ public class OrdersService extends DBContext {
     }
 
     public int insert(Orders order) {
-        String sql = "INSERT INTO Orders (Status, Ship_method, Payment_method, AddressID, UserID, Total_price)"
-                + " VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Orders (Status, Ship_method, Payment_method, AddressID, UserID, Total_price, dateOrder)"
+                + " VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         int generatedId = -1;
 
@@ -113,6 +116,7 @@ public class OrdersService extends DBContext {
                     ps.setLong(4, order.getAddressId());
                     ps.setInt(5, order.getUserId());
                     ps.setLong(6, order.getTotalPrice());
+                    ps.setString(7, order.getDateSend());
 
                     int affectedRows = ps.executeUpdate();
 
@@ -142,7 +146,7 @@ public class OrdersService extends DBContext {
     }
 
     public void editOrder(Orders product) {
-        String sql = "UPDATE Orders SET Status = ?, Ship_method = ?, Payment_method = ?, AddressID = ?, UserID = ?, Total_price = ? WHERE OrderID = ?";
+        String sql = "UPDATE Orders SET Status = ?, Ship_method = ?, Payment_method = ?, AddressID = ?, UserID = ?, Total_price = ?, dateOrder= ? WHERE OrderID = ?";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, product.getStatus());
@@ -151,7 +155,8 @@ public class OrdersService extends DBContext {
             ps.setInt(4, product.getAddressId());
             ps.setInt(5, product.getUserId());
             ps.setLong(6, product.getTotalPrice());
-            ps.setInt(7, product.getOrderId());
+            ps.setString(7, product.getDateSend());
+            ps.setInt(8, product.getOrderId());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

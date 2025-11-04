@@ -154,13 +154,23 @@
     </servlet-mapping>
     
     <servlet>
-        <servlet-name>PaymentServlet</servlet-name>
-        <servlet-class>com.diemxua.controller.PaymentServlet</servlet-class>
+        <servlet-name>ajaxServlet</servlet-name>
+        <servlet-class>com.diemxua.vnpay.common.ajaxServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>PaymentServlet</servlet-name>
-        <url-pattern>/PaymentServlet</url-pattern>
+        <servlet-name>ajaxServlet</servlet-name>
+        <url-pattern>/ajaxServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>VnpayReturn</servlet-name>
+        <servlet-class>com.diemxua.vnpay.common.VnpayReturn</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>VnpayReturn</servlet-name>
+        <url-pattern>/VnpayReturn</url-pattern>
     </servlet-mapping>
     
     <servlet>
@@ -173,6 +183,89 @@
         <url-pattern>/AdminAddAddressServlet</url-pattern>
     </servlet-mapping>
     
+    
+    <servlet>
+        <servlet-name>BuyDetailServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.BuyDetailServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>BuyDetailServlet</servlet-name>
+        <url-pattern>/BuyDetailServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>OrderServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.OrderServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>OrderServlet</servlet-name>
+        <url-pattern>/OrderServlet</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>OrderDetailServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.OrderDetailServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>OrderDetailServlet</servlet-name>
+        <url-pattern>/OrderDetailServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AdminUpdateProductServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.AdminUpdateProductServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminUpdateProductServlet</servlet-name>
+        <url-pattern>/AdminUpdateProductServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AdminOrderServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.AdminOrderServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminOrderServlet</servlet-name>
+        <url-pattern>/AdminOrderServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AdminOrderDetailServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.AdminOrderDetailServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminOrderDetailServlet</servlet-name>
+        <url-pattern>/AdminOrderDetailServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AdminUpdateOrderStatusServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.AdminUpdateOrderStatusServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminUpdateOrderStatusServlet</servlet-name>
+        <url-pattern>/AdminUpdateOrderStatusServlet</url-pattern>
+    </servlet-mapping> 
+    
+    <servlet>
+        <servlet-name>AnalysisServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.AnalysisServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AnalysisServlet</servlet-name>
+        <url-pattern>/AnalysisServlet</url-pattern>
+    </servlet-mapping>
+    
+
     
     <listener>
         <listener-class>com.diemxua.utils.AppContextListener</listener-class>

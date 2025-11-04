@@ -110,13 +110,11 @@
                                             <input type="hidden" name="CartItemID" value="<%= cartItem.getCartItemId() %>"></input>
                                             <input type="hidden" name="ProductID" value="<%= productsCart.getProductID() %>"></input>
                                             <div class="flex border border-gray bg-[#fdf8f3] w-fit rounded-full px-2 py-1 space-x-2">
-                                                <button type="submit" class="text-lg leading-none px-2 select-none" onclick="decrease(this)">-</button>
-                                                <input type="number" 
-                                                       value="<%= cartItem.getQuantityCart()%>"
-                                                       min="1" 
-                                                       class="w-8 text-center bg-transparent"
-                                                       name="inputQuantity" />
-                                                <button type="submit" class="text-lg leading-none select-none" onclick="increase(this)">+</button>
+                                                <div class="flex border border-gray bg-[#fdf8f3] w-fit rounded-full px-2 py-1 space-x-2">
+                                                    <button type="button" class="text-lg leading-none px-2 select-none" onclick="decrease(this)">-</button>
+                                                    <input type="number" value="<%= quantityBuy %>" min="1" class="w-8 text-center bg-transparent" name="inputQuantity" />
+                                                    <button type="button" class="text-lg leading-none select-none" onclick="increase(this)">+</button>
+                                                </div>
                                             </div>
                                         </form>
                                     </div>
@@ -152,7 +150,8 @@
                                         Express (25.000₫)
                                     </label>
                                 </div>
-                                <p id="dateDisplay">Ngày giao hàng dự kiến: </p>
+                                <span>Ngày giao hàng dự kiến: </span><span name id="dateDisplay"> </span>
+                                <input type="hidden" name="dateSend" id="dateSend">
                             </div>
 
                             <div class="block border-b border-dotted border-[#492910]/100 pb-4 mb-4">
@@ -251,6 +250,8 @@
         <script>
             lucide.createIcons();
             const isServerAuthenticated = <%= isAuthenticated %>;
+
+// Xử lý toggle form thêm địa chỉ
             const addAddressBtn = document.getElementById("addAddressBtn");
             const newAddressForm = document.getElementById("newAddressForm");
             const addressInputs = newAddressForm.querySelectorAll('input, textarea');
@@ -276,16 +277,28 @@
                     toggleAddressRequired(false);
                 }
             });
+
+// Tổng tiền
             function updateTotal() {
                 const priceDeli = document.getElementById("priceDeli");
                 const totalPriceDisplay = document.getElementById("totalPriceDisplay");
                 const sendPrice = document.getElementById("sendPrice");
-                const subtotal = <%= totalPrice %>;
+                let subtotal = 0;
+
+                // Cộng tổng tất cả sản phẩm được chọn
+                document.querySelectorAll('.cart-item').forEach(div => {
+                    const qty = parseInt(div.querySelector('input[name="inputQuantity"]').value);
+                    const price = parseInt(div.querySelector('.priceCart').dataset.price);
+                    subtotal += qty * price;
+                });
+
                 const deli = parseInt(priceDeli.textContent.replace(/\./g, '').replace('đ', '')) || 0;
                 const total = subtotal + deli;
                 sendPrice.value = total;
                 totalPriceDisplay.textContent = total.toLocaleString('vi-VN') + 'đ';
             }
+
+// Chọn hình thức giao hàng
             function selectDeliver(type) {
                 const priceDeli = document.getElementById("priceDeli");
                 const currentDate = new Date();
@@ -296,16 +309,37 @@
                 const year = currentDate.getFullYear();
                 const futureDateString = day + '/' + month + '/' + year;
                 const dateDisplay = document.getElementById("dateDisplay");
-                dateDisplay.textContent = 'Ngày giao hàng dự kiến: ' + futureDateString;
+                const dateSend = document.getElementById("dateSend");
+                dateDisplay.textContent = futureDateString;
+                dateSend.value = futureDateString;
                 priceDeli.textContent = (type === 'free') ? '0' : '25.000';
                 updateTotal();
             }
+
+            function decrease(btn) {
+                const input = btn.parentElement.querySelector("input");
+                if (input.value > 1)
+                    input.value--;
+                const mainPrice = <%= priceProduct %> * input.value;
+                document.getElementById("mainPrice").textContent = mainPrice.toLocaleString('vi-VN') + "đ";
+                updateTotal();
+            }
+
+            function increase(btn) {
+                const input = btn.parentElement.querySelector("input");
+                input.value++;
+                const mainPrice = <%= priceProduct %> * input.value;
+                document.getElementById("mainPrice").textContent = mainPrice.toLocaleString('vi-VN') + "đ";
+                updateTotal();
+            }
+
+// Khởi tạo khi load trang
             window.onload = () => {
-                selectDeliver('free')
+                selectDeliver('free');
                 updateTotal();
             };
-
         </script>
+
         <script src="js/handleUI.js"></script>
         <script src="js/handleAuth.js"></script>
     </body>
