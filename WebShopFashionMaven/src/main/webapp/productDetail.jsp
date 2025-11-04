@@ -1,7 +1,7 @@
 <%-- 
-Document   : productDetail
-Created on : Oct 8, 2025, 10:04:12 PM
-Author     : Duong
+    Document   : productDetail
+    Created on : Oct 8, 2025, 10:04:12 PM
+    Author     : Duong
 --%>
 <%@ page import="java.util.List, com.diemxua.model.Product" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -16,15 +16,24 @@ Author     : Duong
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
         <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
-        <!--        <link rel="stylesheet" type="text/css" media="screen" href="main.css" />-->
         <link rel="stylesheet" href="css/category.css" />
         <script src="jscript/javascript.js"></script>
         <style>
+            /* Chiều cao cho container ảnh thử đồ, responsive */
             .image-display {
-                height: 400px;
+                height: 300px; /* Chiều cao mặc định cho mobile */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            @media (min-width: 768px) { /* md breakpoint của Tailwind */
+                .image-display {
+                    height: 400px; /* Chiều cao cho desktop */
+                }
             }
             .image-display img {
-                object-fit: contain;
+                object-fit: contain; /* Giữ tỷ lệ ảnh, vừa với container */
+                max-height: 100%;
             }
         </style>
         <script>
@@ -48,9 +57,9 @@ Author     : Duong
             com.diemxua.model.Product product = (com.diemxua.model.Product) request.getAttribute("product");
             List<com.diemxua.model.ProductMaterial> productMaterial = (List<com.diemxua.model.ProductMaterial>) request.getAttribute("productMaterial");
             String title = "GIAO LĨNH";
-            if(product.getCategoryID() == 2){
+            if (product.getCategoryID() == 2) {
                 title = "VIÊN LĨNH";
-            }else if(product.getCategoryID() == 4) {
+            } else if (product.getCategoryID() == 4) {
                 title = "ÁO TẤC";
             }
             String urlImage = product.getImageProduct1();
@@ -60,59 +69,58 @@ Author     : Duong
             <div class="absolute text-center top-[100px] left-0 w-full h-full">
                 <div class="bg-transparent min-h-screen py-8">
                     <div class="max-w-6xl mx-auto">
-                        <% if(product != null) { %>
+                        <% if (product != null) {%>
                         <form method="get">
                             <header class="text-center mb-8">
-                                <input type="hidden" value="<%= product.getProductID() %>" name="ProductID"/>
+                                <input type="hidden" value="<%= product.getProductID()%>" name="ProductID"/>
                                 <h1 class="text-xl font-serif font-bold text-[#352F29] border-b border-b-[#352F29] inline-block tracking-widest">
-                                    <%= title %>
+                                    <%= title%>
                                 </h1>
                             </header>
 
-                            <div class=" w-full flex flex-col mx-16 md:flex-row gap-[100px]">
-                                <div class="md:w-2/5">
-                                    <div class="w-full h-[420px] bg-[#8FA79D] rounded-lg shadow-xl mb-4">
-                                        <img src="<%= urlImage %>" alt="<%= product.getProductName() %>" id="mainImage" class="w-full h-full object-cover rounded-lg">
+                            <div class="w-full flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-16 px-4 lg:px-0">
+                                <div class="w-full md:w-1/2">
+                                    <div class="w-full h-[350px] md:h-[420px] bg-[#8FA79D] rounded-lg shadow-xl mb-4">
+                                        <img src="<%= urlImage%>" alt="<%= product.getProductName()%>" id="mainImage" class="w-full h-full object-cover rounded-lg">
                                     </div>
-
                                     <div class="flex gap-4 justify-start">
                                         <div class="w-16 h-16 bg-[#8FA79D] rounded-lg opacity-70 cursor-pointer">
-                                            <img src="<%= product.getImageProduct1() %>" alt="<%= product.getProductName() %>" class="w-full h-full object-cover rounded-lg" onclick="changeImage('<%= product.getImageProduct1() %>')">
+                                            <img src="<%= product.getImageProduct1()%>" alt="<%= product.getProductName()%>" class="w-full h-full object-cover rounded-lg" onclick="changeImage('<%= product.getImageProduct1()%>')">
                                         </div>
                                         <div class="w-16 h-16 bg-[#8FA79D] rounded-lg opacity-70 cursor-pointer">
-                                            <img src="<%= product.getImageProduct2() %>" alt="<%= product.getProductName() %>" class="w-full h-full object-cover rounded-lg" onclick="changeImage('<%= product.getImageProduct2() %>')">
+                                            <img src="<%= product.getImageProduct2()%>" alt="<%= product.getProductName()%>" class="w-full h-full object-cover rounded-lg" onclick="changeImage('<%= product.getImageProduct2()%>')">
                                         </div>
                                         <div class="w-16 h-16 bg-[#8FA79D] rounded-lg opacity-70 cursor-pointer">
-                                            <img src="<%= product.getImageProduct3() %>" alt="<%= product.getProductName() %>" class="w-full h-full object-cover rounded-lg" onclick="changeImage('<%= product.getImageProduct3() %>')">
+                                            <img src="<%= product.getImageProduct3()%>" alt="<%= product.getProductName()%>" class="w-full h-full object-cover rounded-lg" onclick="changeImage('<%= product.getImageProduct3()%>')">
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="md:w-2/5 p-0">
-                                    <h2 class="text-4xl font-serif text-[#352F29] mb-2 text-start">
-                                        <%= product.getProductName() %>
+                                <div class="w-full md:w-1/2 p-0">
+                                    <h2 class="text-3xl md:text-4xl font-serif text-[#352F29] mb-2 text-start">
+                                        <%= product.getProductName()%>
                                     </h2>
-                                    <p class="text-3xl font-bold text-[#352F29] mb-6 text-start">
-                                        <%= product.getFormatPrice() %>₫
+                                    <p class="text-2xl md:text-3xl font-bold text-[#352F29] mb-6 text-start">
+                                        <%= product.getFormatPrice()%>₫
                                     </p>
 
                                     <div class="text-[#352F29] space-y-2 mb-8">
-                                        <p class="font-semibold text-start"><%= product.getDescription() %></p>
+                                        <p class="font-semibold text-start"><%= product.getDescription()%></p>
                                         <p class="font-semibold text-start">Set đồ thuê gồm:</p>
                                         <ul class="list-none pl-4 space-y-1 text-sm">
-                                            <% if(productMaterial != null){
-                                                for(com.diemxua.model.ProductMaterial pm : productMaterial){
+                                            <% if (productMaterial != null) {
+                                                    for (com.diemxua.model.ProductMaterial pm : productMaterial) {
                                             %>
-
-                                            <li class="text-start relative before:content-['-'] before:absolute before:left-[-1rem]"><%= pm.getMaterialName() %></li>
-                                                <% } }%>
+                                            <li class="text-start relative before:content-['-'] before:absolute before:left-[-1rem]"><%= pm.getMaterialName()%></li>
+                                            <% }
+                                                }%>
                                         </ul>
                                         <p class="pt-2 text-start">
-                                            <%= product.getTrait() %>
+                                            <%= product.getTrait()%>
                                         </p>
                                     </div>
 
-                                    <div class="flex items-center gap-4">
+                                    <div class="flex flex-wrap items-center gap-4">
                                         <div class="flex border border-gray-300 rounded-lg overflow-hidden w-40">
                                             <button class="w-1/3 py-2 text-xl bg-white hover:bg-gray-100 transition duration-150 border-r border-gray-300 text-[#352F29] font-bold" 
                                                     onclick="decrease(this)" type="button">
@@ -146,10 +154,10 @@ Author     : Duong
                             </div>
                         </form>
 
-                        <div class="container flex flex-col lg:flex-row justify-center gap-6 max-w-7xl mx-auto bg-transparent p-8 rounded-xl my-5">
+                        <div class="container flex flex-col lg:flex-row justify-center gap-6 max-w-7xl mx-auto bg-transparent p-4 md:p-8 rounded-xl my-5">
 
                             <div class="column flex flex-col items-center p-4 border border-gray-200 rounded-lg bg-transparent shadow-md w-full lg:w-1/3">
-                                <h2 class="text-2xl font-bold text-blue-600 mb-4 text-center">Ảnh của bạn</h2>
+                                <h2 class="text-xl md:text-2xl font-bold text-blue-600 mb-4 text-center">Ảnh của bạn</h2>
                                 <div class="image-display w-full max-w-sm flex justify-center items-center mb-4 bg-transparent overflow-hidden">
                                     <img id="personImagePreview" src="#" alt="Ảnh của bạn" class="max-w-full max-h-full hidden">
                                     <span id="personImagePlaceholder" class="text-gray-500">Tải ảnh lên</span>
@@ -159,8 +167,8 @@ Author     : Duong
                             </div>
 
                             <div class="column flex flex-col items-center p-4 border border-gray-200 rounded-lg bg-transparent shadow-md w-full lg:w-1/3">
-                                <h2 class="text-2xl font-bold text-green-600 mb-4 text-center">Kết quả Thử Đồ Ảo</h2>
-                                <div class="image-display w-full max-w-sm  flex justify-center items-center mb-4 bg-transparent overflow-hidden">
+                                <h2 class="text-xl md:text-2xl font-bold text-green-600 mb-4 text-center">Kết quả Thử Đồ Ảo</h2>
+                                <div class="image-display w-full max-w-sm flex justify-center items-center mb-4 bg-transparent overflow-hidden">
                                     <img id="tryOnResultImage" src="#" alt="Kết quả thử đồ" class="max-w-full max-h-full hidden">
                                     <span id="tryOnResultPlaceholder" class="text-gray-500">Kết quả sẽ hiển thị ở đây</span>
                                 </div>
@@ -169,22 +177,22 @@ Author     : Duong
                                 </button>
                                 <div class="loading-spinner mt-4" style="display: none" id="loadingSpinner">
                                     <svg class="animate-spin h-5 w-5 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                     </svg>
                                 </div>
                                 <p class="error-message text-red-600 font-bold mt-4 hidden" id="errorMessage"></p>
                             </div>
 
                             <div class="column flex flex-col items-center p-4 border border-gray-200 rounded-lg bg-transparent shadow-md w-full lg:w-1/3">
-                                <h2 class="text-2xl font-bold text-purple-600 mb-4 text-center">Trang Phục Đã Chọn</h2>
-                                <div class="image-display w-auto  border-2 border-indigo-600 flex justify-center items-center mb-4 bg-gray-50 overflow-hidden rounded-lg shadow-sm">
+                                <h2 class="text-xl md:text-2xl font-bold text-purple-600 mb-4 text-center">Trang Phục Đã Chọn</h2>
+                                <div class="image-display w-auto border-2 border-indigo-600 flex justify-center items-center mb-4 bg-gray-50 overflow-hidden rounded-lg shadow-sm">
                                     <img id="selectedClothImage" 
-                                         src="<%= product.getImageProduct1() %>" 
-                                         alt="<%= product.getProductName() %>" 
+                                         src="<%= product.getImageProduct1()%>" 
+                                         alt="<%= product.getProductName()%>" 
                                          class="max-w-full max-h-full block object-contain">
                                 </div>
-                                <input type="hidden" id="selectedClothUrlInput" value="<%= product.getImageProduct1() %>"> 
+                                <input type="hidden" id="selectedClothUrlInput" value="<%= product.getImageProduct1()%>"> 
                                 <p class="text-sm text-gray-500 mt-4">Ảnh quần áo sẽ được sử dụng để thử đồ.</p>
                             </div>
                         </div>
@@ -275,14 +283,14 @@ Author     : Duong
                                 }
                             }
                         </script>
-                        <% } %>
+                        <% }%>
                     </div>
                 </div>
             </div>
         </section>
         <script>
             lucide.createIcons();
-            const isServerAuthenticated = <%= isAuthenticated %>;
+            const isServerAuthenticated = <%= isAuthenticated%>;
             function addToCart(productID) {
                 const quantityInput = document.querySelector('input[name="quantityCart"]');
                 const quantity = quantityInput ? quantityInput.value : '1';
