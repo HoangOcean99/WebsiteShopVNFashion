@@ -66,6 +66,29 @@ public class AddressService extends DBContext {
         return list;
     }
 
+    public Address getAddressByAddressId(int addressID) {
+        String sql = "SELECT * FROM Address WHERE AddressID = ?";
+        Address m = null;
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, addressID);
+            try (ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
+                    m = new Address();
+                    m.setAddressID(rs.getInt("AddressID"));
+                    m.setRecipientName(rs.getString("RecipientName"));
+                    m.setPhone(rs.getString("Phone"));
+                    m.setCountry(rs.getString("Country"));
+                    m.setCity(rs.getString("City"));
+                    m.setAddressDetail(rs.getString("AddressDetail"));
+                    m.setUserID(rs.getString("UserID"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return m;
+    }
+
     public void insert(Address user) {
         // SỬA: Thêm 2 cột GroupID, SupplierID vào SQL INSERT
         String sql = "INSERT INTO Address (RecipientName, Phone, Country, City, AddressDetail, UserID) "

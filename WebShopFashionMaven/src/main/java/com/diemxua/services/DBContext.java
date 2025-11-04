@@ -21,6 +21,19 @@ public class DBContext {
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
+//        try {
+//            String serverName = "diem-xua-shop.database.windows.net";
+//            String databaseName = "ShopFashionVietNam";
+//            String username = "sqladmin";
+//            String password = "H@iduong090905";
+//
+//            String url = "jdbc:sqlserver://" + serverName + ":1433;databaseName=" + databaseName + ";encrypt=true;trustServerCertificate=true;loginTimeout=30;";
+//
+//            connection = DriverManager.getConnection(url, username, password);
+//            System.out.println("Kết nối Azure SQL thành công!");
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            System.out.println("Kết nối Azure SQL thất bại!");
+//        }
     }
-
 }

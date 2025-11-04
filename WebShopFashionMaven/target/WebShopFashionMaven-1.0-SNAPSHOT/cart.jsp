@@ -136,134 +136,160 @@
 
                     </div>
 
-                    <div class="bg-[#fdf8f3]/60 rounded-2xl p-6 shadow relative z-10">
-                        <h2 class="text-xl font-bold mb-4">Thông tin vận chuyển</h2>
+                    <form method="post">
+                        <div class="bg-[#fdf8f3]/60 rounded-2xl p-6 shadow relative z-10">
+                            <h2 class="text-xl font-bold mb-4">Thông tin vận chuyển</h2>
 
-                        <div class="block border-b border-dotted border-[#492910]/100 pb-4 mb-4">
-                            <div class="border border-[#492910]/60 bg-[#a29992]/80 rounded-xl flex w-fit leading-height space-x-3 px-2 py-1 mb-2">
-                                <label class="deliverOption">
-                                    <input type="radio" name="deliver" value="free" checked onclick="selectDeliver('free')">
-                                    Free
-                                </label>
+                            <div class="block border-b border-dotted border-[#492910]/100 pb-4 mb-4">
+                                <div class="border border-[#492910]/60 bg-[#a29992]/80 rounded-xl flex w-fit leading-height space-x-3 px-2 py-1 mb-2">
+                                    <label class="deliverOption">
+                                        <input type="radio" name="deliver" value="free" checked onclick="selectDeliver('free')">
+                                        Free
+                                    </label>
 
-                                <label class="deliverOption">
-                                    <input type="radio" name="deliver" value="fast" onclick="selectDeliver('fast')">
-                                    Express (25.000₫)
-                                </label>
-                            </div>
-                            <p id="dateDisplay">Ngày giao hàng dự kiến: </p>
-                        </div>
-
-                        <div class="block border-b border-dotted border-[#492910]/100 pb-4 mb-4">
-                            <h3 class="font-bold mb-2">Địa chỉ giao hàng</h3>
-                            <div class="flex space-x-2 items-center">
-                                <select id="addressSelect"
-                                        class="w-full border border-[#492910]/60 bg-[#ffffff]/60 rounded-xl px-3 py-2 focus:ring-1 focus:ring-[#492910] focus:outline-none">
-                                    <option value="">-- Chọn thông tin nhận hàng --</option>
-                                    <% 
-                                        List<com.diemxua.model.Address> listAddress = (List<com.diemxua.model.Address>) request.getAttribute("listAddress");
-                                        for(com.diemxua.model.Address a : listAddress){
-                                    %>
-                                    <option value="<%= a.getAddressID() %>"><%= a.getRecipientName() +" - "+ a.getPhone() +" - "+  a.getAddressDetail() +" - "+  a.getCity() %></option>
-                                    <% } %>
-                                </select>
-                                <button id="addAddressBtn" class="border border-[#492910]/60 rounded-xl px-3 py-2 hover:bg-[#fdf8f3]/70 focus:ring-1 focus:ring-[#492910]">
-                                    Thêm
-                                </button>
+                                    <label class="deliverOption">
+                                        <input type="radio" name="deliver" value="fast" onclick="selectDeliver('fast')">
+                                        Express (25.000₫)
+                                    </label>
+                                </div>
+                                <p id="dateDisplay">Ngày giao hàng dự kiến: </p>
                             </div>
 
-                            <div id="newAddressForm" class="mt-3 hidden">
-                                <form method="post" action="AdminAddAddressServlet">
+                            <div class="block border-b border-dotted border-[#492910]/100 pb-4 mb-4">
+                                <h3 class="font-bold mb-2">Địa chỉ giao hàng</h3>
+                                <div class="flex space-x-2 items-center">
+                                    <select id="addressSelect"
+                                            name="addressSelect"
+                                            class="w-full border border-[#492910]/60 bg-[#ffffff]/60 rounded-xl px-3 py-2 focus:ring-1 focus:ring-[#492910] focus:outline-none">
+                                        <% 
+                                            List<com.diemxua.model.Address> listAddress = (List<com.diemxua.model.Address>) request.getAttribute("listAddress");
+                                            for(com.diemxua.model.Address a : listAddress){
+                                        %>
+                                        <option value="<%= a.getAddressID() %>"><%= a.getRecipientName() +" - "+ a.getPhone() +" - "+  a.getAddressDetail() +" - "+  a.getCity() %></option>
+                                        <% } %>
+                                    </select>
+                                    <button id="addAddressBtn" class="border border-[#492910]/60 rounded-xl px-3 py-2 hover:bg-[#fdf8f3]/70 focus:ring-1 focus:ring-[#492910]">
+                                        Thêm
+                                    </button>
+                                </div>
+
+                                <div id="newAddressForm" class="mt-3 hidden">
                                     <input name="newRecipientName" type="text" placeholder="Tên người nhận (Recipient Name)..." class="w-full border border-[#492910]/60 rounded-xl px-3 py-2 mb-2 focus:ring-1 focus:ring-[#492910] focus:outline-none" required="true" />
                                     <input name="newPhone" type="text" placeholder="Số điện thoại nhận hàng (Phone)..." class="w-full border border-[#492910]/60 rounded-xl px-3 py-2 mb-2 focus:ring-1 focus:ring-[#492910] focus:outline-none" required="true" />
                                     <input name="newCountry" placeholder="Quốc gia (Country)..." class="w-full border border-[#492910]/60 rounded-xl px-3 py-2 mb-2 focus:ring-1 focus:ring-[#492910] focus:outline-none" required="true"></input>
                                     <input name="newCity" placeholder="Thành phố (City)..." class="w-full border border-[#492910]/60 rounded-xl px-3 py-2 mb-2 focus:ring-1 focus:ring-[#492910] focus:outline-none" required="true"></input>
                                     <textarea name="newDetailAddress" placeholder="Địa chỉ chi tiết (Address Detail)..." class="w-full border border-[#492910]/60 rounded-xl px-3 py-2 mb-2 focus:ring-1 focus:ring-[#492910] focus:outline-none" required="true"></textarea>
 
-                                    <button type="submit" class="w-full border border-[#492910]/60 rounded-xl px-3 py-2 bg-[#a29992]/70 hover:bg-[#a29992]/90 font-semibold focus:ring-1 focus:ring-[#492910]">
+                                    <button formaction="AdminAddAddressServlet" type="submit" class="w-full border border-[#492910]/60 rounded-xl px-3 py-2 bg-[#a29992]/70 hover:bg-[#a29992]/90 font-semibold focus:ring-1 focus:ring-[#492910]">
                                         Save Address
                                     </button>
-                                </form>
-                            </div>
-                        </div>
-
-                        <div class="block border-b border-dotted border-[#492910]/100 pb-4 mb-4">
-                            <h3 class="font-bold mb-2">Hình thức thành toán</h3>
-                            <div class="space-y-2">
-                                <label class="flex items-center space-x-2">
-                                    <input type="radio" name="payment" class="accent-[#492910]" checked>
-                                    <span>Thanh toán khi nhận hàng</span>
-                                </label>
-                                <label class="flex items-center space-x-2">
-                                    <input type="radio" name="payment" class="accent-[#492910]">
-                                    <span>Thanh toán bằng MoMo</span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <% long mainPrice = (long) request.getAttribute("mainPrice");
-                            String priceString = (String) request.getAttribute("priceString");
-                            String taxString = (String) request.getAttribute("taxString");
-                            long totalPrice = (long) request.getAttribute("totalPrice");
-                        %>
-                        <div class="block border-b border-dotted border-[#492910]/100 pb-4">
-                            <div class="flex justify-between">
-                                <p>Giá gốc: </p>
-                                <p><%= priceString %>đ</p>
-                            </div>
-                            <div class="flex justify-between">
-                                <p>Phí giao hàng: </p>
-                                <p>+ <span id="priceDeli">0</span>đ</p>
-                            </div>
-                            <div class="flex justify-between">
-                                <p>Thuế (1.5%):</p>
-                                <p>+ <%= taxString %>đ</p>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="flex justify-between text-md font-bold mt-2">
-                                <p>Tổng tiền: </p>
-                                <p id="totalPriceDisplay">0đ</p>
+                                </div>
                             </div>
 
-                            <button class="w-full text-center font-bold border border-[#492910]/60 rounded-2xl px-2 py-2 my-4
+                            <div class="block border-b border-dotted border-[#492910]/100 pb-4 mb-4">
+                                <h3 class="font-bold mb-2">Hình thức thành toán</h3>
+                                <div class="space-y-2">
+                                    <label class="flex items-center space-x-2">
+                                        <input type="radio" name="payment" class="accent-[#492910]" checked value="COD">
+                                        <span>Thanh toán khi nhận hàng</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2">
+                                        <input type="radio" name="payment" class="accent-[#492910]" value="vnpay">
+                                        <span>Thanh toán bằng MoMo</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <% long mainPrice = (long) request.getAttribute("mainPrice");
+                                String priceString = (String) request.getAttribute("priceString");
+                                String taxString = (String) request.getAttribute("taxString");
+                                long totalPrice = (long) request.getAttribute("totalPrice");
+                            %>
+                            <div class="block border-b border-dotted border-[#492910]/100 pb-4">
+                                <div class="flex justify-between">
+                                    <p>Giá gốc: </p>
+                                    <p><%= priceString %>đ</p>
+                                </div>
+                                <div class="flex justify-between">
+                                    <p>Phí giao hàng: </p>
+                                    <p>+ <span id="priceDeli">0</span>đ</p>
+                                </div>
+                                <div class="flex justify-between">
+                                    <p>Thuế (1.5%):</p>
+                                    <p>+ <%= taxString %>đ</p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-md font-bold mt-2">
+                                    <p>Tổng tiền: </p>
+                                    <p id="totalPriceDisplay">0đ</p>
+                                </div>
+
+                                <input type="hidden" name="totalBill" id="sendPrice" value="0">
+                                <input type="hidden" name="type" id="sendPrice" value="cart">
+                                <button 
+                                    formaction="ajaxServlet"
+                                    type="submit"
+                                    class="w-full text-center font-bold border border-[#492910]/60 rounded-2xl px-2 py-2 my-4
                                     hover:bg-[#fdf8f3]/50 focus:bg-[#fdf8f3]/80 focus:outline-none focus:ring-1 focus:ring-[#492910]">
-                                Mua
-                            </button>
-
-                            <button onclick="window.location.href = 'ProductServlet?categoryId=1'" 
+                                    Mua
+                                </button>
+                                <button 
+                                    type="button" 
+                                    onclick="window.location.href = 'ProductServlet?categoryId=1'" 
                                     class="w-full text-center font-bold border border-[#492910]/60 rounded-2xl px-2 py-2 mb-2
                                     hover:bg-[#fdf8f3]/50 focus:bg-[#fdf8f3]/80 focus:outline-none focus:ring-1 focus:ring-[#492910]">
-                                Tiếp tục mua hàng
-                            </button>
+                                    Tiếp tục mua hàng
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
 
         </section>
         <script>
             lucide.createIcons();
             const isServerAuthenticated = <%= isAuthenticated %>;
-            document.getElementById("addAddressBtn").onclick = () => {
-                document.getElementById("newAddressForm").classList.toggle("hidden");
+            const addAddressBtn = document.getElementById("addAddressBtn");
+            const newAddressForm = document.getElementById("newAddressForm");
+            const addressInputs = newAddressForm.querySelectorAll('input, textarea');
+
+            function toggleAddressRequired(enable) {
+                addressInputs.forEach(input => {
+                    if (enable) {
+                        input.setAttribute('required', 'required');
+                    } else {
+                        input.removeAttribute('required');
+                    }
+                });
+            }
+
+            addAddressBtn.onclick = () => {
+                newAddressForm.classList.toggle("hidden");
+                const isHidden = newAddressForm.classList.contains("hidden");
+                toggleAddressRequired(!isHidden);
             };
-        </script>
-        <script>
+
+            window.addEventListener('DOMContentLoaded', () => {
+                if (newAddressForm.classList.contains("hidden")) {
+                    toggleAddressRequired(false);
+                }
+            });
             function updateTotal() {
                 const priceDeli = document.getElementById("priceDeli");
                 const totalPriceDisplay = document.getElementById("totalPriceDisplay");
-
+                const sendPrice = document.getElementById("sendPrice");
                 const subtotal = <%= totalPrice %>;
                 const deli = parseInt(priceDeli.textContent.replace(/\./g, '').replace('đ', '')) || 0;
-
                 const total = subtotal + deli;
+                sendPrice.value = total;
                 totalPriceDisplay.textContent = total.toLocaleString('vi-VN') + 'đ';
             }
             function selectDeliver(type) {
                 const priceDeli = document.getElementById("priceDeli");
                 const currentDate = new Date();
-                const extraTime = (type === 'free') ? 3 : 6;
+                const extraTime = (type === 'free') ? 6 : 3;
                 currentDate.setDate(currentDate.getDate() + extraTime);
                 const day = String(currentDate.getDate()).padStart(2, '0');
                 const month = String(currentDate.getMonth() + 1).padStart(2, '0');
