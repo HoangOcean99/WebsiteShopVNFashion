@@ -41,10 +41,10 @@
 <nav class="fixed top-0 left-0 w-full z-40 bg-[#4B2E17] text-white">
 
     <div class="container mx-auto hidden lg:flex items-center justify-center px-12 py-2">
-        
+
         <div class="flex gap-10"> <% boolean role = session.getAttribute("RoleUser") != null && (Boolean) session.getAttribute("RoleUser").equals("admin"); 
             if(role){ %>
-            <a href="AdminProductServlet" class="hover:text-yellow-400 text-xl">Dashboard</a>
+            <a href="AdminProductServlet" class="hover:bg-white hover:text-[#4B2E17] px-3 py-8 rounded-md text-xl">Dashboard</a>
             <% } %>
             <a href="home.jsp#home" class="hover:bg-white hover:text-[#4B2E17] px-3 py-8 rounded-md text-xl">Giới Thiệu</a>
             <a href="home.jsp#category" class="hover:bg-white hover:text-[#4B2E17] px-3 py-8 rounded-md text-xl">Danh Mục</a>
@@ -65,31 +65,31 @@
         <div class="flex items-center gap-4 pl-12">
             <span 
                 class="flex items-center cursor-pointer hover:bg-white hover:text-[#4B2E17] px-3 py-8 rounded-md" 
-                onclick="window.location.href = 'orders.jsp'"
-            >
+                onclick="window.location.href = 'OrderServlet'"
+                >
                 <i data-lucide="handbag" class="w-5 h-5"></i>
             </span>
 
             <span 
                 class="flex items-center cursor-pointer hover:bg-white hover:text-[#4B2E17] px-3 py-8 rounded-md" 
                 onclick="window.location.href = 'CartDetailServlet'"
-            >
+                >
                 <i data-lucide="shopping-cart" class="w-5 h-5"></i>
             </span>
-            
+
             <% if(userName == null) { %>
             <span 
                 class="flex items-center cursor-pointer hover:bg-white hover:text-[#4B2E17] px-3 py-8 rounded-md" 
-                onclick="window.location.href = 'CartDetailServlet'"
-            >
-              <i data-lucide="user" class="w-5 h-5 cursor-pointer" id="login-button"></i>
+                onclick="window.location.href = "
+                >
+                <i data-lucide="user" class="w-5 h-5 cursor-pointer" id="login-button"></i>
             </span>
-            
+
             <% } %>
             <% if(userName != null) { %>
             <div class="dropdown-container">
-                <span style="cursor: pointer" id="userNameTrigger" class="dropdown-trigger"><%= userName %></span>
-                <div id="userDropdownMenu" class="dropdown-menu">
+                <span style="cursor: pointer" id="userNameTriggerMobile" class="dropdown-trigger"><%= userName %></span>
+                <div id="userDropdownMenuMobile" class="dropdown-menu">
                     <a href="#" style="cursor: pointer">Thông tin tài khoản</a>
                     <a onclick="signOutUser()" style="cursor: pointer">Đăng xuất</a>
                 </div>
@@ -103,19 +103,19 @@
             <img src="images/lgo.png" alt="Logo" class="h-16 w-auto object-cover rounded-full" /> </div>
 
         <div class="flex items-center gap-2">
-            <span class="flex items-center cursor-pointer p-2 rounded-md" onclick="window.location.href = 'orders.jsp'">
+            <span class="flex items-center cursor-pointer p-2 rounded-md" onclick="window.location.href = 'OrderServlet'">
                 <i data-lucide="handbag" class="w-5 h-5"></i>
             </span>
             <span class="flex items-center cursor-pointer p-2 rounded-md" onclick="window.location.href = 'CartDetailServlet'">
                 <i data-lucide="shopping-cart" class="w-5 h-5"></i>
             </span>
-            
+
             <% if(userName == null) { %>
-            <span class="flex items-center cursor-pointer p-2 rounded-md" onclick="window.location.href = 'CartDetailServlet'">
+            <span class="flex items-center cursor-pointer p-2 rounded-md" onclick="window.location.href = 'home.jsp?showLogin=true'">
                 <i data-lucide="user" class="w-5 h-5 cursor-pointer" id="login-button-mobile"></i>
             </span>
             <% } %>
-            
+
             <% if(userName != null) { %>
             <div class="dropdown-container">
                 <span style="cursor: pointer" id="userNameTriggerMobile" class="dropdown-trigger p-2"><%= userName %></span>
@@ -147,14 +147,14 @@
 
 <script>
     // Đảm bảo code chạy sau khi trang đã tải xong
-    document.addEventListener("DOMContentLoaded", function() {
-        
+    document.addEventListener("DOMContentLoaded", function () {
+
         // --- 1. Xử lý Menu Hamburger ---
         const menuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
-        
+
         if (menuButton) {
-            menuButton.addEventListener('click', function(e) {
+            menuButton.addEventListener('click', function (e) {
                 e.stopPropagation(); // Ngăn click lan ra ngoài
                 mobileMenu.classList.toggle('hidden');
             });
@@ -163,20 +163,20 @@
         // --- 2. Xử lý User Dropdown (cho cả mobile và desktop) ---
         // Tìm TẤT CẢ các nút trigger
         const triggers = document.querySelectorAll('.dropdown-trigger');
-        
+
         triggers.forEach(trigger => {
-            trigger.addEventListener('click', function(e) {
+            trigger.addEventListener('click', function (e) {
                 e.stopPropagation(); // Ngăn click lan ra window
-                
+
                 const menu = this.nextElementSibling; // Tìm .dropdown-menu ngay sau nó
-                
+
                 // Đóng tất cả các menu khác đang mở
                 document.querySelectorAll('.dropdown-menu.show').forEach(m => {
                     if (m !== menu) {
                         m.classList.remove('show');
                     }
                 });
-                
+
                 // Bật/tắt menu hiện tại
                 if (menu && menu.classList.contains('dropdown-menu')) {
                     menu.classList.toggle('show');
@@ -185,12 +185,12 @@
         });
 
         // --- 3. Đóng dropdown khi click ra ngoài ---
-        window.addEventListener('click', function() {
+        window.addEventListener('click', function () {
             // Đóng tất cả menu user
             document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
                 menu.classList.remove('show');
             });
-            
+
             // Đóng cả menu hamburger (nếu đang mở)
             if (!mobileMenu.classList.contains('hidden')) {
                 mobileMenu.classList.add('hidden');
