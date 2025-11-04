@@ -34,8 +34,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.ws.rs.core.Response;
+import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -69,14 +72,26 @@ public class ajaxServlet extends HttpServlet {
             String sizeBuy = req.getParameter("inputSize");
             int productIDBuy = Integer.parseInt(req.getParameter("ProductID"));
             long PriceOrigin = Long.parseLong(req.getParameter("PriceOrigin"));
+            int extraTime = 0;
+            if (deliver.equals("fast")) {
+                extraTime = 3;
+            } else {
+                extraTime = 6;
+            }
+
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.DAY_OF_MONTH, extraTime);
+            Date newDate = cal.getTime();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String dateStr = sdf.format(newDate);
             if (req.getParameter("payment").equals("COD")) {
-                orderID = orderService.insert(new Orders("Chờ xác nhận", deliver, "COD", amount, Integer.parseInt(addressSelect), userID));
+                orderID = orderService.insert(new Orders("Cho-xac-nhan", deliver, "COD", amount, Integer.parseInt(addressSelect), userID, dateStr));
                 orderDetailService.insert(new OrderDetails(productIDBuy, quantityBuy, PriceOrigin, orderID, sizeBuy));
                 productSaleSummaryService.insert(new ProductSalesSummary(productIDBuy, quantityBuy, PriceOrigin));
-                req.getRequestDispatcher("orders.jsp").forward(req, resp);
+                resp.sendRedirect("OrderServlet");
                 return;
             } else {
-                orderID = orderService.insert(new Orders("Chưa thanh toán", deliver, "vnpay", amount, Integer.parseInt(addressSelect), userID));
+                orderID = orderService.insert(new Orders("Chua-thanh-toan", deliver, "vnpay", amount, Integer.parseInt(addressSelect), userID, dateStr));
                 orderDetailService.insert(new OrderDetails(productIDBuy, quantityBuy, PriceOrigin, orderID, sizeBuy));
                 productSaleSummaryService.insert(new ProductSalesSummary(productIDBuy, quantityBuy, PriceOrigin));
             }
@@ -86,6 +101,18 @@ public class ajaxServlet extends HttpServlet {
             int userID = Integer.parseInt(String.valueOf(session.getAttribute("UserID")));
             List<CartItems> listProductCart = cartItemService.getByCartId(userID);
             List<CartItems> listResult = new ArrayList<>();
+            int extraTime = 0;
+            if (deliver.equals("fast")) {
+                extraTime = 3;
+            } else {
+                extraTime = 6;
+            }
+
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.DAY_OF_MONTH, extraTime);
+            Date newDate = cal.getTime();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String dateStr = sdf.format(newDate);
             for (CartItems c : listProductCart) {
                 if (c.isIsSelect()) {
                     listResult.add(c);
@@ -96,16 +123,16 @@ public class ajaxServlet extends HttpServlet {
                 return;
             }
             if (req.getParameter("payment").equals("COD")) {
-                orderID = orderService.insert(new Orders("Chờ xác nhận", deliver, "COD", amount, Integer.parseInt(addressSelect), userID));
+                orderID = orderService.insert(new Orders("Cho-xac-nhan", deliver, "COD", amount, Integer.parseInt(addressSelect), userID, dateStr));
                 for (CartItems c : listResult) {
                     Product p = productService.getProductByProductId(c.getProductId());
                     orderDetailService.insert(new OrderDetails(c.getProductId(), c.getQuantityCart(), p.getPrice(), orderID, c.getSizeCart()));
                     productSaleSummaryService.insert(new ProductSalesSummary(c.getProductId(), c.getQuantityCart(), p.getPrice()));
                 }
-                req.getRequestDispatcher("orders.jsp").forward(req, resp);
+                resp.sendRedirect("OrderServlet");
                 return;
             } else {
-                orderID = orderService.insert(new Orders("Chưa thanh toán", deliver, "vnpay", amount, Integer.parseInt(addressSelect), userID));
+                orderID = orderService.insert(new Orders("Chua-thanh-toan", deliver, "vnpay", amount, Integer.parseInt(addressSelect), userID, dateStr));
                 for (CartItems c : listResult) {
                     Product p = productService.getProductByProductId(c.getProductId());
                     orderDetailService.insert(new OrderDetails(c.getProductId(), c.getQuantityCart(), p.getPrice(), orderID, c.getSizeCart()));
@@ -113,6 +140,7 @@ public class ajaxServlet extends HttpServlet {
                 }
             }
         }
+
         session.setAttribute("typeAction", type);
         session.setAttribute("orderID", orderID);
 

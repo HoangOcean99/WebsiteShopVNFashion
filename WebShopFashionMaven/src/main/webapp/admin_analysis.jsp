@@ -111,15 +111,17 @@
             </div>
 
             <div class="main-content">
-
+                <% String finalPrice = (String) request.getAttribute("finalPrice");
+                    double avarage = Double.parseDouble(request.getAttribute("avarage").toString());
+                %>
                 <!-- 1. Phân tích theo Loại Sản phẩm (Category Analysis) -->
                 <div id="category-analysis-section" class="section">
                     <h3>Phân tích theo Loại Sản phẩm</h3>
 
                     <div class="stats-grid">
                         <div class="stat-card">
-                            <p>Tổng Doanh thu (30 ngày)</p>
-                            <strong>350.5 Triệu</strong>
+                            <p>Tổng Doanh thu:</p>
+                            <strong><%=finalPrice %></strong>
                         </div>
                         <div class="stat-card" style="border-left-color: #2ecc71;">
                             <p>Danh mục bán chạy nhất</p>
@@ -127,7 +129,7 @@
                         </div>
                         <div class="stat-card" style="border-left-color: #e74c3c;">
                             <p>Tỷ lệ chuyển đổi TB</p>
-                            <strong>2.15%</strong>
+                            <strong><%= avarage%>%</strong>
                         </div>
                     </div>
 
@@ -144,21 +146,21 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Áo Sơ Mi</td>
+                                <td>Giao Lĩnh</td>
                                 <td>125,000,000</td>
                                 <td>35.6%</td>
                                 <td>550</td>
                                 <td>35,000,000</td>
                             </tr>
                             <tr>
-                                <td>Quần Jeans</td>
+                                <td>Viên Lĩnh</td>
                                 <td>98,200,000</td>
                                 <td>28.0%</td>
                                 <td>320</td>
                                 <td>28,500,000</td>
                             </tr>
                             <tr>
-                                <td>Giày Dép</td>
+                                <td>Áo tấc</td>
                                 <td>65,800,000</td>
                                 <td>18.8%</td>
                                 <td>150</td>

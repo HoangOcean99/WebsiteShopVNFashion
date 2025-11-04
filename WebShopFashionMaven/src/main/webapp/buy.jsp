@@ -243,15 +243,12 @@
                 });
             }
 
-            // Xử lý ẩn/hiện form thêm địa chỉ
             addAddressBtn.onclick = () => {
                 newAddressForm.classList.toggle("hidden");
-                // Nếu form đang ẩn thì remove required, nếu hiện thì set required
                 const isHidden = newAddressForm.classList.contains("hidden");
                 toggleAddressRequired(!isHidden);
             };
 
-            // Khởi tạo: nếu form đang ẩn lúc load trang thì bỏ required
             window.addEventListener('DOMContentLoaded', () => {
                 if (newAddressForm.classList.contains("hidden")) {
                     toggleAddressRequired(false);

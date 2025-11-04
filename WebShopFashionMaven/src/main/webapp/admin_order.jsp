@@ -5,6 +5,12 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List, 
+         com.diemxua.model.Orders, 
+         com.diemxua.model.Product,
+         java.util.ArrayList, 
+         com.diemxua.model.OrderDetails,
+         com.diemxua.model.Address" %> 
 <!DOCTYPE html>
 <html>
     <head>
@@ -89,6 +95,33 @@
             .status-cancelled {
                 background-color: #c0392b;
             } /* Dark Red */
+            .status-badge {
+                display:inline-block;
+                padding:4px 8px;
+                border-radius:6px;
+                font-size:0.9em;
+                color:white;
+                font-weight:bold;
+                text-align:center;
+            }
+
+            /* Màu theo trạng thái */
+            .status-cho-xac-nhan {
+                background-color:#f39c12;
+            } /* cam */
+            .status-dang-giao-hang {
+                background-color:#3498db;
+            } /* xanh dương */
+            .status-da-giao {
+                background-color:#2ecc71;
+            }       /* xanh lá */
+            .status-huy {
+                background-color:#e74c3c;
+            }           /* đỏ */
+            .status-chua-thanh-toan {
+                background-color:#9b59b6;
+            }      /* tím */
+
         </style>
     </head>
     <body>
@@ -100,6 +133,10 @@
 
                 <div id="order-list-section" class="section">
                     <h3>📋 Danh sách Đơn hàng</h3>
+                    <%
+                        List<com.diemxua.model.Orders> orders = (List<com.diemxua.model.Orders>) request.getAttribute("orders");
+
+                    %>
 
                     <table class="order-list-table">
                         <thead>
@@ -114,55 +151,57 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <%
+                                for(com.diemxua.model.Orders o : orders){
+                            %>
                             <tr>
-                                <td>O10085</td>
-                                <td>2025-10-25</td>
-                                <td>U5543</td>
-                                <td><span class="status-badge status-shipping">Đang Giao</span></td>
-                                <td>COD</td>
-                                <td>2,319,000</td>
-                                <td><a href="admin_orderDetail.jsp">Xem</a></td>
+                                <td><%= o.getOrderId()%></td>
+                                <td><%= o.getOrderDate() %></td>
+                                <td><%= o.getUserId() %></td>
+                                <td>
+                                    <%
+                                        String status = o.getStatus();
+                                        String statusClass = "";
+                                        String displayText = "";
+
+                                        switch(status) {
+                                            case "Cho-xac-nhan":
+                                                statusClass = "status-cho-xac-nhan";
+                                                displayText = "Chờ Xác Nhận";
+                                                break;
+                                            case "Dang-van-chuyen":
+                                                statusClass = "status-dang-giao-hang";
+                                                displayText = "Đang Vận Chuyển";
+                                                break;
+                                            case "Da-giao-hang":
+                                                statusClass = "status-da-giao";
+                                                displayText = "Đã Giao hàng";
+                                                break;
+                                            case "Huy":
+                                                statusClass = "status-huy";
+                                                displayText = "Hủy";
+                                                break;
+                                            case "Chua-thanh-toan":
+                                                statusClass = "status-chua-thanh-toan";
+                                                displayText = "Chưa thanh toán";
+                                                break;
+                                            default:
+                                                statusClass = "status-cho-xac-nhan";
+                                                displayText = status; 
+                                        }
+                                    %>
+                                    <span class="status-badge <%= statusClass %>"><%= displayText %></span>
+                                </td>
+
+                                <td><%= o.getPaymentMethod() %></td>
+                                <td><%= o.getFormatPrice() %></td>
+                                <td><a href="AdminOrderDetailServlet?orderID=<%= o.getOrderId() %>">Xem</a></td>
                             </tr>
-                            <tr>
-                                <td>O10085</td>
-                                <td>2025-10-25</td>
-                                <td>U7102</td>
-                                <td><span class="status-badge status-pending">Chờ Xử lý</span></td>
-                                <td>Chuyển khoản</td>
-                                <td>450,000</td>
-                                <td><a href="admin_orderDetail.jsp">Xem</a></td>
-                            </tr>
-                            <tr>
-                                <td>O10085</td>
-                                <td>2025-10-24</td>
-                                <td>U2055</td>
-                                <td><span class="status-badge status-delivered">Đã Giao hàng</span></td>
-                                <td>Thẻ Visa</td>
-                                <td>1,800,000</td>
-                                <td><a href="admin_orderDetail.jsp">Xem</a></td>
-                            </tr>
-                            <tr>
-                                <td>O10085</td>
-                                <td>2025-10-24</td>
-                                <td>U5543</td>
-                                <td><span class="status-badge status-cancelled">Đã Hủy</span></td>
-                                <td>ZaloPay</td>
-                                <td>890,000</td>
-                                <td><a href="admin_orderDetail.jsp">Xem</a></td>
-                            </tr>
-                            <tr>
-                                <td>O10085</td>
-                                <td>2025-10-23</td>
-                                <td>U3901</td>
-                                <td><span class="status-badge status-processing">Đang đóng gói</span></td>
-                                <td>COD</td>
-                                <td>3,120,000</td>
-                                <td><a href="admin_orderDetail.jsp">Xem</a></td>
-                            </tr>
+                            <% } %>
                         </tbody>
                     </table>
 
-                    <p style="margin-top: 25px; text-align: right; color: #555;">Tổng số đơn hàng: **5** (Hiển thị 1-5)</p>
+                    <p style="margin-top: 25px; text-align: right; color: #555;">Tổng số đơn hàng: **<%= orders.size() %>** </p>
                 </div>
 
             </div>

@@ -205,7 +205,7 @@
     </servlet-mapping>
     
     
-        <servlet>
+    <servlet>
         <servlet-name>OrderDetailServlet</servlet-name>
         <servlet-class>com.diemxua.controller.OrderDetailServlet</servlet-class>
     </servlet>
@@ -214,6 +214,58 @@
         <servlet-name>OrderDetailServlet</servlet-name>
         <url-pattern>/OrderDetailServlet</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AdminUpdateProductServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.AdminUpdateProductServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminUpdateProductServlet</servlet-name>
+        <url-pattern>/AdminUpdateProductServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AdminOrderServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.AdminOrderServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminOrderServlet</servlet-name>
+        <url-pattern>/AdminOrderServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AdminOrderDetailServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.AdminOrderDetailServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminOrderDetailServlet</servlet-name>
+        <url-pattern>/AdminOrderDetailServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AdminUpdateOrderStatusServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.AdminUpdateOrderStatusServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminUpdateOrderStatusServlet</servlet-name>
+        <url-pattern>/AdminUpdateOrderStatusServlet</url-pattern>
+    </servlet-mapping> 
+    
+    <servlet>
+        <servlet-name>AnalysisServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.AnalysisServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AnalysisServlet</servlet-name>
+        <url-pattern>/AnalysisServlet</url-pattern>
+    </servlet-mapping>
+    
+
     
     <listener>
         <listener-class>com.diemxua.utils.AppContextListener</listener-class>

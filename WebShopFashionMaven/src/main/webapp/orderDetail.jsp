@@ -43,7 +43,7 @@
                             </div>
 
                             <h2>Hòa lạc, Hà Nội</h2>
-                            <h2>Estimated arrival: 30 September 2025</h2>
+                            <h2>Estimated arrival: <%= order.getDateSend() %></h2>
                             <h2><%= address.getAddressDetail() +", " + address.getCity()%></h2>
                         </div>
                         <div class="grid grid-cols-2 gap-2 mt-4 flex align-item"> 
