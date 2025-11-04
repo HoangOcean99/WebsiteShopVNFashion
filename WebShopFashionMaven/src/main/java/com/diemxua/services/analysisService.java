@@ -3,6 +3,8 @@ package com.diemxua.services;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class analysisService extends DBContext {
 
@@ -46,5 +48,59 @@ public class analysisService extends DBContext {
             e.printStackTrace();
         }
         return totalUsers;
+    }
+
+    public Map<Integer, Integer> getQuantitySoldByCategory() {
+        Map<Integer, Integer> result = new HashMap<>();
+        String sql = "SELECT p.CategoryID, SUM(od.Quantity) AS TotalQuantitySold "
+                + "FROM OrderDetails od "
+                + "JOIN Products p ON od.ProductID = p.ProductID "
+                + "JOIN Orders o ON o.OrderID = od.OrderID "
+                + "WHERE o.Status = 'Da-giao-hang' "
+                + "GROUP BY p.CategoryID "
+                + "ORDER BY TotalQuantitySold DESC";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                int categoryID = rs.getInt("CategoryID");
+                int totalQty = rs.getInt("TotalQuantitySold");
+                result.put(categoryID, totalQty);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        for (int i : new int[]{1, 2, 4}) {
+            result.putIfAbsent(i, 0);
+        }
+
+        return result;
+    }
+
+    public Map<Integer, Long> getRevenueByCategory() {
+        Map<Integer, Long> result = new HashMap<>();
+        String sql = "SELECT p.CategoryID, SUM(od.Price * od.Quantity) AS TotalRevenue "
+                + "FROM OrderDetails od "
+                + "JOIN Products p ON od.ProductID = p.ProductID "
+                + "JOIN Orders o ON o.OrderID = od.OrderID "
+                + "WHERE o.Status = 'Da-giao-hang' "
+                + "GROUP BY p.CategoryID "
+                + "ORDER BY TotalRevenue DESC";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                int categoryID = rs.getInt("CategoryID");
+                long totalRevenue = rs.getLong("TotalRevenue");
+                result.put(categoryID, totalRevenue);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        for (int i : new int[]{1, 2, 4}) {
+            result.putIfAbsent(i, 0L);
+        }
+
+        return result;
     }
 }

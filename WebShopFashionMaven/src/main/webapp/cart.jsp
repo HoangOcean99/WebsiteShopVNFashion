@@ -96,28 +96,34 @@
                                     <p class="text-2xl font-bold pb-2"><%= productsCart.getProductName() %> </p>
                                     <p class="text-xl pb-2"> <%= productsCart.getFormatPrice() %>đ </p>
                                     <div class="flex gap-6">
-                                        <form action="ChangeCartServlet" method="post">
-                                            <button class="flex space-x-3 " type="button">
-                                                <select class="border border-gray-300 rounded-full px-2 py-1 text-sm focus:outline-none"
-                                                        name="inputSize" 
-                                                        onchange="this.form.submit()">
-                                                    <option value="XL" <% if("XL".equals(cartItem.getSizeCart())) {%> selected <% } %>>XL</option>
-                                                    <option value="L" <% if("L".equals(cartItem.getSizeCart())) {%> selected <% } %>>L</option>
-                                                    <option value="M" <% if("M".equals(cartItem.getSizeCart())) {%> selected <% } %>>M</option>
-                                                    <option value="S" <% if("S".equals(cartItem.getSizeCart())) {%> selected <% } %>>S</option>
-                                                </select>
-                                            </button>
-                                            <input type="hidden" name="CartItemID" value="<%= cartItem.getCartItemId() %>"></input>
-                                            <input type="hidden" name="ProductID" value="<%= productsCart.getProductID() %>"></input>
-                                            <div class="flex border border-gray bg-[#fdf8f3] w-fit rounded-full px-2 py-1 space-x-2">
-                                                <div class="flex border border-gray bg-[#fdf8f3] w-fit rounded-full px-2 py-1 space-x-2">
-                                                    <button type="button" class="text-lg leading-none px-2 select-none" onclick="decrease(this)">-</button>
-                                                    <input type="number" value="<%= quantityBuy %>" min="1" class="w-8 text-center bg-transparent" name="inputQuantity" />
-                                                    <button type="button" class="text-lg leading-none select-none" onclick="increase(this)">+</button>
-                                                </div>
+                                        <form action="ChangeCartServlet" method="post" class="cart-item-form">
+                                            <input type="hidden" name="CartItemID" value="<%= cartItem.getCartItemId() %>">
+                                            <input type="hidden" name="ProductID" value="<%= productsCart.getProductID() %>">
+
+                                            <!-- Select Size -->
+                                            <select class="border border-gray-300 rounded-full px-2 py-1 text-sm focus:outline-none"
+                                                    name="inputSize" 
+                                                    onchange="this.form.submit()">
+                                                <option value="XL" <% if("XL".equals(cartItem.getSizeCart())) {%> selected <% } %>>XL</option>
+                                                <option value="L" <% if("L".equals(cartItem.getSizeCart())) {%> selected <% } %>>L</option>
+                                                <option value="M" <% if("M".equals(cartItem.getSizeCart())) {%> selected <% } %>>M</option>
+                                                <option value="S" <% if("S".equals(cartItem.getSizeCart())) {%> selected <% } %>>S</option>
+                                            </select>
+
+                                            <!-- Quantity -->
+                                            <div class="flex border border-gray bg-[#fdf8f3] w-fit rounded-full px-2 py-1 space-x-2 cart-item">
+                                                <button type="button" class="text-lg leading-none px-2 select-none" onclick="decrease(this)">-</button>
+                                                <input type="number" 
+                                                       value="<%= cartItem.getQuantityCart() %>" 
+                                                       min="1" 
+                                                       class="w-8 text-center bg-transparent" 
+                                                       name="inputQuantity" 
+                                                       data-price="<%= productsCart.getPrice() %>"/>
+                                                <button type="button" class="text-lg leading-none select-none" onclick="increase(this)">+</button>
                                             </div>
                                         </form>
                                     </div>
+
                                 </div>
                                 <form action="DeleteCartItemServlet" method="post">
                                     <input type="hidden" name="CartItemID" value="<%= cartItem.getCartItemId() %>"></input>
@@ -222,7 +228,7 @@
                             <div>
                                 <div class="flex justify-between text-md font-bold mt-2">
                                     <p>Tổng tiền: </p>
-                                    <p id="totalPriceDisplay">0đ</p>
+                                    <p id="totalPriceDisplay"><%= totalPrice %>đ</p>
                                 </div>
 
                                 <input type="hidden" name="totalBill" id="sendPrice" value="0">
@@ -278,18 +284,21 @@
                 }
             });
 
-// Tổng tiền
             function updateTotal() {
                 const priceDeli = document.getElementById("priceDeli");
                 const totalPriceDisplay = document.getElementById("totalPriceDisplay");
                 const sendPrice = document.getElementById("sendPrice");
-                let subtotal = 0;
+                let subtotal = <%= totalPrice %>;
 
-                // Cộng tổng tất cả sản phẩm được chọn
                 document.querySelectorAll('.cart-item').forEach(div => {
-                    const qty = parseInt(div.querySelector('input[name="inputQuantity"]').value);
-                    const price = parseInt(div.querySelector('.priceCart').dataset.price);
-                    subtotal += qty * price;
+                    const form = div.closest('form');
+                    const checkbox = form.querySelector('input[name="selectProduct"]');
+                    if (checkbox && checkbox.checked) {
+                        const input = div.querySelector('input[name="inputQuantity"]');
+                        const qty = parseInt(input.value);
+                        const price = parseInt(input.dataset.price);
+                        subtotal += qty * price;
+                    }
                 });
 
                 const deli = parseInt(priceDeli.textContent.replace(/\./g, '').replace('đ', '')) || 0;
@@ -298,7 +307,8 @@
                 totalPriceDisplay.textContent = total.toLocaleString('vi-VN') + 'đ';
             }
 
-// Chọn hình thức giao hàng
+
+
             function selectDeliver(type) {
                 const priceDeli = document.getElementById("priceDeli");
                 const currentDate = new Date();
@@ -317,23 +327,22 @@
             }
 
             function decrease(btn) {
-                const input = btn.parentElement.querySelector("input");
-                if (input.value > 1)
+                const form = btn.closest('.cart-item-form');
+                const input = form.querySelector('input[name="inputQuantity"]');
+                if (parseInt(input.value) > 1)
                     input.value--;
-                const mainPrice = <%= priceProduct %> * input.value;
-                document.getElementById("mainPrice").textContent = mainPrice.toLocaleString('vi-VN') + "đ";
-                updateTotal();
+                form.submit(); // gửi số lượng mới về server
             }
 
             function increase(btn) {
-                const input = btn.parentElement.querySelector("input");
+                const form = btn.closest('.cart-item-form');
+                const input = form.querySelector('input[name="inputQuantity"]');
                 input.value++;
-                const mainPrice = <%= priceProduct %> * input.value;
-                document.getElementById("mainPrice").textContent = mainPrice.toLocaleString('vi-VN') + "đ";
-                updateTotal();
+                form.submit(); // gửi số lượng mới về server
             }
 
-// Khởi tạo khi load trang
+
+
             window.onload = () => {
                 selectDeliver('free');
                 updateTotal();

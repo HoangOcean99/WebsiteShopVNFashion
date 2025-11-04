@@ -105,7 +105,7 @@
                 <nav>
                     <ul>
                         <li><a href="#" id="link-category" class="active" onclick="showAnalyticsSection('category-analysis-section')">Theo Loại Sản phẩm</a></li>
-                        <li><a href="#" id="link-time" onclick="showAnalyticsSection('time-analysis-section')">Theo Thời gian</a></li>
+                        <!--<li><a href="#" id="link-time" onclick="showAnalyticsSection('time-analysis-section')">Theo Thời gian</a></li>-->
                     </ul>
                 </nav>
             </div>
@@ -132,7 +132,24 @@
                             <strong><%= avarage%>%</strong>
                         </div>
                     </div>
+                    <%
+                        Integer p1 = (Integer) request.getAttribute("p1");
+                        Integer p2 = (Integer) request.getAttribute("p2");
+                        Integer p4 = (Integer) request.getAttribute("p4");
+                        
+                        String price1 = (String) request.getAttribute("price1");
+                        String price2 = (String) request.getAttribute("price2");
+                        String price4 = (String) request.getAttribute("price4");
+                        
+                        String income1 = (String) request.getAttribute("income1");
+                        String income2 = (String) request.getAttribute("income2");
+                        String income4 = (String) request.getAttribute("income4");
+                        
+                        Double TL1 = (Double) request.getAttribute("TL1");
+                        Double TL2 = (Double) request.getAttribute("TL2");
+                        Double TL4 = (Double) request.getAttribute("TL4");    
 
+                    %>
                     <h4>Thống kê chi tiết theo Danh mục</h4>
                     <table class="data-table">
                         <thead>
@@ -147,49 +164,35 @@
                         <tbody>
                             <tr>
                                 <td>Giao Lĩnh</td>
-                                <td>125,000,000</td>
-                                <td>35.6%</td>
-                                <td>550</td>
-                                <td>35,000,000</td>
+                                <td><%= price1 %>đ</td>
+                                <td><%= TL1%>%</td>
+                                <td><%= p1%></td>
+                                <td><%= income1%></td>
                             </tr>
                             <tr>
                                 <td>Viên Lĩnh</td>
-                                <td>98,200,000</td>
-                                <td>28.0%</td>
-                                <td>320</td>
-                                <td>28,500,000</td>
+                                <td><%= price2 %>đ</td>
+                                <td><%= TL2%>%</td>
+                                <td><%= p2%></td>
+                                <td><%= income2%></td>
                             </tr>
                             <tr>
                                 <td>Áo tấc</td>
-                                <td>65,800,000</td>
-                                <td>18.8%</td>
-                                <td>150</td>
-                                <td>15,000,000</td>
-                            </tr>
-                            <tr>
-                                <td>Phụ Kiện</td>
-                                <td>30,000,000</td>
-                                <td>8.5%</td>
-                                <td>600</td>
-                                <td>12,000,000</td>
-                            </tr>
-                            <tr>
-                                <td>Khác</td>
-                                <td>31,500,000</td>
-                                <td>9.0%</td>
-                                <td>450</td>
-                                <td>10,000,000</td>
+                                <td><%= price4 %>đ</td>
+                                <td><%= TL4%>%</td>
+                                <td><%= p4%></td>
+                                <td><%= income4%></td>
                             </tr>
                         </tbody>
                     </table>
 
-                    <div class="chart-placeholder">
+<!--                    <div class="chart-placeholder">
                         [Placeholder Biểu đồ tròn (Pie Chart) thể hiện Tỷ trọng Doanh thu theo Danh mục]
-                    </div>
+                    </div>-->
                 </div>
 
                 <!-- 2. Phân tích theo Thời gian (Time Analysis) -->
-                <div id="time-analysis-section" class="section">
+<!--                <div id="time-analysis-section" class="section">
                     <h3>Phân tích Doanh số theo Thời gian (Theo Tuần)</h3>
 
                     <div class="stats-grid">
@@ -248,12 +251,12 @@
                                 <td>0%</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table>-->
 
-                    <div class="chart-placeholder">
+<!--                    <div class="chart-placeholder">
                         [Placeholder Biểu đồ đường (Line Chart) thể hiện Doanh thu theo Tuần/Tháng]
-                    </div>
-                </div>
+                    </div>-->
+                <!--</div>-->
 
             </div>
         </div>

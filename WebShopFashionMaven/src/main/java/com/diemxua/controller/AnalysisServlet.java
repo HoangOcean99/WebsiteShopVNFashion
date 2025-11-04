@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.text.NumberFormat;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  *
@@ -37,7 +38,24 @@ public class AnalysisServlet extends HttpServlet {
         analysisService analysisService = new analysisService();
         long finalPrice = analysisService.getTotalRevenue();
         double tiLeTB = (double) ((double) analysisService.getTotalOrders() / analysisService.getTotalUsers()) * 100;
+        Map<Integer, Integer> containCategory = analysisService.getQuantitySoldByCategory();
+        Map<Integer, Long> containTotalPrice = analysisService.getRevenueByCategory();
 
+        for (Map.Entry<Integer, Integer> entry : containCategory.entrySet()) {
+            int key = entry.getKey();
+            int val = entry.getValue();
+            request.setAttribute("p" + key, val);
+        }
+
+        for (Map.Entry<Integer, Long> entry : containTotalPrice.entrySet()) {
+            int key = entry.getKey();
+            long val = entry.getValue();
+            request.setAttribute("price" + key, format(val));
+            request.setAttribute("income" + key, format(val / 2));
+            double percent = ((double) val / finalPrice) * 100;
+            percent = Math.round(percent * 100.0) / 100.0;
+            request.setAttribute("TL" + key, percent);
+        }
         request.setAttribute("finalPrice", format(finalPrice));
         request.setAttribute("avarage", tiLeTB);
         request.getRequestDispatcher("admin_analysis.jsp").forward(request, response);

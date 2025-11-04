@@ -26,6 +26,11 @@ public class AdminOrderServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        boolean role = session.getAttribute("RoleUser") != null && (Boolean) session.getAttribute("RoleUser").equals("admin");
+        if (!role) {
+            request.getRequestDispatcher("home.jsp").forward(request, response);
+            return;
+        }
         int userID = Integer.parseInt(String.valueOf(session.getAttribute("UserID")));
 
         OrdersService orderService = new OrdersService();
