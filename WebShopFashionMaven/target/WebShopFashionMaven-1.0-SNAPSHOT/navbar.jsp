@@ -62,11 +62,6 @@
             <a href="home.jsp#footer" class="hover:bg-white hover:text-[#4B2E17] px-3 py-8 rounded-md  text-xl">Liên Hệ</a>
         </div>
 
-<<<<<<< HEAD
-        <div class="flex items-center gap-4 pl-20">
-            <i data-lucide="handbag" class="w-5 h-5 cursor-pointer"  onclick="window.location.href = 'OrderServlet'"></i>
-            <i data-lucide="shopping-cart" class="w-5 h-5 cursor-pointer" onclick="window.location.href = 'CartDetailServlet'"></i>
-=======
         <div class="flex items-center gap-4 pl-12">
             <span 
                 class="flex items-center cursor-pointer hover:bg-white hover:text-[#4B2E17] px-3 py-8 rounded-md" 
@@ -82,7 +77,6 @@
                 <i data-lucide="shopping-cart" class="w-5 h-5"></i>
             </span>
             
->>>>>>> feature/category-page
             <% if(userName == null) { %>
             <span 
                 class="flex items-center cursor-pointer hover:bg-white hover:text-[#4B2E17] px-3 py-8 rounded-md" 
