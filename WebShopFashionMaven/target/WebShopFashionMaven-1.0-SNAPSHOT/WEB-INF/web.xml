@@ -154,23 +154,13 @@
     </servlet-mapping>
     
     <servlet>
-        <servlet-name>ajaxServlet</servlet-name>
-        <servlet-class>com.diemxua.vnpay.common.ajaxServlet</servlet-class>
+        <servlet-name>PaymentServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.PaymentServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>ajaxServlet</servlet-name>
-        <url-pattern>/ajaxServlet</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>VnpayReturn</servlet-name>
-        <servlet-class>com.diemxua.vnpay.common.VnpayReturn</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>VnpayReturn</servlet-name>
-        <url-pattern>/VnpayReturn</url-pattern>
+        <servlet-name>PaymentServlet</servlet-name>
+        <url-pattern>/PaymentServlet</url-pattern>
     </servlet-mapping>
     
     <servlet>
@@ -183,37 +173,6 @@
         <url-pattern>/AdminAddAddressServlet</url-pattern>
     </servlet-mapping>
     
-    
-    <servlet>
-        <servlet-name>BuyDetailServlet</servlet-name>
-        <servlet-class>com.diemxua.controller.BuyDetailServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>BuyDetailServlet</servlet-name>
-        <url-pattern>/BuyDetailServlet</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>OrderServlet</servlet-name>
-        <servlet-class>com.diemxua.controller.OrderServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>OrderServlet</servlet-name>
-        <url-pattern>/OrderServlet</url-pattern>
-    </servlet-mapping>
-    
-    
-        <servlet>
-        <servlet-name>OrderDetailServlet</servlet-name>
-        <servlet-class>com.diemxua.controller.OrderDetailServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>OrderDetailServlet</servlet-name>
-        <url-pattern>/OrderDetailServlet</url-pattern>
-    </servlet-mapping>
     
     <listener>
         <listener-class>com.diemxua.utils.AppContextListener</listener-class>
