@@ -62,9 +62,9 @@
     </head>
 
     <body>
-        <%
-            boolean isAuthenticated = session.getAttribute("isAuthenticated") != null && (Boolean) session.getAttribute("isAuthenticated");
-        %>
+            <%
+                boolean isAuthenticated = session.getAttribute("isAuthenticated") != null && (Boolean) session.getAttribute("isAuthenticated");
+            %>
         <%@include file="navbar.jsp" %>
         <section>
             <img src="images/Background3.png" alt="Trang chủ" class="w-full h-full object-cover fixed inset-0 -z-10" />
@@ -145,6 +145,7 @@
                                         Free
                                     </label>
 
+<<<<<<< HEAD
                                     <label class="deliverOption">
                                         <input type="radio" name="deliver" value="fast" onclick="selectDeliver('fast')">
                                         Express (25.000₫)
@@ -152,6 +153,32 @@
                                 </div>
                                 <span>Ngày giao hàng dự kiến: </span><span name id="dateDisplay"> </span>
                                 <input type="hidden" name="dateSend" id="dateSend">
+=======
+                                <label class="deliverOption">
+                                    <input type="radio" name="deliver" value="fast" onclick="selectDeliver('fast')">
+                                    Express (25.000₫)
+                                </label>
+                            </div>
+                            <p id="dateDisplay">Ngày giao hàng dự kiến: </p>
+                        </div>
+
+                        <div class="block border-b border-dotted border-[#492910]/100 pb-4 mb-4">
+                            <h3 class="font-bold mb-2">Địa chỉ giao hàng</h3>
+                            <div class="flex space-x-2 items-center">
+                                <select id="addressSelect"
+                                        class="w-full border border-[#492910]/60 bg-[#ffffff]/60 rounded-xl px-3 py-2 focus:ring-1 focus:ring-[#492910] focus:outline-none">
+                                    <option value="">-- Chọn thông tin nhận hàng --</option>
+                                    <% 
+                                        List<com.diemxua.model.Address> listAddress = (List<com.diemxua.model.Address>) request.getAttribute("listAddress");
+                                        for(com.diemxua.model.Address a : listAddress){
+                                    %>
+                                    <option value="<%= a.getAddressID() %>"><%= a.getRecipientName() +" - "+ a.getPhone() +" - "+  a.getAddressDetail() +" - "+  a.getCity() %></option>
+                                    <% } %>
+                                </select>
+                                <button id="addAddressBtn" class="border border-[#492910]/60 rounded-xl px-3 py-2 hover:bg-[#fdf8f3]/70 focus:ring-1 focus:ring-[#492910]">
+                                    Thêmoc
+                                </button>
+>>>>>>> feature/category-page
                             </div>
 
                             <div class="block border-b border-dotted border-[#492910]/100 pb-4 mb-4">
