@@ -30,7 +30,7 @@
 
                     <form action="UserProfileServlet" method="post" class="align-items bg-[#fdf8f3]/60 rounded-2xl p-6 shadow relative z-10">
 
-                        <h2 class="text-2xl font-bold mb-4">Form Thông Tin</h2>
+                        <h2 class="text-2xl font-bold mb-4">Thông Tin Khách Hàng</h2>
                         <div>
                             <div class="p-6">
                                 <h2 class="text-2xl font-bold flex justify-around align-items items-center  border border-gray-600 rounded-2xl w-full h-full bg-[#4B2E17] text-white">Thông tin cá nhân</h2>
@@ -147,12 +147,19 @@
 
                                 </div>
                             </div>
-                             <button type="submit" class=" text-2xl font-bold flex justify-around align-items items-center w-full border border-gray-600 rounded-2xl bg-[#4B2E17]/90 text-white hover:bg-[#fdf8f3]/50 focus:bg-[#fdf8f3]/80 focus:outline-none focus:ring-1 focus:ring-[#492910]">Gửi thông tin</button>
+                            <div class="pt-4 flex justify-center">
+                                <button type="submit"
+                                        class="text-md font-bold text-white bg-[#4B2E17]/90 rounded-2xl shadow-lg
+                                        px-10 py-3 transition-colors duration-200 hover:bg-[#6a401c]">
+                                    Lưu thay đổi
+                                </button>
+                            </div>
                         </div>
-                       
-                    </form>
                 </div>
+
+                </form>
             </div>
-        </section>
-    </body>
+        </div>
+    </section>
+</body>
 </html>

@@ -44,8 +44,8 @@
             if(role){ %>
             <a href="AdminProductServlet" class="hover:text-yellow-400 text-xl">Dashboard</a>
             <% } %>
-            <a href="home.jsp#home" class="hover:text-yellow-400 text-xl">Giới Thiệu</a>
-            <a href="home.jsp#category" class="hover:text-yellow-400 text-xl">Danh Mục</a>
+            <a href="home.jsp#home" class="hover:bg-white hover:text-[#4B2E17] px-3 py-8 rounded-md text-xl">Giới Thiệu</a>
+            <a href="home.jsp#category" class="hover:bg-white hover:text-[#4B2E17] px-3 py-8 rounded-md text-xl">Danh Mục</a>
         </div>
 
         <div class="flex-shrink-0">
@@ -57,15 +57,33 @@
         </div>
 
         <div class="flex items-center gap-20">
-            <a href="home.jsp#feedback" class="hover:text-yellow-400 text-xl">Feedback</a>
-            <a href="home.jsp#footer" class="hover:text-yellow-400 text-xl">Liên Hệ</a>
+            <a href="home.jsp#feedback" class="hover:bg-white hover:text-[#4B2E17] px-3 py-8 rounded-md text-xl">Feedback</a>
+            <a href="home.jsp#footer" class="hover:bg-white hover:text-[#4B2E17] px-3 py-8 rounded-md  text-xl">Liên Hệ</a>
         </div>
 
         <div class="flex items-center gap-4 pl-20">
-            <i data-lucide="handbag" class="w-5 h-5 cursor-pointer"  onclick="window.location.href = 'orders.jsp'"></i>
-            <i data-lucide="shopping-cart" class="w-5 h-5 cursor-pointer" onclick="window.location.href = 'CartDetailServlet'"></i>
+            <span 
+                class="flex items-center cursor-pointer hover:bg-white hover:text-[#4B2E17] px-3 py-8 rounded-md" 
+                onclick="window.location.href = 'orders.jsp'"
+            >
+                <i data-lucide="handbag" class="w-5 h-5"></i>
+            </span>
+
+            <span 
+                class="flex items-center cursor-pointer hover:bg-white hover:text-[#4B2E17] px-3 py-8 rounded-md" 
+                onclick="window.location.href = 'CartDetailServlet'"
+            >
+                <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+            </span>
+            
             <% if(userName == null) { %>
-            <i data-lucide="user" class="w-5 h-5 cursor-pointer" id="login-button"></i>
+            <span 
+                class="flex items-center cursor-pointer hover:bg-white hover:text-[#4B2E17] px-3 py-8 rounded-md" 
+                onclick="window.location.href = 'CartDetailServlet'"
+            >
+              <i data-lucide="user" class="w-5 h-5 cursor-pointer" id="login-button"></i>
+            </span>
+            
             <% } %>
             <% if(userName != null) { %>
             <div class="dropdown-container">

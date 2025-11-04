@@ -20,7 +20,6 @@
             <div class="absolute top-[120px] left-0 w-full h-full">
                 <div class="grid gap-6 w-4/5 mx-auto items-stretch">
                     <img src="images/Background3.png" alt="Trang chủ" class="w-full h-full object-cover fixed inset-0 -z-10" />
-
                     <div class="bg-[#fdf8f3]/60 rounded-2xl p-6 shadow relative z-10">
                         <h1 class="text-2xl font-bold mb-4">Order Detail</h1>
                         <div class="flex justify-around items-center"> 
@@ -106,11 +105,11 @@
                                 </div>
                             </div>
                         </div>
-                        <p class="font-bold size-3xl m-4">Tracking History</p>
+                        <p class="font-bold size-3xl m-4">Thông tin khách hàng</p>
                         <div class="flex justify-around items-center text-sm m-4"> 
-                            <h2>Order confirming</h2>
-                            <h2>Packaging</h2>
-                            <h2>Shipping</h2>
+                            <h2>Nguyễn Minh Trang</h2>
+                            <h2>SĐT: 0389887773</h2>
+                            <h2>Thanh toán khi nhận hàng</h2>
                             <h2>Delivered</h2>
                         </div>
 

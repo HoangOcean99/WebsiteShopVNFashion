@@ -62,9 +62,9 @@
     </head>
 
     <body>
-        <%
-            boolean isAuthenticated = session.getAttribute("isAuthenticated") != null && (Boolean) session.getAttribute("isAuthenticated");
-        %>
+            <%
+                boolean isAuthenticated = session.getAttribute("isAuthenticated") != null && (Boolean) session.getAttribute("isAuthenticated");
+            %>
         <%@include file="navbar.jsp" %>
         <section>
             <img src="images/Background3.png" alt="Trang chủ" class="w-full h-full object-cover fixed inset-0 -z-10" />
@@ -168,7 +168,7 @@
                                     <% } %>
                                 </select>
                                 <button id="addAddressBtn" class="border border-[#492910]/60 rounded-xl px-3 py-2 hover:bg-[#fdf8f3]/70 focus:ring-1 focus:ring-[#492910]">
-                                    Thêm
+                                    Thêmoc
                                 </button>
                             </div>
 
