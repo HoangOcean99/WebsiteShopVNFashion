@@ -138,7 +138,7 @@ Author     : Duong
                                         </button>
                                     </div>
                                     <button class="mt-4 w-full py-3 bg-[#C0A785] text-[#352F29] font-semibold rounded-lg hover:bg-[#B3997A] transition duration-200 shadow-md"
-                                            formaction="BuyServlet"
+                                            formaction="BuyDetailServlet"
                                             type="submit">
                                         Buy Now
                                     </button>

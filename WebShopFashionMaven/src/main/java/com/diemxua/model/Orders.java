@@ -2,51 +2,84 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package com.diemxua.model;
 
 import java.util.*;
 import java.lang.*;
 import java.io.*;
+import java.text.NumberFormat;
 
 public class Orders {
+
     private int orderId;
     private Date orderDate;
     private String status;
     private String shipMethod;
     private String paymentMethod;
-    private String Note;
-    private float totalPrice;
+    private long totalPrice;
     private int addressId;
     private int userId;
-    private Date createAt;
+    private String formatPrice;
+
+    private String format(long price) {
+        Locale localeVN = new Locale("vi", "VN");
+        NumberFormat currencyFormatter = NumberFormat.getNumberInstance(localeVN);
+
+        currencyFormatter.setMaximumFractionDigits(0);
+        currencyFormatter.setMinimumFractionDigits(0);
+
+        return currencyFormatter.format(price);
+    }
 
     public Orders() {
     }
 
-    public Orders(int orderId, Date orderDate, String status, String shipMethod, String paymentMethod, String Note, float totalPrice, int addressId, int userId, Date createAt) {
+    public Orders(int orderId, String status, String shipMethod, String paymentMethod, long totalPrice, int addressId, int userId) {
+        this.orderId = orderId;
+        this.status = status;
+        this.shipMethod = shipMethod;
+        this.paymentMethod = paymentMethod;
+        this.totalPrice = totalPrice;
+        this.addressId = addressId;
+        this.userId = userId;
+        this.formatPrice = this.format(this.totalPrice);
+
+    }
+
+    public Orders(String status, String shipMethod, String paymentMethod, long totalPrice, int addressId, int userId) {
+        this.status = status;
+        this.shipMethod = shipMethod;
+        this.paymentMethod = paymentMethod;
+        this.totalPrice = totalPrice;
+        this.addressId = addressId;
+        this.userId = userId;
+        this.formatPrice = this.format(this.totalPrice);
+
+    }
+
+    public Orders(int orderId, Date orderDate, String status, String shipMethod, String paymentMethod, long totalPrice, int addressId, int userId) {
         this.orderId = orderId;
         this.orderDate = orderDate;
         this.status = status;
         this.shipMethod = shipMethod;
         this.paymentMethod = paymentMethod;
-        this.Note = Note;
         this.totalPrice = totalPrice;
         this.addressId = addressId;
         this.userId = userId;
-        this.createAt = createAt;
+        this.formatPrice = this.format(this.totalPrice);
+
     }
 
-    public Orders(Date orderDate, String status, String shipMethod, String paymentMethod, String Note, float totalPrice, int addressId, int userId, Date createAt) {
+    public Orders(Date orderDate, String status, String shipMethod, String paymentMethod, long totalPrice, int addressId, int userId) {
         this.orderDate = orderDate;
         this.status = status;
         this.shipMethod = shipMethod;
         this.paymentMethod = paymentMethod;
-        this.Note = Note;
         this.totalPrice = totalPrice;
         this.addressId = addressId;
         this.userId = userId;
-        this.createAt = createAt;
+        this.formatPrice = this.format(this.totalPrice);
+
     }
 
     public int getOrderId() {
@@ -55,14 +88,6 @@ public class Orders {
 
     public void setOrderId(int orderId) {
         this.orderId = orderId;
-    }
-
-    public Date getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
     }
 
     public String getStatus() {
@@ -89,20 +114,14 @@ public class Orders {
         this.paymentMethod = paymentMethod;
     }
 
-    public String getNote() {
-        return Note;
-    }
-
-    public void setNote(String Note) {
-        this.Note = Note;
-    }
-
-    public float getTotalPrice() {
+    public long getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(float totalPrice) {
+    public void setTotalPrice(long totalPrice) {
         this.totalPrice = totalPrice;
+        this.formatPrice = this.format(totalPrice);
+
     }
 
     public int getAddressId() {
@@ -121,14 +140,15 @@ public class Orders {
         this.userId = userId;
     }
 
-    public Date getCreateAt() {
-        return createAt;
+    public Date getOrderDate() {
+        return orderDate;
     }
 
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
     }
 
-   
-    
+    public String getFormatPrice() {
+        return formatPrice;
+    }
 }

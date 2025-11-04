@@ -62,7 +62,7 @@
         </div>
 
         <div class="flex items-center gap-4 pl-20">
-            <i data-lucide="handbag" class="w-5 h-5 cursor-pointer"  onclick="window.location.href = 'orders.jsp'"></i>
+            <i data-lucide="handbag" class="w-5 h-5 cursor-pointer"  onclick="window.location.href = 'OrderServlet'"></i>
             <i data-lucide="shopping-cart" class="w-5 h-5 cursor-pointer" onclick="window.location.href = 'CartDetailServlet'"></i>
             <% if(userName == null) { %>
             <i data-lucide="user" class="w-5 h-5 cursor-pointer" id="login-button"></i>

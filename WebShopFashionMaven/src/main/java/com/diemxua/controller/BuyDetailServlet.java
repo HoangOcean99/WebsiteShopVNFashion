@@ -11,9 +11,7 @@ import com.diemxua.services.AddressService;
 import com.diemxua.services.CartItemsService;
 import com.diemxua.services.ProductService;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -32,36 +30,31 @@ public class BuyDetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CartItemsService cartItemService = new CartItemsService();
+        HttpSession session = request.getSession();
+//        int UserID = Integer.parseInt(session.getAttribute("UserID"));
+        int ProductID = Integer.valueOf(request.getParameter("ProductID"));
+        int quantityCart = Integer.parseInt(request.getParameter("quantityCart"));
+        String sizeCart = String.valueOf(request.getParameter("sizeCart"));
+
         ProductService productService = new ProductService();
         AddressService addressService = new AddressService();
-        HttpSession session = request.getSession();
         int userId = Integer.valueOf(String.valueOf(session.getAttribute("UserID")));
-        List<CartItems> cartItems = (List<CartItems>) cartItemService.getByCartId(userId);
-        List<Product> productsCart = new ArrayList<>();
-        long mainPrice = 0;
-        for (CartItems cartItem : cartItems) {
-            Product p = productService.getProductByProductId(cartItem.getProductId());
-            long priceMini = p.getPrice() * cartItem.getQuantityCart();
-            cartItem.setPriceCart(priceMini);
-            if (cartItem.isIsSelect()) {
-                mainPrice += priceMini;
-            }
-            productsCart.add(p);
-        }
         List<Address> listAddress = addressService.getUserByFirebaseId(String.valueOf(session.getAttribute("userUID")));
+
         request.setAttribute("listAddress", listAddress);
+        Product productBuy = productService.getProductByProductId(ProductID);
+        long mainPrice = productBuy.getPrice() * quantityCart;
+        String priceString = format(mainPrice);
 
         request.setAttribute("mainPrice", mainPrice);
-        request.setAttribute("priceString", format(mainPrice));
-
+        request.setAttribute("priceString", priceString);
         request.setAttribute("tax", mainPrice * 3 / 200);
         request.setAttribute("taxString", format(mainPrice * 3 / 200));
-
+        request.setAttribute("productBuy", productBuy);
+        request.setAttribute("quantityBuy", quantityCart);
+        request.setAttribute("sizeBuy", sizeCart);
         request.setAttribute("totalPrice", mainPrice + mainPrice * 3 / 200);
 
-        request.setAttribute("cartItems", cartItems);
-        request.setAttribute("listProductCart", productsCart);
         request.getRequestDispatcher("buy.jsp").forward(request, response);
     }
 
