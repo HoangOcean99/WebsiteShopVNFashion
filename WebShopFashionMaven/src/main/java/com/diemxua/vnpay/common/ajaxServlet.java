@@ -95,7 +95,7 @@ public class ajaxServlet extends HttpServlet {
                 orderDetailService.insert(new OrderDetails(productIDBuy, quantityBuy, PriceOrigin, orderID, sizeBuy));
                 productSaleSummaryService.insert(new ProductSalesSummary(productIDBuy, quantityBuy, PriceOrigin));
             }
-        } else {
+        } else if (type.equals("cart")) {
             String deliver = req.getParameter("deliver");
             String addressSelect = req.getParameter("addressSelect");
             int userID = Integer.parseInt(String.valueOf(session.getAttribute("UserID")));
@@ -139,6 +139,8 @@ public class ajaxServlet extends HttpServlet {
                     productSaleSummaryService.insert(new ProductSalesSummary(c.getProductId(), c.getQuantityCart(), p.getPrice()));
                 }
             }
+        } else {
+            orderID = Integer.parseInt(req.getParameter("OrderID"));
         }
 
         session.setAttribute("typeAction", type);

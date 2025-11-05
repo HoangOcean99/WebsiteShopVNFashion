@@ -21,6 +21,7 @@ com\diemxua\controller\ProductDetailServlet.class
 com\diemxua\vnpay\common\ajaxServlet.class
 com\diemxua\model\Orders.class
 com\diemxua\controller\TryOnServlet.class
+com\diemxua\controller\CancelOrderServlet.class
 com\diemxua\controller\AnalysisServlet.class
 com\diemxua\controller\FirebaseLoginServlet.class
 com\diemxua\services\DBContext.class

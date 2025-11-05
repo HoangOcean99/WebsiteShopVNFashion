@@ -24,13 +24,13 @@ import java.util.Map;
  * @author HP
  */
 public class VnpayReturn extends HttpServlet {
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -58,7 +58,7 @@ public class VnpayReturn extends HttpServlet {
                     fields.put(fieldName, fieldValue);
                 }
             }
-            
+
             String vnp_SecureHash = request.getParameter("vnp_SecureHash");
             if (fields.containsKey("vnp_SecureHashType")) {
                 fields.remove("vnp_SecureHashType");
@@ -69,21 +69,20 @@ public class VnpayReturn extends HttpServlet {
             String signValue = Config.hashAllFields(fields);
             if (signValue.equals(vnp_SecureHash)) {
                 String paymentCode = request.getParameter("vnp_TransactionNo");
-                
+
                 String orderId = request.getParameter("vnp_TxnRef");
-                
+
                 boolean transSuccess = false;
                 HttpSession session = request.getSession();
                 int orderID = Integer.parseInt(orderId);
                 OrdersService orderService = new OrdersService();
                 Orders newOrder = orderService.getOrderByOrderId(orderID);
                 if ("00".equals(request.getParameter("vnp_TransactionStatus"))) {
-                    newOrder.setStatus("Chờ xác nhận(đã thanh toán)");
+                    newOrder.setStatus("Cho-xac-nhan");
                     orderService.editOrder(newOrder);
                     transSuccess = true;
                 } else {
-                    newOrder.setStatus("Chờ xác nhận");
-                    newOrder.setPaymentMethod("COD");
+                    newOrder.setStatus("Chua-thanh-toan");
                     orderService.editOrder(newOrder);
                     transSuccess = false;
                 }
@@ -94,5 +93,5 @@ public class VnpayReturn extends HttpServlet {
             }
         }
     }
-    
+
 }

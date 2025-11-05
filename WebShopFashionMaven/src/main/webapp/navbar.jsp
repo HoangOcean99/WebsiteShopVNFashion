@@ -71,7 +71,7 @@
             <div class="dropdown-container">
                 <span style="cursor: pointer" id="userNameTrigger" class="dropdown-trigger"><%= userName %></span>
                 <div id="userDropdownMenu" class="dropdown-menu">
-                    <a href="#" style="cursor: pointer">Thông tin tài khoản</a>
+                    <a href="UserInforServlet" style="cursor: pointer">Thông tin tài khoản</a>
                     <a onclick="signOutUser()" style="cursor: pointer">Đăng xuất</a>
                 </div>
             </div>

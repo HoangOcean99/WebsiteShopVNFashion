@@ -115,11 +115,25 @@
                                         <p class="font-bold text-[#492910]"><%= order.getFormatPrice() %>đ</p>
                                     </div>
 
-                                    <% if (order.getStatus().toLowerCase().contains("chờ xác nhận")) { %>
+                                    <% if (order.getStatus().toLowerCase().contains("cho-xac-nhan")) { %>
                                     <button class="w-full py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition duration-200 shadow-md mt-4" 
                                             onclick="window.location.href = 'CancelOrderServlet?OrderID=<%= order.getOrderId()%>'">
                                         Hủy Đơn hàng
                                     </button>
+                                    <% } %>
+
+                                    <% if (order.getStatus().toLowerCase().contains("chua-thanh-toan")) { %>
+                                    <form action="ajaxServlet" method="post">
+                                        <input type="hidden" name="type" value="again">
+                                        <input type="hidden" name="totalBill" value="<%= order.getTotalPrice() %>">
+                                        <input type="hidden" name="OrderID" value="<%= order.getOrderId() %>">
+
+                                        <button type="submit" 
+                                                class="w-full py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-200 shadow-md mt-4">
+                                            Thanh toán
+                                        </button>
+                                    </form>
+
                                     <% } %>
 
                                 </div>
