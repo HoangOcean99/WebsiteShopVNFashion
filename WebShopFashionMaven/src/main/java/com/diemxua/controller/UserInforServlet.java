@@ -49,5 +49,20 @@ public class UserInforServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        UserService userService = new UserService();
+        UserProfileService userProfileService = new UserProfileService();
+        AddressService addressService = new AddressService();
+
+        int userID = Integer.parseInt(String.valueOf(session.getAttribute("UserID")));
+        String firebaseID = String.valueOf(session.getAttribute("userUID"));
+        User user = userService.getUserById(userID);
+        UserProfile userProfile = userProfileService.getUserByFirebaseId(firebaseID);
+        List<Address> addresses = addressService.getUserByFirebaseId(firebaseID);
+
+        request.setAttribute("addresses", addresses);
+        request.setAttribute("user", user);
+        request.setAttribute("userProfile", userProfile);
+        request.getRequestDispatcher("inforCustomer.jsp").forward(request, response);
     }
 }

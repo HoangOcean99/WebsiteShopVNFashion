@@ -12,7 +12,8 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Chi tiết đơn hàng</title>
+        <title>Diễm Xưa Shop</title>
+        <link rel="icon" type="image/png" href="images/watermark2.png">        
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script src="https://unpkg.com/lucide@latest"></script>
         <script src="https://cdn.tailwindcss.com"></script>
@@ -49,15 +50,22 @@
                                 <p class="text-sm font-medium">Trạng thái: <span class="text-[#492910] font-bold"><%= order.getStatus() %></span></p>
                             </div>
 
+                            <% if(!order.getStatus().equals("Chua-thanh-toan") && !order.getStatus().equals("Da-huy") && !order.getStatus().equals("Da-giao-hang")){ %>
                             <div class="w-full sm:w-auto">
                                 <p class="text-sm">Giao hàng dự kiến: <%= order.getDateSend() %></p>
                             </div>
+                            <% } %>
+                            <% if(order.getStatus().equals("Da-giao-hang")){ %>
+                            <div class="w-full sm:w-auto">
+                                <p class="text-sm">Ngày giao hàng: <%= order.getDateSend() %></p>
+                            </div>
+                            <% } %>
                             <div class="w-full sm:w-auto">
                                 <p class="text-sm">Địa chỉ: **<%= address.getAddressDetail() +", " + address.getCity()%>**</p>
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4 items-start">  
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4 items-start border-b border-[#492910]/20 pb-5">  
 
                             <div class="grid grid-rows-none gap-4">
                                 <h2 class="text-lg font-bold border-b pb-2 mb-2">Sản phẩm đã đặt</h2>
@@ -135,9 +143,44 @@
                                     </form>
 
                                     <% } %>
-
                                 </div>
                             </div>
+                        </div>
+                        <p class="font-bold size-3xl m-4">Thông tin khách hàng</p>
+                        <div class="flex justify-around items-center text-sm m-4"> 
+                            <h2><%= address.getRecipientName() %></h2>
+                            <h2>SĐT: <%= address.getPhone() %></h2>
+                            <% String paymentMethod = "";
+                                if(order.getPaymentMethod().equals("COD")){
+                                    paymentMethod = "Thanh toán khi nhận hàng";
+                                }else{
+                                    paymentMethod = "Thanh toán qua VNPay";
+                                }
+                                String status = order.getStatus();
+                                String displayText = "";
+
+                                switch(status) {
+                                    case "Cho-xac-nhan":
+                                        displayText = "Chờ Xác Nhận";
+                                        break;
+                                    case "Dang-van-chuyen":
+                                        displayText = "Đang Vận Chuyển";
+                                        break;
+                                    case "Da-giao-hang":
+                                        displayText = "Đã Giao hàng";
+                                        break;
+                                    case "Da-huy":
+                                        displayText = "Đã Hủy";
+                                        break;
+                                    case "Chua-thanh-toan":
+                                        displayText = "Chưa Thanh Toán";
+                                        break;
+                                    default:
+                                        displayText = status; 
+                                }
+                            %>
+                            <h2><%= paymentMethod %></h2>
+                            <h2><%= displayText %></h2>
                         </div>
                     </div>
                     <% } else { %>

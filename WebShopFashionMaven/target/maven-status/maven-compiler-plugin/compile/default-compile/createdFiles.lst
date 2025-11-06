@@ -2,6 +2,7 @@ com\diemxua\controller\AdminUpdateProductServlet.class
 com\diemxua\services\AddressService.class
 com\diemxua\utils\AppContextListener.class
 com\diemxua\controller\AdminProductDetailServlet.class
+com\diemxua\controller\UpdateInforCustomerServlet.class
 com\diemxua\controller\AdminDeleteProductServlet.class
 com\diemxua\controller\AdminAddProductServlet.class
 com\diemxua\model\User.class
@@ -14,6 +15,7 @@ com\diemxua\model\CartItems.class
 com\diemxua\controller\CartDetailServlet.class
 com\mycompany\webshopfashionmaven\JakartaRestConfiguration.class
 com\diemxua\controller\ProductServlet.class
+com\diemxua\controller\UserInforServlet.class
 com\diemxua\vnpay\common\Config.class
 com\diemxua\controller\CartServlet.class
 com\diemxua\services\ProductMaterialsService.class
@@ -45,6 +47,7 @@ com\diemxua\model\ProductMaterial.class
 com\diemxua\controller\DeleteCartItemServlet.class
 com\diemxua\utils\AuthenticationFilter.class
 com\diemxua\model\OrderDetails.class
+com\diemxua\controller\DeleteAddressServlet.class
 com\diemxua\services\OrderDetailService.class
 com\diemxua\services\ProductService.class
 com\diemxua\vnpay\common\VnpayReturn.class

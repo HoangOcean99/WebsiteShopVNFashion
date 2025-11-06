@@ -132,6 +132,7 @@
             <h2>📊 Dashboard</h2>
             <nav>
                 <ul>
+                    <li><a id="user" href="AdminUserServlet">📦 Danh sách người dùng</a></li>
                     <li><a id="product" href="AdminProductServlet">📦 Thông tin Sản phẩm</a></li>
                     <li><a id="order" href="AdminOrderServlet">🛒 Thông tin Đơn hàng</a></li>
                     <li><a id="analysis" href="AnalysisServlet">📈 Phân tích Mua hàng</a></li>
@@ -140,21 +141,17 @@
         </div>
 
         <script>
-            // Logic Javascript cho Mobile Toggle
             const sidebar = document.getElementById('admin-sidebar');
             const toggleButton = document.getElementById('menu-toggle');
 
-            // Hàm kiểm tra xem có ở Mobile không (<= 768px)
             function isMobileView() {
                 return window.innerWidth <= 768;
             }
 
-            // Toggle sidebar khi nhấn nút
             toggleButton.addEventListener('click', function () {
                 sidebar.classList.toggle('open');
             });
 
-            // Đóng sidebar khi click vào bất kỳ liên kết nào (chỉ áp dụng cho mobile)
             document.querySelectorAll('.sidebar nav ul li a').forEach(link => {
                 link.addEventListener('click', function () {
                     if (isMobileView()) {
@@ -163,7 +160,6 @@
                 });
             });
 
-            // Logic đánh dấu Active Link
             window.onload = function () {
                 const pathParts = location.pathname.split("/");
                 const currentPage = pathParts[pathParts.length - 1];

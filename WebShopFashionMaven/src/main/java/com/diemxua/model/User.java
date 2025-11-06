@@ -62,6 +62,4 @@ public class User {
     public void setFirebaseUID(String firebaseUID) {
         this.firebaseUID = firebaseUID;
     }
-
-    
 }

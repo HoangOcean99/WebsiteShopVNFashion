@@ -113,6 +113,7 @@
             <div class="main-content">
                 <% String finalPrice = (String) request.getAttribute("finalPrice");
                     double avarage = Double.parseDouble(request.getAttribute("avarage").toString());
+                    String MaxQuantity = (String) request.getAttribute("MaxQuantity");
                 %>
                 <!-- 1. Phân tích theo Loại Sản phẩm (Category Analysis) -->
                 <div id="category-analysis-section" class="section">
@@ -125,7 +126,7 @@
                         </div>
                         <div class="stat-card" style="border-left-color: #2ecc71;">
                             <p>Danh mục bán chạy nhất</p>
-                            <strong>Áo Sơ Mi</strong>
+                            <strong><%= MaxQuantity %></strong>
                         </div>
                         <div class="stat-card" style="border-left-color: #e74c3c;">
                             <p>Tỷ lệ chuyển đổi TB</p>
@@ -177,7 +178,7 @@
                                 <td><%= income2%></td>
                             </tr>
                             <tr>
-                                <td>Áo tấc</td>
+                                <td>Áo Tấc</td>
                                 <td><%= price4 %>đ</td>
                                 <td><%= TL4%>%</td>
                                 <td><%= p4%></td>
@@ -186,76 +187,76 @@
                         </tbody>
                     </table>
 
-<!--                    <div class="chart-placeholder">
-                        [Placeholder Biểu đồ tròn (Pie Chart) thể hiện Tỷ trọng Doanh thu theo Danh mục]
-                    </div>-->
+                    <!--                    <div class="chart-placeholder">
+                                            [Placeholder Biểu đồ tròn (Pie Chart) thể hiện Tỷ trọng Doanh thu theo Danh mục]
+                                        </div>-->
                 </div>
 
                 <!-- 2. Phân tích theo Thời gian (Time Analysis) -->
-<!--                <div id="time-analysis-section" class="section">
-                    <h3>Phân tích Doanh số theo Thời gian (Theo Tuần)</h3>
+                <!--                <div id="time-analysis-section" class="section">
+                                    <h3>Phân tích Doanh số theo Thời gian (Theo Tuần)</h3>
+                
+                                    <div class="stats-grid">
+                                        <div class="stat-card">
+                                            <p>Doanh thu Tuần trước</p>
+                                            <strong>85.2 Triệu</strong>
+                                        </div>
+                                        <div class="stat-card" style="border-left-color: #f1c40f;">
+                                            <p>Tổng Đơn hàng Tuần này</p>
+                                            <strong>250 Đơn</strong>
+                                        </div>
+                                        <div class="stat-card" style="border-left-color: #9b59b6;">
+                                            <p>Giá trị Đơn hàng TB (AOV)</p>
+                                            <strong>340,800 VND</strong>
+                                        </div>
+                                    </div>
+                
+                                    <h4>Phân tích Doanh thu hàng Tuần</h4>
+                                    <table class="data-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Tuần</th>
+                                                <th>Tổng Doanh thu (VND)</th>
+                                                <th>Tổng Đơn hàng</th>
+                                                <th>AOV (VND)</th>
+                                                <th>So với Tuần trước</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Tuần 43 (2025-10-21)</td>
+                                                <td>88,500,000</td>
+                                                <td>260</td>
+                                                <td>340,384</td>
+                                                <td style="color: #27ae60;">+3.8%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Tuần 42 (2025-10-14)</td>
+                                                <td>85,200,000</td>
+                                                <td>255</td>
+                                                <td>334,117</td>
+                                                <td style="color: #c0392b;">-1.5%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Tuần 41 (2025-10-07)</td>
+                                                <td>86,500,000</td>
+                                                <td>280</td>
+                                                <td>308,928</td>
+                                                <td style="color: #27ae60;">+6.2%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Tuần 40 (2025-09-30)</td>
+                                                <td>81,500,000</td>
+                                                <td>245</td>
+                                                <td>332,653</td>
+                                                <td>0%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>-->
 
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <p>Doanh thu Tuần trước</p>
-                            <strong>85.2 Triệu</strong>
-                        </div>
-                        <div class="stat-card" style="border-left-color: #f1c40f;">
-                            <p>Tổng Đơn hàng Tuần này</p>
-                            <strong>250 Đơn</strong>
-                        </div>
-                        <div class="stat-card" style="border-left-color: #9b59b6;">
-                            <p>Giá trị Đơn hàng TB (AOV)</p>
-                            <strong>340,800 VND</strong>
-                        </div>
-                    </div>
-
-                    <h4>Phân tích Doanh thu hàng Tuần</h4>
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Tuần</th>
-                                <th>Tổng Doanh thu (VND)</th>
-                                <th>Tổng Đơn hàng</th>
-                                <th>AOV (VND)</th>
-                                <th>So với Tuần trước</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Tuần 43 (2025-10-21)</td>
-                                <td>88,500,000</td>
-                                <td>260</td>
-                                <td>340,384</td>
-                                <td style="color: #27ae60;">+3.8%</td>
-                            </tr>
-                            <tr>
-                                <td>Tuần 42 (2025-10-14)</td>
-                                <td>85,200,000</td>
-                                <td>255</td>
-                                <td>334,117</td>
-                                <td style="color: #c0392b;">-1.5%</td>
-                            </tr>
-                            <tr>
-                                <td>Tuần 41 (2025-10-07)</td>
-                                <td>86,500,000</td>
-                                <td>280</td>
-                                <td>308,928</td>
-                                <td style="color: #27ae60;">+6.2%</td>
-                            </tr>
-                            <tr>
-                                <td>Tuần 40 (2025-09-30)</td>
-                                <td>81,500,000</td>
-                                <td>245</td>
-                                <td>332,653</td>
-                                <td>0%</td>
-                            </tr>
-                        </tbody>
-                    </table>-->
-
-<!--                    <div class="chart-placeholder">
-                        [Placeholder Biểu đồ đường (Line Chart) thể hiện Doanh thu theo Tuần/Tháng]
-                    </div>-->
+                <!--                    <div class="chart-placeholder">
+                                        [Placeholder Biểu đồ đường (Line Chart) thể hiện Doanh thu theo Tuần/Tháng]
+                                    </div>-->
                 <!--</div>-->
 
             </div>

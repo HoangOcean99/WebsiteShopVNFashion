@@ -22,6 +22,7 @@ D:\Hoc_tap_fpt\Ki_4_Fall_2025\PRJ301\Project-github\WebsiteShopVNFashion\WebShop
 D:\Hoc_tap_fpt\Ki_4_Fall_2025\PRJ301\Project-github\WebsiteShopVNFashion\WebShopFashionMaven\src\main\java\com\diemxua\model\ProductMaterial.java
 D:\Hoc_tap_fpt\Ki_4_Fall_2025\PRJ301\Project-github\WebsiteShopVNFashion\WebShopFashionMaven\src\main\java\com\diemxua\services\DBContext.java
 D:\Hoc_tap_fpt\Ki_4_Fall_2025\PRJ301\Project-github\WebsiteShopVNFashion\WebShopFashionMaven\src\main\java\com\diemxua\controller\OrderDetailServlet.java
+D:\Hoc_tap_fpt\Ki_4_Fall_2025\PRJ301\Project-github\WebsiteShopVNFashion\WebShopFashionMaven\src\main\java\com\diemxua\controller\UpdateInforCustomerServlet.java
 D:\Hoc_tap_fpt\Ki_4_Fall_2025\PRJ301\Project-github\WebsiteShopVNFashion\WebShopFashionMaven\src\main\java\com\diemxua\model\Product.java
 D:\Hoc_tap_fpt\Ki_4_Fall_2025\PRJ301\Project-github\WebsiteShopVNFashion\WebShopFashionMaven\src\main\java\com\diemxua\services\UserService.java
 D:\Hoc_tap_fpt\Ki_4_Fall_2025\PRJ301\Project-github\WebsiteShopVNFashion\WebShopFashionMaven\src\main\java\com\diemxua\services\OrdersService.java
@@ -47,7 +48,9 @@ D:\Hoc_tap_fpt\Ki_4_Fall_2025\PRJ301\Project-github\WebsiteShopVNFashion\WebShop
 D:\Hoc_tap_fpt\Ki_4_Fall_2025\PRJ301\Project-github\WebsiteShopVNFashion\WebShopFashionMaven\src\main\java\com\diemxua\model\ProductSalesSummary.java
 D:\Hoc_tap_fpt\Ki_4_Fall_2025\PRJ301\Project-github\WebsiteShopVNFashion\WebShopFashionMaven\src\main\java\com\diemxua\utils\AuthenticationFilter.java
 D:\Hoc_tap_fpt\Ki_4_Fall_2025\PRJ301\Project-github\WebsiteShopVNFashion\WebShopFashionMaven\src\main\java\com\diemxua\controller\AdminUpdateOrderStatusServlet.java
+D:\Hoc_tap_fpt\Ki_4_Fall_2025\PRJ301\Project-github\WebsiteShopVNFashion\WebShopFashionMaven\src\main\java\com\diemxua\controller\DeleteAddressServlet.java
 D:\Hoc_tap_fpt\Ki_4_Fall_2025\PRJ301\Project-github\WebsiteShopVNFashion\WebShopFashionMaven\src\main\java\com\mycompany\webshopfashionmaven\JakartaRestConfiguration.java
 D:\Hoc_tap_fpt\Ki_4_Fall_2025\PRJ301\Project-github\WebsiteShopVNFashion\WebShopFashionMaven\src\main\java\com\diemxua\controller\AdminProductServlet.java
 D:\Hoc_tap_fpt\Ki_4_Fall_2025\PRJ301\Project-github\WebsiteShopVNFashion\WebShopFashionMaven\src\main\java\com\diemxua\services\ProductSalesSummaryService.java
+D:\Hoc_tap_fpt\Ki_4_Fall_2025\PRJ301\Project-github\WebsiteShopVNFashion\WebShopFashionMaven\src\main\java\com\diemxua\controller\UserInforServlet.java
 D:\Hoc_tap_fpt\Ki_4_Fall_2025\PRJ301\Project-github\WebsiteShopVNFashion\WebShopFashionMaven\src\main\java\com\diemxua\model\ProductDetail.java

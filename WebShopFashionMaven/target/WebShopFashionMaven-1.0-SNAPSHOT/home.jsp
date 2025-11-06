@@ -10,7 +10,8 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Trang Chủ</title>
+        <title>Diễm Xưa Shop</title>
+        <link rel="icon" type="image/png" href="images/watermark2.png">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script src="https://unpkg.com/lucide@latest"></script>
         <script src="https://cdn.tailwindcss.com"></script>
@@ -35,8 +36,8 @@
                 display: none;
             }
             .scroll-hide {
-                -ms-overflow-style: none; /* IE and Edge */
-                scrollbar-width: none; /* Firefox */
+                -ms-overflow-style: none;
+                scrollbar-width: none;
             }
         </style>
     </head>
@@ -46,7 +47,6 @@
             boolean doneUserDetail = session.getAttribute("doneUserDetail") != null && (Boolean) session.getAttribute("doneUserDetail");
         %>
         <%
-            // Khai báo biến isAuthenticated (FIXED: Đảm bảo biến được định nghĩa)
             boolean isAuthenticated = session.getAttribute("isAuthenticated") != null && (Boolean) session.getAttribute("isAuthenticated");
         %>
 
@@ -134,7 +134,7 @@
                 class="container mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center md:items-start gap-8"
                 >
                 <div class="text-center md:text-left order-1 md:order-none">
-                    <img src="images/lgo.png" alt="logo" class="w-20 h-16 sm:w-30 sm:h-20 object-cover mx-auto md:mx-0" />
+                    <a href="https://www.facebook.com/Diemxua.7Aspire"><img src="images/lgo.png" alt="logo" class="w-auto h-16 sm:w-30 sm:h-20 object-cover mx-auto md:mx-0" /></a>
                     <p class="text-sm text-gray-300 max-w-sm mt-2">
                         Hành trình tìm lại hương sắc Việt
                     </p>
@@ -148,10 +148,10 @@
                 </div>
 
                 <div class="flex gap-4 order-2 md:order-none">
-                    <i
-                        data-lucide="facebook "
-                        class="w-6 h-6 hover:text-yellow-400 cursor-pointer"
-                        ></i>
+                    <a href="https://www.facebook.com/Diemxua.7Aspire" target="blank"><i
+                            data-lucide="facebook "
+                            class="w-6 h-6 hover:text-yellow-400 cursor-pointer"
+                            ></i></a>
                     <i
                         data-lucide="instagram "
                         class="w-6 h-6 hover:text-yellow-400 cursor-pointer"
@@ -177,8 +177,6 @@
             const doneUserDetail = <%= doneUserDetail %>;
             const contextPath = '<%= request.getContextPath() %>';
 
-            // Gỡ bỏ logic cũ trong DOMContentLoaded và chuyển sang handleUI.js và handleAuth.js
-            // Giữ nguyên phần liên quan đến modal nếu bạn không muốn chuyển ra file ngoài.
             document.addEventListener('DOMContentLoaded', function () {
                 const loginModal = document.getElementById("login-modal");
                 const searchModal = document.getElementById("search-modal");
@@ -200,15 +198,13 @@
                 }
                 if (loginModal) {
                     loginModal.addEventListener("click", (event) => {
-                        // Đóng modal khi click ra ngoài, nhưng không phải click vào nội dung modal
                         if (event.target === loginModal) {
                             loginModal.classList.add("hidden");
                         }
                     });
                 }
 
-                // Giả sử searchModal và searchButton được định nghĩa trong search.jsp
-                const actualSearchButton = document.querySelector('.search-button'); // Giả định có class này trong search.jsp
+                const actualSearchButton = document.querySelector('.search-button');
                 const actualSearchModal = document.getElementById("search-modal");
 
                 if (actualSearchButton && actualSearchModal) {

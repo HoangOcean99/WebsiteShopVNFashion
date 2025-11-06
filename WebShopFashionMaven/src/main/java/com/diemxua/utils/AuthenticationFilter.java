@@ -26,7 +26,36 @@ import jakarta.servlet.http.HttpSession;
     "/formUserDetail.jsp",
     "/orderDetail.jsp",
     "/paymentResult.jsp",
-    "/productDetail.jsp",})
+    "/productDetail.jsp",
+    "/ProductServlet",
+    "/AdminAddAddressServlet",
+    "/AdminAddProductServlet",
+    "/AdminDeleteProductServlet",
+    "/AdminOrderDetailServlet",
+    "/AdminOrderServlet",
+    "/AdminProductDetailServlet",
+    "/AdminProductServlet",
+    "/AdminUpdateOrderStatusServlet",
+    "/AdminUpdateProductServlet",
+    "/AdminUserServlet",
+    "/AnalysisServlet",
+    "/BuyDetailServlet",
+    "/CancelOrderServlet",
+    "/CartDetailServlet",
+    "/CartServlet",
+    "/ChangeCartServlet",
+    "/DeleteAddressServlet",
+    "/DeleteCartItemServlet",
+    "/FirebaseLogoutServlet",
+    "/OrderDetailServlet",
+    "/OrderServlet",
+    "/ProductDetailServlet",
+    "/TryOnServlet",
+    "/UpdateInforCustomerServlet",
+    "/UpdateRoleUserServlet",
+    "/UserInforServlet",
+    "/UserProfileServlet"
+})
 public class AuthenticationFilter implements Filter {
 
     @Override

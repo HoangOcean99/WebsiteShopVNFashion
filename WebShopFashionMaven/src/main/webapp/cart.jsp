@@ -15,7 +15,8 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Giỏ Hàng & Thanh Toán</title>
+        <title>Diễm Xưa Shop</title>
+        <link rel="icon" type="image/png" href="images/watermark2.png">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script src="https://unpkg.com/lucide@latest"></script>
         <script src="https://cdn.tailwindcss.com"></script>
@@ -56,7 +57,7 @@
                 background-color: #49291010;
                 border-color: #492910;
             }
-            
+
             /* Xóa CSS tùy chỉnh cho grid vì chúng ta sẽ dùng lớp Tailwind */
         </style>
 
@@ -69,11 +70,11 @@
         <%@include file="navbar.jsp" %>
         <section>
             <img src="images/Background3.png" alt="Trang chủ" class="w-full h-full object-cover fixed inset-0 -z-10" />
-            
+
             <div class="relative pt-[100px] md:pt-[120px] pb-10">
-                
+
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 items-start">
-                    
+
                     <div class="bg-[#fdf8f3]/90 rounded-2xl p-4 sm:p-8 shadow relative z-10 order-2 md:order-1 md:col-span-2">
                         <h2 class="text-xl sm:text-2xl font-bold mb-4">Giỏ hàng</h2>
                         <div>  
@@ -85,33 +86,33 @@
                                     com.diemxua.model.CartItems cartItem = cartItems.get(i);
                             %>
                             <div class="flex gap-3 sm:gap-[20px] p-3 border border-[#4B2E17]/20 rounded-lg mb-4 items-center">
-                                
+
                                 <form action="ChangeCartServlet" method="post" class="flex-shrink-0">
                                     <input type="hidden" name="CartItemID" value="<%= cartItem.getCartItemId() %>"></input>
                                     <input type="hidden" name="ProductID" value="<%= productsCart.getProductID() %>"></input>
                                     <input type="checkbox" name="selectProduct"
-                                                class="w-5 h-5 my-auto rounded-md border-2 border-[#492910]/70
-                                                text-[#492910] focus:ring-[#492910]
-                                                cursor-pointer" <%= cartItem.isIsSelect() ? "checked" : "" %>
-                                                onchange="this.form.submit()"
-                                                />
+                                           class="w-5 h-5 my-auto rounded-md border-2 border-[#492910]/70
+                                           text-[#492910] focus:ring-[#492910]
+                                           cursor-pointer" <%= cartItem.isIsSelect() ? "checked" : "" %>
+                                           onchange="this.form.submit()"
+                                           />
                                 </form>
-                                
+
                                 <img src="<%= productsCart.getImageProduct1() %>" alt="<%= productsCart.getProductName() %>" 
                                      class="w-16 h-20 sm:w-20 sm:h-24 object-cover rounded-lg flex-shrink-0" />
-                                
+
                                 <div class="grow block min-w-0">
                                     <p class="text-base sm:text-xl font-bold pb-1 truncate"><%= productsCart.getProductName() %> </p>
                                     <p class="text-sm sm:text-lg pb-2"><%= productsCart.getFormatPrice() %>đ </p>
-                                    
+
                                     <div class="flex flex-wrap gap-4 items-center">
                                         <form action="ChangeCartServlet" method="post" class="cart-item-form flex gap-2 items-center">
                                             <input type="hidden" name="CartItemID" value="<%= cartItem.getCartItemId() %>">
                                             <input type="hidden" name="ProductID" value="<%= productsCart.getProductID() %>">
 
                                             <select class="border border-gray-300 rounded-full px-2 py-1 text-xs sm:text-sm focus:outline-none"
-                                                         name="inputSize" 
-                                                         onchange="this.form.submit()">
+                                                    name="inputSize" 
+                                                    onchange="this.form.submit()">
                                                 <option value="XL" <% if("XL".equals(cartItem.getSizeCart())) {%> selected <% } %>>XL</option>
                                                 <option value="L" <% if("L".equals(cartItem.getSizeCart())) {%> selected <% } %>>L</option>
                                                 <option value="M" <% if("M".equals(cartItem.getSizeCart())) {%> selected <% } %>>M</option>
@@ -121,17 +122,17 @@
                                             <div class="flex border border-gray bg-[#fdf8f3] w-fit rounded-full px-1 py-0.5 space-x-1 sm:space-x-2 cart-item text-sm sm:text-base">
                                                 <button type="button" class="leading-none px-1 select-none" onclick="decrease(this)">-</button>
                                                 <input type="number" 
-                                                             value="<%= cartItem.getQuantityCart() %>" 
-                                                             min="1" 
-                                                             class="w-6 sm:w-8 text-center bg-transparent focus:outline-none" 
-                                                             name="inputQuantity" 
-                                                             data-price="<%= productsCart.getPrice() %>"/>
+                                                       value="<%= cartItem.getQuantityCart() %>" 
+                                                       min="1" 
+                                                       class="w-6 sm:w-8 text-center bg-transparent focus:outline-none" 
+                                                       name="inputQuantity" 
+                                                       data-price="<%= productsCart.getPrice() %>"/>
                                                 <button type="button" class="leading-none px-1 select-none" onclick="increase(this)">+</button>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
-                                
+
                                 <div class="flex flex-col items-end flex-shrink-0">
                                     <p class="text-base sm:text-xl font-bold mb-8 sm:mb-12"><%= cartItem.getFormatPriceCart()%>đ</p>
                                     <form action="DeleteCartItemServlet" method="post">
@@ -145,7 +146,7 @@
                             </div>
                             <% } 
                             } else { %>
-                                <p class="text-center py-10 text-gray-600">Giỏ hàng của bạn đang trống.</p>
+                            <p class="text-center py-10 text-gray-600">Giỏ hàng của bạn đang trống.</p>
                             <% } %>
                         </div>
 
@@ -186,7 +187,7 @@
                                         <option value="<%= a.getAddressID() %>"><%= a.getRecipientName() +" - "+ a.getPhone() +" - "+ a.getAddressDetail() +" - "+ a.getCity() %></option>
                                         <% } 
                                             } else { %>
-                                                <option value="">Chưa có địa chỉ nào</option>
+                                        <option value="">Chưa có địa chỉ nào</option>
                                         <% } %>
                                     </select>
                                     <button id="addAddressBtn" type="button" class="w-full sm:w-auto border border-[#492910]/60 rounded-xl px-3 py-2 hover:bg-[#fdf8f3]/70 focus:ring-1 focus:ring-[#492910] text-sm font-semibold flex-shrink-0">
@@ -249,7 +250,7 @@
 
                                 <input type="hidden" name="totalBill" id="sendPrice" value="0">
                                 <input type="hidden" name="type" value="cart">
-                                
+
                                 <button 
                                     formaction="ajaxServlet"
                                     type="submit"
@@ -318,13 +319,13 @@
 
                 const deliText = priceDeli.textContent.replace(/\./g, '').replace('₫', '');
                 const deli = parseInt(deliText) || 0;
-                
+
                 // Giữ nguyên logic tính toán của bạn cho totalPrice
                 let finalTotal;
                 if (document.querySelector('input[name="deliver"][value="fast"]').checked) {
                     finalTotal = <%= totalPrice %> + 25000;
                 } else {
-                     finalTotal = <%= totalPrice %>;
+                    finalTotal = <%= totalPrice %>;
                 }
 
                 sendPrice.value = finalTotal;
@@ -345,10 +346,10 @@
                 const dateSend = document.getElementById("dateSend");
                 dateDisplay.textContent = futureDateString;
                 dateSend.value = futureDateString;
-                
+
                 const deliPrice = (type === 'free') ? '0' : '25.000';
                 priceDeli.textContent = deliPrice;
-                
+
                 updateTotal();
             }
 

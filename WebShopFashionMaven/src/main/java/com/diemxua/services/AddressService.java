@@ -108,11 +108,11 @@ public class AddressService extends DBContext {
         }
     }
 
-    public void deleteUser(String medicineId) {
-        String sql = "DELETE FROM Address WHERE UserID = ?";
+    public void deleteUser(int medicineId) {
+        String sql = "DELETE FROM Address WHERE AddressID = ?";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setString(1, medicineId);
+            ps.setInt(1, medicineId);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -120,7 +120,7 @@ public class AddressService extends DBContext {
     }
 
     public void editUser(Address user) {
-        String sql = "UPDATE Address SET RecipientName = ?, Phone = ?, Country = ?, City = ?, AddressDetail = ? WHERE UserID = ?";
+        String sql = "UPDATE Address SET RecipientName = ?, Phone = ?, Country = ?, City = ?, AddressDetail = ? WHERE AddressID = ?";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, user.getRecipientName());
@@ -128,7 +128,7 @@ public class AddressService extends DBContext {
             ps.setString(3, user.getCountry());
             ps.setString(4, user.getCity());
             ps.setString(5, user.getAddressDetail());
-            ps.setString(7, user.getUserID());
+            ps.setInt(6, user.getAddressID());
 
             ps.executeUpdate();
         } catch (SQLException e) {
