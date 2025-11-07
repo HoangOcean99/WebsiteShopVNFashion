@@ -17,7 +17,6 @@ import java.io.IOException;
 @WebListener
 public class AppContextListener implements ServletContextListener {
 
-    // Đường dẫn tuyệt đối đến file JSON trong WEB-INF
     private static final String SERVICE_ACCOUNT_PATH = "/WEB-INF/diemxua-8f674-firebase-adminsdk-fbsvc-c462fd91a4.json";
 
     @Override
