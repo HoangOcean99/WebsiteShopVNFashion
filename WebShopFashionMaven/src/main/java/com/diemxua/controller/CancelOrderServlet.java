@@ -13,38 +13,26 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.List;
 
 /**
  *
  * @author Duong
  */
-public class AdminOrderServlet extends HttpServlet {
-
+public class CancelOrderServlet extends HttpServlet {
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        boolean role = session.getAttribute("RoleUser") != null && (Boolean) session.getAttribute("RoleUser").equals("admin");
-        if (!role) {
-            request.getRequestDispatcher("home.jsp").forward(request, response);
-            return;
-        }
-        int userID = Integer.parseInt(String.valueOf(session.getAttribute("UserID")));
-
+        int orderID = Integer.parseInt(request.getParameter("OrderID"));
         OrdersService orderService = new OrdersService();
-        List<Orders> orders = orderService.getAll();
-
-        request.setAttribute("orders", orders);
-
-        request.getRequestDispatcher("admin_order.jsp").forward(request, response);
-
+        Orders order = orderService.getOrderByOrderId(orderID);
+        order.setStatus("Da-huy");
+        orderService.editOrder(order);
+        response.sendRedirect("OrderServlet");
     }
-
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
-
 }

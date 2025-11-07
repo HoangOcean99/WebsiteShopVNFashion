@@ -42,7 +42,7 @@ public class UserProfileService extends DBContext {
         return list;
     }
 
-    public UserProfile getUserById(String userId) {
+    public UserProfile getUserByFirebaseId(String userId) {
         String sql = "SELECT * FROM UserProfile WHERE UserID = ?";
         UserProfile m = null;
         try (PreparedStatement st = connection.prepareStatement(sql)) {

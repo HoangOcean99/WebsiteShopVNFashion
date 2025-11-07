@@ -4,8 +4,10 @@
  */
 package com.diemxua.controller;
 
-import com.diemxua.model.Orders;
-import com.diemxua.services.OrdersService;
+import com.diemxua.model.User;
+import com.diemxua.model.UserProfile;
+import com.diemxua.services.UserProfileService;
+import com.diemxua.services.UserService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,15 +16,17 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Duong
  */
-public class AdminUpdateOrderStatusServlet extends HttpServlet {
+public class AdminUserServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         boolean role = session.getAttribute("RoleUser") != null && (Boolean) session.getAttribute("RoleUser").equals("admin");
@@ -30,17 +34,16 @@ public class AdminUpdateOrderStatusServlet extends HttpServlet {
             request.getRequestDispatcher("home.jsp").forward(request, response);
             return;
         }
-        OrdersService orderService = new OrdersService();
-        int orderId = Integer.parseInt(request.getParameter("orderID"));
+        UserService userService = new UserService();
+        UserProfileService userProfileService = new UserProfileService();
+        List<User> listUsers = userService.getAll();
+        List<UserProfile> userProfile = new ArrayList<>();
+        for (User u : listUsers) {
+            userProfile.add(userProfileService.getUserByFirebaseId(u.getFirebaseUID()));
+        }
 
-        Orders order = orderService.getOrderByOrderId(orderId);
-        String status = request.getParameter("status");
-
-        order.setStatus(status);
-
-        orderService.editOrder(order);
-
-        response.sendRedirect("AdminOrderDetailServlet?orderID=" + orderId);
+        request.setAttribute("listUsers", listUsers);
+        request.setAttribute("userProfile", userProfile);
+        request.getRequestDispatcher("admin_userInfor.jsp").forward(request, response);
     }
-
 }

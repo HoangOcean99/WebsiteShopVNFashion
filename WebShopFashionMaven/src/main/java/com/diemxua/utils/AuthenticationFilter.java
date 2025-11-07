@@ -12,7 +12,50 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebFilter(urlPatterns = {"/productDetail.jsp", "/cart.jsp", "/category.jsp", "/admin/*"})
+@WebFilter(urlPatterns = {
+    "/cart.jsp",
+    "/category.jsp",
+    "/admin_addProduct.jsp",
+    "/admin_analysis.jsp",
+    "/admin_order.jsp",
+    "/admin_orderDetail.jsp",
+    "/admin_product.jsp",
+    "/admin_productDetail.jsp",
+    "/admin_sidebar.jsp",
+    "/buy.jsp",
+    "/formUserDetail.jsp",
+    "/orderDetail.jsp",
+    "/paymentResult.jsp",
+    "/productDetail.jsp",
+    "/ProductServlet",
+    "/AdminAddAddressServlet",
+    "/AdminAddProductServlet",
+    "/AdminDeleteProductServlet",
+    "/AdminOrderDetailServlet",
+    "/AdminOrderServlet",
+    "/AdminProductDetailServlet",
+    "/AdminProductServlet",
+    "/AdminUpdateOrderStatusServlet",
+    "/AdminUpdateProductServlet",
+    "/AdminUserServlet",
+    "/AnalysisServlet",
+    "/BuyDetailServlet",
+    "/CancelOrderServlet",
+    "/CartDetailServlet",
+    "/CartServlet",
+    "/ChangeCartServlet",
+    "/DeleteAddressServlet",
+    "/DeleteCartItemServlet",
+    "/FirebaseLogoutServlet",
+    "/OrderDetailServlet",
+    "/OrderServlet",
+    "/ProductDetailServlet",
+    "/TryOnServlet",
+    "/UpdateInforCustomerServlet",
+    "/UpdateRoleUserServlet",
+    "/UserInforServlet",
+    "/UserProfileServlet"
+})
 public class AuthenticationFilter implements Filter {
 
     @Override

@@ -265,7 +265,68 @@
         <url-pattern>/AnalysisServlet</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>CancelOrderServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.CancelOrderServlet</servlet-class>
+    </servlet>
 
+    <servlet-mapping>
+        <servlet-name>CancelOrderServlet</servlet-name>
+        <url-pattern>/CancelOrderServlet</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>UserInforServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.UserInforServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UserInforServlet</servlet-name>
+        <url-pattern>/UserInforServlet</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>UpdateInforCustomerServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.UpdateInforCustomerServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpdateInforCustomerServlet</servlet-name>
+        <url-pattern>/UpdateInforCustomerServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>DeleteAddressServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.DeleteAddressServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteAddressServlet</servlet-name>
+        <url-pattern>/DeleteAddressServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AdminUserServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.AdminUserServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminUserServlet</servlet-name>
+        <url-pattern>/AdminUserServlet</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>UpdateRoleUserServlet</servlet-name>
+        <servlet-class>com.diemxua.controller.UpdateRoleUserServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpdateRoleUserServlet</servlet-name>
+        <url-pattern>/UpdateRoleUserServlet</url-pattern>
+    </servlet-mapping>
     
     <listener>
         <listener-class>com.diemxua.utils.AppContextListener</listener-class>

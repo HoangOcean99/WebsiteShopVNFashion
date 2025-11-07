@@ -19,6 +19,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,26 +30,32 @@ import java.util.Locale;
  * @author Duong
  */
 public class AdminOrderDetailServlet extends HttpServlet {
-    
+
     private String format(long price) {
         Locale localeVN = new Locale("vi", "VN");
         NumberFormat currencyFormatter = NumberFormat.getNumberInstance(localeVN);
-        
+
         currencyFormatter.setMaximumFractionDigits(0);
         currencyFormatter.setMinimumFractionDigits(0);
-        
+
         return currencyFormatter.format(price);
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        boolean role = session.getAttribute("RoleUser") != null && (Boolean) session.getAttribute("RoleUser").equals("admin");
+        if (!role) {
+            request.getRequestDispatcher("home.jsp").forward(request, response);
+            return;
+        }
         int orderId = Integer.parseInt(request.getParameter("orderID"));
         OrdersService orderService = new OrdersService();
         AddressService addressService = new AddressService();
         ProductService productService = new ProductService();
         OrderDetailService orderDetailService = new OrderDetailService();
-        
+
         Orders order = orderService.getOrderByOrderId(orderId);
         Address address = addressService.getAddressByAddressId(order.getAddressId());
         List<OrderDetails> orderDetails = orderDetailService.getOrderByOrderID(orderId);
@@ -57,7 +64,7 @@ public class AdminOrderDetailServlet extends HttpServlet {
             Product pr = productService.getProductByProductId(orderDetail.getProductID());
             products.add(pr);
         }
-        
+
         request.setAttribute("totalPrice", format(order.getTotalPrice()));
         request.setAttribute("orderDetails", orderDetails);
         request.setAttribute("orderDetails", orderDetails);
@@ -66,10 +73,10 @@ public class AdminOrderDetailServlet extends HttpServlet {
         request.setAttribute("order", order);
         request.getRequestDispatcher("admin_orderDetail.jsp").forward(request, response);
     }
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
-    
+
 }

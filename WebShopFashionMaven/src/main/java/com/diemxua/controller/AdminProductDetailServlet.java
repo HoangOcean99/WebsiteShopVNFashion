@@ -17,6 +17,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -28,6 +29,12 @@ public class AdminProductDetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        boolean role = session.getAttribute("RoleUser") != null && (Boolean) session.getAttribute("RoleUser").equals("admin");
+        if (!role) {
+            request.getRequestDispatcher("home.jsp").forward(request, response);
+            return;
+        }
         ProductService productService = new ProductService();
         ProductMaterialsService materialService = new ProductMaterialsService();
         ProductDetailService detailService = new ProductDetailService();
@@ -39,9 +46,7 @@ public class AdminProductDetailServlet extends HttpServlet {
         request.setAttribute("product", product);
         request.setAttribute("productDetails", productDetails);
         request.setAttribute("productMaterials", productMaterials);
-        
+
         request.getRequestDispatcher("admin_productDetail.jsp").forward(request, response);
     }
 }
-
-

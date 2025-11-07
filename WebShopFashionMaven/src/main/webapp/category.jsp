@@ -6,7 +6,8 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Page Title</title>
+        <title>Diễm Xưa Shop</title>
+        <link rel="icon" type="image/png" href="images/watermark2.png">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <script src="https://unpkg.com/lucide@latest"></script>
@@ -14,9 +15,18 @@
         <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
         <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
         <link rel="stylesheet" href="css/category.css" />
+        <style>
+            .scroll-hide::-webkit-scrollbar {
+                display: none;
+            }
+            .scroll-hide {
+                -ms-overflow-style: none; /* IE and Edge */
+                scrollbar-width: none; /* Firefox */
+            }
+        </style>
 
         <script>
-            // KHỞI TẠO FIREBASE (Cần chạy sớm)
+            // KHỞI TẠO FIREBASE
             const firebaseConfig = {
                 // ... (chi tiết config của bạn)
                 apiKey: "AIzaSyBKJjw6QbT3vJKt3jL86bvG3wCvyma5lMQ",
@@ -37,39 +47,44 @@
             boolean isAuthenticated = session.getAttribute("isAuthenticated") != null && (Boolean) session.getAttribute("isAuthenticated");
         %>
         <%@include file="navbar.jsp" %>
-        <section class="relative w-full h-screen overflow-hidden bg-[#f5f0e8]">
-            <img src="images/Home2.png" alt="Trang chủ" class="w-full h-full object-cover fixed top-0" />
-            <div class="absolute text-center top-[120px] left-0 w-full h-full">
-                <div class="flex text-center items-center justify-center gap-36">
-                    <h1 class="font-bold mb-5 text-xl cursor-pointer"><a href="ProductServlet?categoryId=1">GIAO LĨNH</a></h1>
-                    <h1 class="font-bold mb-5 text-xl cursor-pointer"><a href="ProductServlet?categoryId=2">VIÊN LĨNH</a></h1>
-                    <h1 class="font-bold mb-5 text-xl cursor-pointer"><a href="ProductServlet?categoryId=4">ÁO TẤC</a></h1>
+
+        <img src="images/Home2.png" alt="Trang chủ" class="w-full h-full object-cover fixed top-0 -z-10" />
+
+        <section class="relative w-full min-h-screen pt-[100px] pb-10">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="flex overflow-x-auto scroll-hide whitespace-nowrap justify-start lg:justify-center mb-8 gap-4 sm:gap-8 lg:gap-36 p-2 bg-white/70 rounded-lg shadow-lg">
+                    <h1 class="font-bold text-lg sm:text-xl flex-shrink-0 cursor-pointer hover:text-[#4B2E17]"><a href="ProductServlet?categoryId=1">GIAO LĨNH</a></h1>
+                    <h1 class="font-bold text-lg sm:text-xl flex-shrink-0 cursor-pointer hover:text-[#4B2E17]"><a href="ProductServlet?categoryId=2">VIÊN LĨNH</a></h1>
+                    <h1 class="font-bold text-lg sm:text-xl flex-shrink-0 cursor-pointer hover:text-[#4B2E17]"><a href="ProductServlet?categoryId=4">ÁO TẤC</a></h1>
                 </div>
-                <div class="grid grid-cols-3 grid-rows-2 gap-y-5 w-1/2 mx-auto">
+
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8 max-w-5xl mx-auto p-4 bg-white/70 rounded-lg shadow-lg">
                     <% 
                         List<com.diemxua.model.Product> productList = 
                             (List<com.diemxua.model.Product>) request.getAttribute("listProducts");
 
-                        if (productList != null) {
+                        if (productList != null && !productList.isEmpty()) {
                             for (com.diemxua.model.Product p : productList) {
                     %>
-                    <div class="cursor-pointer" 
+                    <div class="cursor-pointer text-center" 
                          onclick="window.location.href = 'ProductDetailServlet?ProductId=<%= p.getProductID() %>'">
-                        <div class="w-44 h-52 bg-gray-400 mx-auto rounded-lg">
-                            <img src="<%= p.getImageProduct1() %>" alt="<%= p.getProductName() %>" class="w-full h-full object-cover rounded-lg">
+
+                        <div class="w-full h-48 sm:h-56 bg-gray-300 mx-auto rounded-lg overflow-hidden shadow-md">
+                            <img src="<%= p.getImageProduct1() %>" alt="<%= p.getProductName() %>" class="w-full h-full object-cover rounded-lg transition duration-300 hover:scale-[1.02]">
                         </div>
 
-                        <p class="mt-2"><%= p.getProductName() %></p>
-                        <p class="font-semibold"><%= p.getFormatPrice() %>đ</p>
+                        <p class="mt-2 text-sm sm:text-base truncate px-1"><%= p.getProductName() %></p>
+                        <p class="font-bold text-base sm:text-lg text-[#4B2E17]"><%= p.getFormatPrice() %>đ</p>
                     </div>
-                    <% 
-                }  
-            } 
-            else{
+                    <%  
+                        } 
+                    } 
+                    else{
                     %>
-                    <h1>Chưa có sản phẩm nào</h1>
+                    <h1 class="col-span-full text-center text-xl font-semibold p-10 text-[#4B2E17]">Chưa có sản phẩm nào</h1>
                     <%
-            }
+                    }
                     %>
                 </div>
             </div>
@@ -77,8 +92,7 @@
         <script>
             lucide.createIcons();
             const isServerAuthenticated = <%= isAuthenticated %>;
-
-        </script>z
+        </script>
         <script src="js/handleUI.js"></script>
         <script src="js/handleAuth.js"></script>
     </body>

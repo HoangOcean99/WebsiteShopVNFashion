@@ -12,11 +12,11 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Page Title</title>
+        <title>Diễm Xưa Shop</title>
+        <link rel="icon" type="image/png" href="images/watermark2.png">        
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script src="https://unpkg.com/lucide@latest"></script>
         <script src="https://cdn.tailwindcss.com"></script>
-        <!--        <link rel="stylesheet" type="text/css" media="screen" href="main.css" />-->
         <link rel="stylesheet" href="css/cart.css" />
         <script src="jscript/javascript.js"></script>
     </head>
@@ -30,93 +30,166 @@
                 ArrayList<com.diemxua.model.OrderDetails> listOrderDetails = ( ArrayList<com.diemxua.model.OrderDetails>) request.getAttribute("listOrderDetails");
                 com.diemxua.model.Address address  = ( com.diemxua.model.Address) request.getAttribute("address");
             %>
-            <div class="absolute top-[120px] left-0 w-full h-full">
-                <div class="grid gap-6 w-4/5 mx-auto items-stretch">
-                    <img src="images/Background3.png" alt="Trang chủ" class="w-full h-full object-cover fixed inset-0 -z-10" />
 
-                    <div class="bg-[#fdf8f3]/60 rounded-2xl p-6 shadow relative z-10">
-                        <h1 class="text-2xl font-bold mb-4">Order Detail</h1>
-                        <div class="flex justify-around items-center"> 
-                            <div class="flex items-center gap-2">
-                                <i data-lucide="shopping-bag" class="size-5"></i>
-                                <h2 class="text-sm">OrderID-<%= order.getOrderId() %></h2>
+            <img src="images/Background3.png" alt="Trang chủ" class="w-full h-full object-cover fixed inset-0 -z-10" />
+
+            <div class="relative mt-[100px] md:pt-[60px] pb-10 min-h-screen">
+                <div class="grid gap-6 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 items-stretch">
+
+                    <% if (order != null && address != null) { %>
+                    <div class="bg-[#fdf8f3]/90 rounded-2xl p-4 sm:p-6 shadow relative z-10">
+                        <h1 class="text-xl sm:text-2xl font-bold mb-4">Chi tiết Đơn hàng</h1>
+
+                        <div class="flex flex-wrap justify-start sm:justify-between items-center text-sm sm:text-base border-b border-[#492910]/20 pb-3 mb-3 gap-y-2">  
+                            <div class="flex items-center gap-2 w-full sm:w-auto">
+                                <i data-lucide="shopping-bag" class="size-4 sm:size-5"></i>
+                                <h2 class="font-semibold">OrderID-<%= order.getOrderId() %></h2>
                             </div>
 
-                            <h2>Hòa lạc, Hà Nội</h2>
-                            <h2>Estimated arrival: <%= order.getDateSend() %></h2>
-                            <h2><%= address.getAddressDetail() +", " + address.getCity()%></h2>
+                            <div class="w-full sm:w-auto">
+                                <p class="text-sm font-medium">Trạng thái: <span class="text-[#492910] font-bold"><%= order.getStatus() %></span></p>
+                            </div>
+
+                            <% if(!order.getStatus().equals("Chua-thanh-toan") && !order.getStatus().equals("Da-huy") && !order.getStatus().equals("Da-giao-hang")){ %>
+                            <div class="w-full sm:w-auto">
+                                <p class="text-sm">Giao hàng dự kiến: <%= order.getDateSend() %></p>
+                            </div>
+                            <% } %>
+                            <% if(order.getStatus().equals("Da-giao-hang")){ %>
+                            <div class="w-full sm:w-auto">
+                                <p class="text-sm">Ngày giao hàng: <%= order.getDateSend() %></p>
+                            </div>
+                            <% } %>
+                            <div class="w-full sm:w-auto">
+                                <p class="text-sm">Địa chỉ: **<%= address.getAddressDetail() +", " + address.getCity()%>**</p>
+                            </div>
                         </div>
-                        <div class="grid grid-cols-2 gap-2 mt-4 flex align-item"> 
-                            <div class="grid grid-rows-2 gap-2 ">
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4 items-start border-b border-[#492910]/20 pb-5">  
+
+                            <div class="grid grid-rows-none gap-4">
+                                <h2 class="text-lg font-bold border-b pb-2 mb-2">Sản phẩm đã đặt</h2>
                                 <%
                                     if(listProducts!=null && listOrderDetails!=null){
                                     for(int j = 0; j< Math.min(listProducts.size(),listOrderDetails.size()) ; j++){
                                         com.diemxua.model.Product product = listProducts.get(j);
                                         com.diemxua.model.OrderDetails orderDetail = listOrderDetails.get(j);
                                 %>
-                                <div class="flex gap-[20px] p-4 bg-[#f8f6ef]/80 rounded-lg">
-                                    <img src="<%= product.getImageProduct1() %>" alt="<%= product.getProductName()%>" class="w-15 h-32 bg-gray-400 rounded-2xl" />
-                                    <div class="grow block">
-                                        <p class="text-2xl font-bold pb-2"><%= product.getProductName() %> </p>
-                                        <p class="text-xl pb-2"> <%= product.getFormatPrice() %>đ x<%= orderDetail.getQuantity()%></p>
-                                        <div class="flex gap-6">
-                                            <button class="flex space-x-3 ">
-                                                <p class="rounded-full py-1 text-sm focus:outline-none">
-                                                    <span class="font-semibold">Size:</span> <%= orderDetail.getSize()%>
-                                                </p>
-                                            </button>
+                                <div class="flex gap-4 p-3 sm:p-4 bg-[#f8f6ef]/80 rounded-lg items-center">
+                                    <img src="<%= product.getImageProduct1() %>" alt="<%= product.getProductName()%>" class="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg flex-shrink-0" />
+                                    <div class="grow block text-left">
+                                        <p class="text-base sm:text-lg font-bold mb-1"><%= product.getProductName() %> </p>
+                                        <div class="flex justify-between items-center">
+                                            <p class="text-sm sm:text-base"> <%= product.getFormatPrice() %>đ x<%= orderDetail.getQuantity()%></p>
+                                            <p class="border border-gray-300 rounded-full px-2 py-0.5 text-xs sm:text-sm font-semibold">
+                                                Size: <%= orderDetail.getSize()%>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
                                 <% } } %>
-
                             </div>
 
-
-
-
-                            <div class=" gap-[20px] p-4 bg-[#f8f6ef]/80 rounded-lg ">
-                                <div class="flex flex-col justify-start h-full px-12 py-8">
+                            <div class="p-4 bg-[#f8f6ef]/80 rounded-2xl flex flex-col justify-start">
+                                <div class="flex flex-col justify-start h-full px-4 sm:px-8 py-4">
+                                    <h2 class="text-lg font-bold border-b pb-2 mb-4">Tóm tắt Thanh toán</h2>
                                     <%
                                         String priceOrigin = (String) request.getAttribute("priceOrigin");
                                         String tax = (String) request.getAttribute("tax") ;
-
                                     %>
-                                    <div class="flex justify-between mb-4">
-                                        <p>Subtotal</p>
+                                    <div class="flex justify-between mb-3 text-sm sm:text-base">
+                                        <p>Tổng tiền hàng</p>
                                         <p><%= priceOrigin%>đ</p>
                                     </div>
 
-                                    <div class="flex justify-between mb-4">
-                                        <p>Delivery</p>
+                                    <div class="flex justify-between mb-3 text-sm sm:text-base">
+                                        <p>Phí vận chuyển</p>
                                         <%
-                                            String deliver = "";
+                                            String deliver = "25.000";
                                             if(order.getShipMethod().equals("free")){
                                                 deliver = "0";
-                                            }else{
-                                                deliver = "25.000";
                                             }
                                         %>
                                         <p><%= deliver %>đ</p>
                                     </div>
 
-                                    <div class="flex justify-between mb-4">
-                                        <p>Tax</p>
+                                    <div class="flex justify-between mb-3 text-sm sm:text-base">
+                                        <p>Thuế (VAT)</p>
                                         <p>+<%= tax%>đ</p>
                                     </div>
-                                    <div class="block border-b border-dotted border-[#492910]/100 pb-4 mb-4"></div>
-                                    <div class="flex justify-between mb-4">
-                                        <p class="font-bold size-3xl">Total</p>
-                                        <p class="font-bold size-xl"><%= order.getFormatPrice() %>đ</p>
+                                    <div class="block border-b border-dotted border-[#492910]/30 pb-4 mb-4"></div>
+                                    <div class="flex justify-between mb-4 text-base sm:text-xl">
+                                        <p class="font-bold">Tổng cộng</p>
+                                        <p class="font-bold text-[#492910]"><%= order.getFormatPrice() %>đ</p>
                                     </div>
 
+                                    <% if (order.getStatus().toLowerCase().contains("cho-xac-nhan")) { %>
+                                    <button class="w-full py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition duration-200 shadow-md mt-4" 
+                                            onclick="window.location.href = 'CancelOrderServlet?OrderID=<%= order.getOrderId()%>'">
+                                        Hủy Đơn hàng
+                                    </button>
+                                    <% } %>
+
+                                    <% if (order.getStatus().toLowerCase().contains("chua-thanh-toan")) { %>
+                                    <form action="ajaxServlet" method="post">
+                                        <input type="hidden" name="type" value="again">
+                                        <input type="hidden" name="totalBill" value="<%= order.getTotalPrice() %>">
+                                        <input type="hidden" name="OrderID" value="<%= order.getOrderId() %>">
+
+                                        <button type="submit" 
+                                                class="w-full py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-200 shadow-md mt-4">
+                                            Thanh toán
+                                        </button>
+                                    </form>
+
+                                    <% } %>
                                 </div>
                             </div>
                         </div>
+                        <p class="font-bold size-3xl m-4">Thông tin khách hàng</p>
+                        <div class="flex justify-around items-center text-sm m-4"> 
+                            <h2><%= address.getRecipientName() %></h2>
+                            <h2>SĐT: <%= address.getPhone() %></h2>
+                            <% String paymentMethod = "";
+                                if(order.getPaymentMethod().equals("COD")){
+                                    paymentMethod = "Thanh toán khi nhận hàng";
+                                }else{
+                                    paymentMethod = "Thanh toán qua VNPay";
+                                }
+                                String status = order.getStatus();
+                                String displayText = "";
 
-
+                                switch(status) {
+                                    case "Cho-xac-nhan":
+                                        displayText = "Chờ Xác Nhận";
+                                        break;
+                                    case "Dang-van-chuyen":
+                                        displayText = "Đang Vận Chuyển";
+                                        break;
+                                    case "Da-giao-hang":
+                                        displayText = "Đã Giao hàng";
+                                        break;
+                                    case "Da-huy":
+                                        displayText = "Đã Hủy";
+                                        break;
+                                    case "Chua-thanh-toan":
+                                        displayText = "Chưa Thanh Toán";
+                                        break;
+                                    default:
+                                        displayText = status; 
+                                }
+                            %>
+                            <h2><%= paymentMethod %></h2>
+                            <h2><%= displayText %></h2>
+                        </div>
                     </div>
+                    <% } else { %>
+                    <div class="text-center text-xl font-semibold p-6 bg-[#fdf8f3]/90 rounded-2xl shadow">
+                        Không tìm thấy chi tiết đơn hàng.
+                    </div>
+                    <% } %>
                 </div>
+            </div>
         </section>
     </body>
     <script>
